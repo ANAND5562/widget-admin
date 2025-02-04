@@ -1,0 +1,2 @@
+# WidgetAdmin
+Manage widget data
