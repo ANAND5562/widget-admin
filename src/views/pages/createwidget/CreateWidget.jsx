@@ -54,9 +54,8 @@ function CreateWidget() {
                 <p className='text-xs py-2'>Pick a button which meets your requirements and get a head start on collecting payments or you could build your own.</p>
             </div>
 
-            <div className='grid grid-cols-1 gap-6 mb-4 sm:grid-cols-1 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-4'>
-
-                <Link to={'/'}>
+            {/* <div className='grid grid-cols-1 gap-6 mb-4 sm:grid-cols-1 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-4'>
+                <Link to={'/admin/dashboard'}>
                     <div className="bg-gray-50 rounded-md shadow-md">
                         <div style={{ backgroundImage: `url(${Background})`, backgroundSize: 'cover', backgroundPosition: 'center', borderRadius: '8px 8px 0px 0px', overflow: 'hidden', padding: '12px' }}>
                             <img src={QuickPay} alt="Something went wrong!" style={{ height: '160px', width: '200px' }} />
@@ -80,7 +79,7 @@ function CreateWidget() {
                     </div>
                 </Link>
 
-                <Link to={'/'}>
+                <Link to={'/admin/dashboard'}>
                     <div className="bg-gray-50 rounded-md shadow-md">
                         <div style={{ backgroundImage: `url(${Background})`, backgroundSize: 'cover', backgroundPosition: 'center', borderRadius: '8px 8px 0px 0px', overflow: 'hidden', padding: '12px', }}>
                             <img src={BuyNow} alt="Something went wrong!" style={{ height: '160px', width: '200px', opacity: 1 }} />
@@ -91,7 +90,7 @@ function CreateWidget() {
                     </div>
                 </Link>
 
-                <Link to={'/'}>
+                <Link to={'/admin/dashboard'}>
                     <div className="bg-gray-50 rounded-md shadow-md">
                         <div style={{ backgroundImage: `url(${Background})`, backgroundSize: 'cover', backgroundPosition: 'center', borderRadius: '8px 8px 0px 0px', overflow: 'hidden', padding: '12px' }}>
                             <img src={CustomPic} alt="Something went wrong!" style={{ height: '160px', width: '200px' }} />
@@ -102,7 +101,61 @@ function CreateWidget() {
                     </div>
                 </Link>
 
+            </div> */}
+            <div className='grid grid-cols-1 gap-6 mb-4 sm:grid-cols-1 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-4'>
+    <Link to={'/admin/dashboard'}>
+        <div className="bg-gray-50 rounded-md shadow-md flex flex-col h-full">
+            <div style={{ backgroundImage: `url(${Background})`, backgroundSize: 'cover', backgroundPosition: 'center', borderRadius: '8px 8px 0px 0px', overflow: 'hidden', padding: '12px' }}>
+                <img src={QuickPay} alt="Something went wrong!" className="w-full h-[210px] object-cover" />
             </div>
+            <div className="flex flex-col flex-grow px-3 pb-5">
+                <p className='font-semibold text-center text-indigo-600 text-md mt-2'>Quick-Pay Button</p>
+                <p className="text-xs text-gray-500 mt-3">Instant payments made simple.</p>
+                <p className="text-xs text-gray-500 mt-3 flex-grow">Allow your customers to complete payments instantly with one click, perfect for fixed-cost services.</p>
+            </div>
+        </div>
+    </Link>
+
+    <Link to={'/admin/createwidget/donation'}>
+        <div className="bg-gray-50 rounded-md shadow-md flex flex-col h-full">
+            <div style={{ backgroundImage: `url(${Background})`, backgroundSize: 'cover', backgroundPosition: 'center', borderRadius: '8px 8px 0px 0px', overflow: 'hidden', padding: '12px' }}>
+                <img src={Donation} alt="Something went wrong!" className="w-full h-[210px] object-cover" />
+            </div>
+            <div className="flex flex-col flex-grow px-3 pb-5">
+                <p className='font-semibold text-center text-gray-600 text-md mt-2'>Donations Button</p>
+                <p className="text-xs text-gray-500 mt-3">Flexible donations made easy.</p>
+                <p className="text-xs text-gray-500 mt-3 flex-grow">Empower your supporters to contribute effortlessly with preset or custom donation amounts, supporting your cause seamlessly.</p>
+            </div>
+        </div>
+    </Link>
+
+    <Link to={'/admin/dashboard'}>
+        <div className="bg-gray-50 rounded-md shadow-md flex flex-col h-full">
+            <div style={{ backgroundImage: `url(${Background})`, backgroundSize: 'cover', backgroundPosition: 'center', borderRadius: '8px 8px 0px 0px', overflow: 'hidden', padding: '12px' }}>
+                <img src={BuyNow} alt="Something went wrong!" className="w-full h-[210px] object-cover" />
+            </div>
+            <div className="flex flex-col flex-grow px-3 pb-5">
+                <p className='font-semibold text-center text-gray-600 text-md mt-2'>Buy Now Button</p>
+                <p className="text-xs text-gray-500 mt-3">Seamless purchases in just a few clicks.</p>
+                <p className="text-xs text-gray-500 mt-3 flex-grow">Offer a smooth shopping experience, enabling customers to quickly select quantities and make purchases with ease.</p>
+            </div>
+        </div>
+    </Link>
+
+    <Link to={'/admin/dashboard'}>
+        <div className="bg-gray-50 rounded-md shadow-md flex flex-col h-full">
+            <div style={{ backgroundImage: `url(${Background})`, backgroundSize: 'cover', backgroundPosition: 'center', borderRadius: '8px 8px 0px 0px', overflow: 'hidden', padding: '12px' }}>
+                <img src={CustomPic} alt="Something went wrong!" className="w-full h-[210px] object-cover" />
+            </div>
+            <div className="flex flex-col flex-grow px-3 pb-5">
+                <p className='font-semibold text-center text-gray-600 text-md mt-2'>Custom Button</p>
+                <p className="text-xs text-gray-500 mt-3">Personalized payments for unique needs.</p>
+                <p className="text-xs text-gray-500 mt-3 flex-grow">Provide advanced customization options, allowing users to set their own payment amounts and customize forms.</p>
+            </div>
+        </div>
+    </Link>
+</div>
+
         </>
     )
 }
