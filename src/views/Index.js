@@ -14,7 +14,7 @@ export default function Index() {
           <div className="w-full md:w-8/12 lg:w-6/12 xl:w-6/12 px-4">
             <div className="pt-32 sm:pt-0">
               <h2 className="font-semibold text-4xl text-blueGray-600">
-                Protected Payments, Hassle-Free.
+                Payment Widget
               </h2>
               <p className="mt-4 text-lg leading-relaxed text-blueGray-500">
                 Create custom payment buttons, forms, and more.
@@ -177,11 +177,9 @@ export default function Index() {
 
         <div className="justify-center text-center flex flex-wrap mt-24">
           <div className="w-full md:w-6/12 px-12 md:px-4">
-            <h2 className="font-semibold text-4xl">Beautiful Example Pages</h2>
+            <h2 className="font-semibold text-4xl">Protected Payments, Hassle-Free.</h2>
             <p className="text-lg leading-relaxed mt-4 mb-4 text-blueGray-500">
-              Notus React is a completly new product built using our past
-              experience in web templates. Take the examples we made for you and
-              start playing with them.
+            Protected payments, stress-free transactions. Enjoy seamless security with every purchase—no hidden fees, no complications. Just smooth, worry-free payments every time.
             </p>
           </div>
         </div>
