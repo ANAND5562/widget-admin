@@ -14,20 +14,20 @@ export default function Index() {
           <div className="w-full md:w-8/12 lg:w-6/12 xl:w-6/12 px-4">
             <div className="pt-32 sm:pt-0">
               <h2 className="font-semibold text-4xl text-blueGray-600">
-                Notus React - A beautiful extension for Tailwind CSS.
+                Protected Payments, Hassle-Free.
               </h2>
               <p className="mt-4 text-lg leading-relaxed text-blueGray-500">
-                Notus React is Free and Open Source. It does not change any of
-                the CSS from{" "}
+                Create custom payment buttons, forms, and more.
+                Design the perfect checkout experience.
+                Secure transactions with smooth integrations.
+                Power up your payments today with{" "}
                 <a
-                  href="https://tailwindcss.com/?ref=creativetim"
+                  href="https://developer.sabpaisa.in/"
                   className="text-blueGray-600"
                   target="_blank"
                 >
-                  Tailwind CSS
+                  SabPaisa!
                 </a>
-                . It features multiple HTML elements and it comes with dynamic
-                components for ReactJS, Vue and Angular.
               </p>
               <div className="mt-12">
                 <a
@@ -103,10 +103,10 @@ export default function Index() {
                     Great for your awesome project
                   </h4>
                   <p className="text-md font-light mt-2 text-white">
-                    Putting together a page has never been easier than matching
-                    together pre-made components. From landing pages
-                    presentation to login areas, you can easily customise and
-                    built your pages.
+                    Make payments effortless with our all-in-one solution.
+                    Seamless checkout, secure transactions, and instant payouts.
+                    Accept cards, wallets, and digital payments with ease.
+                    Get started today and grow your business faster!
                   </p>
                 </blockquote>
               </div>
@@ -121,11 +121,10 @@ export default function Index() {
                         <i className="fas fa-sitemap"></i>
                       </div>
                       <h6 className="text-xl mb-1 font-semibold">
-                        CSS Components
+                        Quick-Pay Button
                       </h6>
                       <p className="mb-4 text-blueGray-500">
-                        Notus React comes with a huge number of Fully Coded CSS
-                        components.
+                        Allow your customers to complete payments instantly with one click, perfect for fixed-cost services.
                       </p>
                     </div>
                   </div>
@@ -135,11 +134,10 @@ export default function Index() {
                         <i className="fas fa-drafting-compass"></i>
                       </div>
                       <h6 className="text-xl mb-1 font-semibold">
-                        JavaScript Components
+                        Buy Now Button
                       </h6>
                       <p className="mb-4 text-blueGray-500">
-                        We also feature many dynamic components for React,
-                        NextJS, Vue and Angular.
+                        Offer a smooth shopping experience, enabling customers to quickly select quantities and make purchases with ease.
                       </p>
                     </div>
                   </div>
@@ -150,10 +148,9 @@ export default function Index() {
                       <div className="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-white">
                         <i className="fas fa-newspaper"></i>
                       </div>
-                      <h6 className="text-xl mb-1 font-semibold">Pages</h6>
+                      <h6 className="text-xl mb-1 font-semibold">Donations Button</h6>
                       <p className="mb-4 text-blueGray-500">
-                        This extension also comes with 3 sample pages. They are
-                        fully coded so you can start working instantly.
+                        Empower your supporters to contribute effortlessly with preset or custom donation amounts, supporting your cause seamlessly.
                       </p>
                     </div>
                   </div>
@@ -163,11 +160,10 @@ export default function Index() {
                         <i className="fas fa-file-alt"></i>
                       </div>
                       <h6 className="text-xl mb-1 font-semibold">
-                        Documentation
+                        Custom Button
                       </h6>
                       <p className="mb-4 text-blueGray-500">
-                        Built by developers for developers. You will love how
-                        easy is to to work with Notus React.
+                        Provide advanced customization options, allowing users to set their own payment amounts and customize forms.
                       </p>
                     </div>
                   </div>
