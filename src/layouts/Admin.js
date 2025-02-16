@@ -14,6 +14,7 @@ import Tables from "views/admin/Tables.js";
 import CreateWidget from "views/pages/createwidget/CreateWidget";
 import HeaderStats from "components/Headers/HeaderStats";
 import Donation from "views/pages/donation/Donation";
+import PaymentForm from "views/pages/paymentform/PaymentForm";
 
 export default function Admin() {
   const location = useLocation();
@@ -33,6 +34,8 @@ export default function Admin() {
             {/* Manually added */}
             <Route path="/admin/createwidget" exact component={CreateWidget} />
             <Route path="/admin/createwidget/donation" component={Donation} />
+            <Route path="/admin/payment-form" exact component={PaymentForm} />
+
 
             <Redirect from="/admin" to="/admin/dashboard" />
           </Switch>
