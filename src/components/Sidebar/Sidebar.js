@@ -213,7 +213,7 @@ export default function Sidebar() {
                         : "text-blueGray-300")
                     }
                   ></i>{" "}
-                  Customize Payment Form
+                  Create Payment Form
                 </Link>
               </li>
 
