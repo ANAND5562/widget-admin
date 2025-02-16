@@ -1,18 +1,38 @@
 /*eslint-disable*/
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useHistory } from "react-router-dom";
 
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import Footer from "components/Footers/Footer.js";
 
+
 export default function Index() {
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const history = useHistory(); // Initialize useHistory
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+
+    if (email === "admin" && password === "admin") {
+      history.push("/admin/dashboard"); // Redirect using history.push
+    } else {
+      setErrorMessage("Invalid email or password!");
+    }
+  };
+
+
   return (
     <>
       <IndexNavbar fixed />
-      <section className="header relative pt-16 items-center flex h-screen max-h-860-px">
-        <div className="container mx-auto items-center flex flex-wrap">
-          <div className="w-full md:w-8/12 lg:w-6/12 xl:w-6/12 px-4">
-            <div className="pt-32 sm:pt-0">
+
+      <section className="header relative pt-16 flex items-center h-screen max-h-860-px">
+        <div className="container mx-auto flex flex-wrap items-center justify-center gap-x-12">
+          {/* Left Section - Payment Widget */}
+          <div className="w-full md:w-5/12 lg:w-5/12 xl:w-5/12 px-4 mr-auto">
+            <div className="pt-28 sm:pt-0">
               <h2 className="font-semibold text-4xl text-blueGray-600">
                 Payment Widget
               </h2>
@@ -23,8 +43,9 @@ export default function Index() {
                 Power up your payments today with{" "}
                 <a
                   href="https://developer.sabpaisa.in/"
-                  className="text-blueGray-600"
+                  className="text-blueGray-600 font-semibold hover:underline"
                   target="_blank"
+                  rel="noopener noreferrer"
                 >
                   SabPaisa!
                 </a>
@@ -32,29 +53,89 @@ export default function Index() {
               <div className="mt-12">
                 <a
                   href="#"
-                  // target="_blank"
-                  style={{ backgroundColor: '#9ACD32' }}
-                  className="get-started text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 active:bg-lightBlue-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
+                  style={{ backgroundColor: "#9ACD32" }}
+                  className="get-started text-white font-bold px-6 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105"
                 >
                   Get started
                 </a>
                 <a
                   href="#"
-                  className="github-star ml-1 text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-700 active:bg-blueGray-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
-                // target="_blank"
+                  className="github-star ml-3 text-white font-bold px-6 py-4 rounded-lg bg-blueGray-700 shadow-lg hover:bg-blueGray-600 hover:shadow-xl transition-all duration-200 transform hover:scale-105"
                 >
                   Widget Star
                 </a>
               </div>
             </div>
           </div>
-        </div>
 
-        {/* <img
-          className="absolute top-0 b-auto right-0 pt-16 sm:w-6/12 -mt-48 sm:mt-0 w-10/12 max-h-860px"
-          src={require("assets/img/pattern_react.png").default}
-          alt="..."
-        /> */}
+          {/* Right Section - Login Form */}
+          <div className="w-full md:w-5/12 lg:w-4/12 xl:w-4/12 px-4 ml-auto mt-5">
+            <div className="bg-white shadow-lg rounded-lg p-8">
+              <h3 className="text-2xl font-semibold text-center text-blueGray-700">
+                Login
+              </h3>
+              <form className="mt-6" onSubmit={handleLogin}>
+                {/* Email Field */}
+                <div className="mb-4">
+                  <label className="block text-blueGray-600 text-sm font-bold mb-2">
+                    Email Address
+                  </label>
+                  <input
+                    type="text"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blueGray-500"
+                    placeholder="Enter your email"
+                    required
+                  />
+                </div>
+
+                {/* Password Field */}
+                <div className="mb-4">
+                  <label className="block text-blueGray-600 text-sm font-bold mb-2">
+                    Password
+                  </label>
+                  <input
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blueGray-500"
+                    placeholder="Enter your password"
+                    required
+                  />
+                </div>
+
+                {/* Error Message */}
+                {errorMessage && (
+                  <p className="text-red-500 text-sm mb-4 text-center">{errorMessage}</p>
+                )}
+
+                {/* Login Button */}
+                <div className="mb-6">
+                  <button
+                    type="submit"
+                    className="w-full bg-blueGray-700 text-white font-bold py-2 px-4 rounded-lg hover:bg-blueGray-600 transition duration-200"
+                  >
+                    Sign In
+                  </button>
+                </div>
+
+                {/* Forgot Password & Signup */}
+                <div className="text-center">
+                  <a href="#" className="text-blueGray-500 text-sm hover:underline">
+                    Forgot Password?
+                  </a>
+                  <p className="mt-2 text-sm text-blueGray-500">
+                    Don't have an account?{" "}
+                    <a href="#" className="text-blueGray-700 font-bold hover:underline">
+                      Sign up
+                    </a>
+                  </p>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section className="mt-48 md:mt-40 pb-40 relative bg-blueGray-100">
@@ -179,7 +260,7 @@ export default function Index() {
           <div className="w-full md:w-6/12 px-12 md:px-4">
             <h2 className="font-semibold text-4xl">Protected Payments, Hassle-Free.</h2>
             <p className="text-lg leading-relaxed mt-4 mb-4 text-blueGray-500">
-            Protected payments, stress-free transactions. Enjoy seamless security with every purchase—no hidden fees, no complications. Just smooth, worry-free payments every time.
+              Protected payments, stress-free transactions. Enjoy seamless security with every purchase—no hidden fees, no complications. Just smooth, worry-free payments every time.
             </p>
           </div>
         </div>
