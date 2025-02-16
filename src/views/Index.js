@@ -87,7 +87,7 @@ export default function Index() {
                   <label className="block text-blueGray-500 text-sm font-semibold mb-2">
                     Email
                   </label>
-                  <div className="flex items-center border rounded-lg shadow-md focus-within:ring-2 focus-within:ring-blueGray-500">
+                  <div className="flex items-center border rounded-lg shadow-sm focus-within:ring-2 focus-within:ring-blueGray-500">
                     <span className="px-3 text-blueGray-500">
                       <i className="fas fa-envelope"></i>
                     </span>
@@ -107,7 +107,7 @@ export default function Index() {
                   <label className="block text-blueGray-500 text-sm font-semibold mb-2">
                     Password
                   </label>
-                  <div className="flex items-center border rounded-lg shadow-md focus-within:ring-2 focus-within:ring-blueGray-500">
+                  <div className="flex items-center border rounded-lg shadow-sm focus-within:ring-2 focus-within:ring-blueGray-500">
                     <span className="px-3 text-blueGray-500">
                       <i className="fas fa-lock"></i>
                     </span>
