@@ -75,7 +75,7 @@ export default function Index() {
                 <img src={SabPaisaLogo} alt="404" className="h-6 w-auto" />
               </div>
               <div className="text-center text-sm mt-4 ml-2">
-              <p className="text-blueGray-500">
+                <p className="text-blueGray-500">
                   Welcome to SabPaisa!
                 </p>
               </div>
@@ -199,7 +199,7 @@ export default function Index() {
                     ></polygon>
                   </svg>
                   <h4 className="text-xl font-bold text-white">
-                    Great for your awesome project
+                    Fast, Secure, Easy Transactions
                   </h4>
                   <p className="text-md font-light mt-2 text-white">
                     Make payments effortless with our all-in-one solution.
