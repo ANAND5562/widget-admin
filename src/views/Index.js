@@ -33,9 +33,9 @@ export default function Index() {
           {/* Left Section - Payment Widget */}
           <div className="w-full md:w-5/12 lg:w-5/12 xl:w-5/12 px-4 mr-auto">
             <div className="pt-28 sm:pt-0">
-              <h2 className="font-semibold text-4xl text-blueGray-600">
-                Payment Widget
-              </h2>
+              <div className="font-semibold text-4xl text-blueGray-600">
+                Payment <span style={{ color: "#9ACD32" }}>Widget</span>
+              </div>
               <p className="mt-4 text-lg leading-relaxed text-blueGray-500">
                 Create custom payment buttons, forms, and more.
                 Design the perfect checkout experience.
@@ -72,14 +72,17 @@ export default function Index() {
           {/* <div className="w-full md:w-5/12 lg:w-4/12 xl:w-4/12 px-4 ml-auto mt-5"> */}
           <div className="w-full md:w-8/12 lg:w-6/12 xl:w-5/12 px-6 mx-auto mt-5 max-w-lg ml-5">
             <div className="bg-white shadow-xl rounded-2xl p-10">
-              <div className="flex justify-center items-center">
+              {/* <div className="flex justify-center items-center">
                 <img src={SabPaisaLogo} alt="404" className="h-6 w-auto" />
+              </div> */}
+              <div className="text-center text-3xl">
+                Welcome to Sab<span style={{ color: "#9ACD32" }}>Paisa</span>!
               </div>
-              <div className="text-center text-sm mt-4 ml-2">
+              {/* <div className="text-center text-sm mt-4 ml-2">
                 <p className="text-blueGray-500">
                   Welcome to SabPaisa!
                 </p>
-              </div>
+              </div> */}
 
               <form className="mt-6" onSubmit={handleLogin}>
                 {/* Email Field */}
