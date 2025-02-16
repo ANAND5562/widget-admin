@@ -1,9 +1,9 @@
 /*eslint-disable*/
 import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
-
+import { useHistory } from "react-router-dom";
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import Footer from "components/Footers/Footer.js";
+import SabPaisaLogo from '../assets/img/SabpaisaLogo.svg'
 
 
 export default function Index() {
@@ -70,39 +70,50 @@ export default function Index() {
 
           {/* Right Section - Login Form */}
           <div className="w-full md:w-5/12 lg:w-4/12 xl:w-4/12 px-4 ml-auto mt-5">
-            <div className="bg-white shadow-lg rounded-lg p-8">
-              <h3 className="text-2xl font-semibold text-center text-blueGray-700">
-                Login
-              </h3>
-              <form className="mt-6" onSubmit={handleLogin}>
+            <div className="bg-white shadow-xl rounded-2xl p-10">
+              <div className="flex justify-center items-center">
+                <img src={SabPaisaLogo} alt="404" className="h-6 w-auto" />
+              </div>
+
+              <form className="mt-8" onSubmit={handleLogin}>
                 {/* Email Field */}
-                <div className="mb-4">
-                  <label className="block text-blueGray-600 text-sm font-bold mb-2">
-                    Email Address
+                <div className="mb-6 relative">
+                  <label className="block text-blueGray-500 text-sm font-semibold mb-2">
+                    Email
                   </label>
-                  <input
-                    type="text"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blueGray-500"
-                    placeholder="Enter your email"
-                    required
-                  />
+                  <div className="flex items-center border rounded-lg shadow-md focus-within:ring-2 focus-within:ring-blueGray-500">
+                    <span className="px-3 text-blueGray-500">
+                      <i className="fas fa-envelope"></i>
+                    </span>
+                    <input
+                      type="text"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="w-full px-3 py-2 border-none rounded-r-lg focus:outline-none"
+                      placeholder="Enter your email"
+                      required
+                    />
+                  </div>
                 </div>
 
                 {/* Password Field */}
-                <div className="mb-4">
-                  <label className="block text-blueGray-600 text-sm font-bold mb-2">
+                <div className="mb-6 relative">
+                  <label className="block text-blueGray-500 text-sm font-semibold mb-2">
                     Password
                   </label>
-                  <input
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blueGray-500"
-                    placeholder="Enter your password"
-                    required
-                  />
+                  <div className="flex items-center border rounded-lg shadow-md focus-within:ring-2 focus-within:ring-blueGray-500">
+                    <span className="px-3 text-blueGray-500">
+                      <i className="fas fa-lock"></i>
+                    </span>
+                    <input
+                      type="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      className="w-full px-3 py-2 border-none rounded-r-lg focus:outline-none"
+                      placeholder="Enter your password"
+                      required
+                    />
+                  </div>
                 </div>
 
                 {/* Error Message */}
@@ -114,10 +125,11 @@ export default function Index() {
                 <div className="mb-6">
                   <button
                     type="submit"
-                    className="w-full bg-blueGray-700 text-white font-bold py-2 px-4 rounded-lg hover:bg-blueGray-600 transition duration-200"
+                    className="w-full bg-blueGray-700 text-white font-bold py-3 px-4 rounded-lg shadow-lg hover:bg-blueGray-600 transform transition-all duration-200 hover:scale-105"
                   >
                     Sign In
                   </button>
+
                 </div>
 
                 {/* Forgot Password & Signup */}
@@ -125,9 +137,9 @@ export default function Index() {
                   <a href="#" className="text-blueGray-500 text-sm hover:underline">
                     Forgot Password?
                   </a>
-                  <p className="mt-2 text-sm text-blueGray-500">
+                  <p className="mt-3 text-sm text-blueGray-500">
                     Don't have an account?{" "}
-                    <a href="#" className="text-blueGray-700 font-bold hover:underline">
+                    <a href="#" className="font-bold hover:underline" style={{ color: "#9ACD32" }}>
                       Sign up
                     </a>
                   </p>
@@ -135,6 +147,7 @@ export default function Index() {
               </form>
             </div>
           </div>
+
         </div>
       </section>
 
