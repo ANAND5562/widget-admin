@@ -74,8 +74,13 @@ export default function Index() {
               <div className="flex justify-center items-center">
                 <img src={SabPaisaLogo} alt="404" className="h-6 w-auto" />
               </div>
+              <div className="text-center text-sm mt-4 ml-2">
+              <p className="text-blueGray-500">
+                  Welcome to SabPaisa!
+                </p>
+              </div>
 
-              <form className="mt-8" onSubmit={handleLogin}>
+              <form className="mt-6" onSubmit={handleLogin}>
                 {/* Email Field */}
                 <div className="mb-6 relative">
                   <label className="block text-blueGray-500 text-sm font-semibold mb-2">
