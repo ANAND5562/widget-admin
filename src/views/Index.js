@@ -103,7 +103,7 @@ export default function Index() {
                 </div>
 
                 {/* Password Field */}
-                <div className="mb-6 relative">
+                <div className="mb-8 relative">
                   <label className="block text-blueGray-500 text-sm font-semibold mb-2">
                     Password
                   </label>
@@ -128,10 +128,10 @@ export default function Index() {
                 )}
 
                 {/* Login Button */}
-                <div className="mb-6">
+                <div className="mb-6 pt-2">
                   <button
                     type="submit"
-                    className="w-full bg-blueGray-700 text-white font-bold py-3 px-4 rounded-lg shadow-lg hover:bg-blueGray-600 transform transition-all duration-200 hover:scale-105"
+                    className="w-full bg-blueGray-700 text-white font-bold py-2 px-4 rounded-lg shadow-lg hover:bg-blueGray-600 transform transition-all duration-200 hover:scale-105"
                   >
                     Sign In
                   </button>
