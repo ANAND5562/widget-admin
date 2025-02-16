@@ -93,7 +93,7 @@ function Donation() {
   }
   return (
     <div>
-      <h6 className="text-center md:mt-[-17px] py-1">Easy Progresses</h6>
+      <h6 className="text-center md:mt-[-17px] py-1 font-semibold">Easy Progresses</h6>
       <div className="flex flex-col md:ml-[195px]">
         {/* Step Indicators and Titles */}
         <div className="flex justify-between items-between w-full">
