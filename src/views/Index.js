@@ -71,7 +71,7 @@ export default function Index() {
           {/* Right Section - Login Form */}
           {/* <div className="w-full md:w-5/12 lg:w-4/12 xl:w-4/12 px-4 ml-auto mt-5"> */}
           <div className="w-full md:w-8/12 lg:w-6/12 xl:w-5/12 px-6 mx-auto mt-5 max-w-lg ml-5">
-            <div className="bg-white shadow-xl rounded-2xl p-10">
+            <div className="bg-white shadow-md rounded-md p-10">
               {/* <div className="flex justify-center items-center">
                 <img src={SabPaisaLogo} alt="404" className="h-6 w-auto" />
               </div> */}
