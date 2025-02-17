@@ -196,47 +196,42 @@ function ButtonDetails({ formData, onFormChange }) {
 }
 
 function AmountDetails({ formData, onFormChange }) {
-  const [isAddEnabled, setIsAddEnabled] = useState(false) // State to manage toggle button
   const [showTextarea, setShowTextarea] = useState(false); // State to control textarea visibility
 
-
   const handleFieldChange = (index, key, value) => {
-    const updatedFields = [...formData.fields]
-    updatedFields[index][key] = value
-    onFormChange('fields', updatedFields)
-  }
+    const updatedFields = [...formData.fields];
+    updatedFields[index][key] = value;
+    onFormChange('fields', updatedFields);
+  };
 
   const addNewField = () => {
-    if (isAddEnabled && formData.fields.length < 6) {
+    if (formData.fields.length < 6) {
       onFormChange('fields', [
         ...formData.fields,
-        { label: '', amount: '', disabled: false }, // New empty field with disabled state
-      ])
+        { label: '', amount: '', disabled: false }, // New empty field
+      ]);
     }
-  }
+  };
 
   const deleteField = (index) => {
-    const updatedFields = formData.fields.filter((_, i) => i !== index)
-    onFormChange('fields', updatedFields)
-  }
+    const updatedFields = formData.fields.filter((_, i) => i !== index);
+    onFormChange('fields', updatedFields);
+  };
 
-  const toggleAddButton = () => {
-    setIsAddEnabled(!isAddEnabled) // Toggle the state
-  }
   const toggleTextarea = () => {
     setShowTextarea(!showTextarea); // Toggle textarea visibility
   };
 
   const toggleDisableField = (index) => {
-    const updatedFields = [...formData.fields]
+    const updatedFields = [...formData.fields];
     if (!updatedFields[index].disabled) {
-      // If disabling the field, clear its values
-      updatedFields[index].label = ''
-      updatedFields[index].amount = ''
+      updatedFields[index].label = '';
+      updatedFields[index].amount = '';
     }
-    updatedFields[index].disabled = !updatedFields[index].disabled
-    onFormChange('fields', updatedFields)
-  }
+    updatedFields[index].disabled = !updatedFields[index].disabled;
+    onFormChange('fields', updatedFields);
+  };
+
   return (
     <div>
       <h6 className="text-center md:ml-[-40px]">Donation Amount</h6>
@@ -258,39 +253,31 @@ function AmountDetails({ formData, onFormChange }) {
                       type="text"
                       value={field.label}
                       onChange={(e) =>
-                        handleFieldChange(
-                          index,
-                          'label',
-                          e.target.value
-                        )
+                        handleFieldChange(index, 'label', e.target.value)
                       }
                       className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-xs"
                       placeholder="Enter label"
-                      disabled={field.disabled} // Disable if the field is marked disabled
+                      disabled={field.disabled}
                     />
                   </div>
                   {/* Amount Input */}
                   <div className="flex-1">
                     <label className="block text-xs font-medium text-gray-700">
-                      Field Type
+                      Amount
                     </label>
                     <input
                       type="number"
                       value={field.amount}
                       onChange={(e) =>
-                        handleFieldChange(
-                          index,
-                          'amount',
-                          e.target.value
-                        )
+                        handleFieldChange(index, 'amount', e.target.value)
                       }
                       className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-xs"
                       placeholder="Enter amount"
-                      disabled={field.disabled} // Disable if the field is marked disabled
+                      disabled={field.disabled}
                     />
                   </div>
 
-                  {/* Delete Button (only for additional fields) */}
+                  {/* Delete and Disable Button (only for additional fields) */}
                   {index !== 0 && (
                     <div style={{ marginTop: '20px', display: 'flex', gap: '5px' }}>
                       <button
@@ -304,8 +291,8 @@ function AmountDetails({ formData, onFormChange }) {
                         type="button"
                         onClick={() => toggleDisableField(index)}
                         className={`px-2 py-1 rounded-md shadow focus:outline-none ${field.disabled
-                          ? 'bg-green-500 text-white hover:bg-green-600'
-                          : 'bg-gray-500 text-white hover:bg-gray-600'
+                            ? 'bg-green-500 text-white hover:bg-green-600'
+                            : 'bg-gray-500 text-white hover:bg-gray-600'
                           }`}
                       >
                         {field.disabled ? 'Enable' : 'Disable'}
@@ -340,45 +327,26 @@ function AmountDetails({ formData, onFormChange }) {
             ))}
           </div>
 
-          {/* Buttons */}
+          {/* Add Preset Button */}
           <div className="mt-4 flex justify-between items-center">
-            <div></div>
-            <div>
-              <button
-                type="button"
-                onClick={toggleAddButton}
-                disabled={formData.fields.length >= 6} // Disable based on field limit
-                className={`${formData.fields.length >= 6
+            <button
+              type="button"
+              onClick={addNewField}
+              disabled={formData.fields.length >= 6}
+              className={`${formData.fields.length >= 6
                   ? 'text-gray-700 cursor-not-allowed underline'
-                  : isAddEnabled
-                    ? 'text-blue-500 cursor-pointer underline'
-                    : 'text-blue-500 cursor-pointer underline'
-                  }`}
-              >
-                {isAddEnabled ? 'Disable Preset' : 'Enable Preset'}
-              </button>
-              <button
-                style={{ marginLeft: '20px' }}
-                type="button"
-                onClick={addNewField}
-                disabled={!isAddEnabled || formData.fields.length >= 6} // Disabled when toggle is off or limit is reached
-                className={`${formData.fields.length >= 6
-                  ? 'text-gray-700 cursor-not-allowed underline'
-                  : isAddEnabled
-                    ? 'text-blue-500 cursor-pointer underline'
-                    : 'text-gray-700 cursor-not-allowed underline'
-                  }`}
-              >
-                +Add Another Preset
-              </button>
-            </div>
+                  : 'text-blue-500 cursor-pointer underline'
+                }`}
+            >
+              +Add Another Preset
+            </button>
           </div>
         </div>
-        {/* Button Preview */}
       </div>
     </div>
-  )
+  );
 }
+
 function CustomerDetails({ formData, onFormChange }) {
   return (
     <div>
