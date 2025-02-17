@@ -198,12 +198,12 @@ function ButtonDetails({ formData, onFormChange }) {
 function AmountDetails({ formData, onFormChange }) {
   const [showTextarea, setShowTextarea] = useState(false);
 
-  // Ensure at least 3 fields exist initially
+  // Ensure at least 3 default fields exist
   if (formData.fields.length < 3) {
     onFormChange('fields', [
       { label: '', amount: '', disabled: false }, // First field (non-deletable, non-disablable)
-      { label: '', amount: '', disabled: false }, // Second field
-      { label: '', amount: '', disabled: false }, // Third field
+      { label: '', amount: '', disabled: false }, // Second field (deletable, disablable)
+      { label: '', amount: '', disabled: false }, // Third field (deletable, disablable)
     ]);
   }
 
@@ -224,7 +224,7 @@ function AmountDetails({ formData, onFormChange }) {
 
   const deleteField = (index) => {
     if (index > 0) {
-      // Ensure first field is never deleted
+      // Prevent first field from being deleted
       const updatedFields = formData.fields.filter((_, i) => i !== index);
       onFormChange('fields', updatedFields);
     }
@@ -232,13 +232,13 @@ function AmountDetails({ formData, onFormChange }) {
 
   const toggleDisableField = (index) => {
     if (index > 0) {
-      // Ensure first field is never disabled
+      // Prevent first field from being disabled
       const updatedFields = [...formData.fields];
-      if (!updatedFields[index].disabled) {
+      updatedFields[index].disabled = !updatedFields[index].disabled;
+      if (updatedFields[index].disabled) {
         updatedFields[index].label = '';
         updatedFields[index].amount = '';
       }
-      updatedFields[index].disabled = !updatedFields[index].disabled;
       onFormChange('fields', updatedFields);
     }
   };
@@ -272,7 +272,7 @@ function AmountDetails({ formData, onFormChange }) {
                       }
                       className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-xs"
                       placeholder="Enter label"
-                      disabled={index === 0 || field.disabled}
+                      disabled={field.disabled}
                     />
                   </div>
                   {/* Amount Input */}
@@ -288,7 +288,7 @@ function AmountDetails({ formData, onFormChange }) {
                       }
                       className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-xs"
                       placeholder="Enter amount"
-                      disabled={index === 0 || field.disabled}
+                      disabled={field.disabled}
                     />
                   </div>
 
@@ -305,10 +305,11 @@ function AmountDetails({ formData, onFormChange }) {
                       <button
                         type="button"
                         onClick={() => toggleDisableField(index)}
-                        className={`px-2 py-1 rounded-md shadow focus:outline-none ${field.disabled
+                        className={`px-2 py-1 rounded-md shadow focus:outline-none ${
+                          field.disabled
                             ? 'bg-green-500 text-white hover:bg-green-600'
                             : 'bg-gray-500 text-white hover:bg-gray-600'
-                          }`}
+                        }`}
                       >
                         {field.disabled ? 'Enable' : 'Disable'}
                       </button>
@@ -348,10 +349,11 @@ function AmountDetails({ formData, onFormChange }) {
               type="button"
               onClick={addNewField}
               disabled={formData.fields.length >= 6}
-              className={`${formData.fields.length >= 6
+              className={`${
+                formData.fields.length >= 6
                   ? 'text-gray-700 cursor-not-allowed underline'
                   : 'text-blue-500 cursor-pointer underline'
-                }`}
+              }`}
             >
               +Add Another Preset
             </button>
