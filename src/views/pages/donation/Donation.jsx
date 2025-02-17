@@ -196,7 +196,16 @@ function ButtonDetails({ formData, onFormChange }) {
 }
 
 function AmountDetails({ formData, onFormChange }) {
-  const [showTextarea, setShowTextarea] = useState(false); // State to control textarea visibility
+  const [showTextarea, setShowTextarea] = useState(false);
+
+  // Ensure at least 3 fields exist initially
+  if (formData.fields.length < 3) {
+    onFormChange('fields', [
+      { label: '', amount: '', disabled: false }, // First field (non-deletable, non-disablable)
+      { label: '', amount: '', disabled: false }, // Second field
+      { label: '', amount: '', disabled: false }, // Third field
+    ]);
+  }
 
   const handleFieldChange = (index, key, value) => {
     const updatedFields = [...formData.fields];
@@ -208,28 +217,34 @@ function AmountDetails({ formData, onFormChange }) {
     if (formData.fields.length < 6) {
       onFormChange('fields', [
         ...formData.fields,
-        { label: '', amount: '', disabled: false }, // New empty field
+        { label: '', amount: '', disabled: false },
       ]);
     }
   };
 
   const deleteField = (index) => {
-    const updatedFields = formData.fields.filter((_, i) => i !== index);
-    onFormChange('fields', updatedFields);
-  };
-
-  const toggleTextarea = () => {
-    setShowTextarea(!showTextarea); // Toggle textarea visibility
+    if (index > 0) {
+      // Ensure first field is never deleted
+      const updatedFields = formData.fields.filter((_, i) => i !== index);
+      onFormChange('fields', updatedFields);
+    }
   };
 
   const toggleDisableField = (index) => {
-    const updatedFields = [...formData.fields];
-    if (!updatedFields[index].disabled) {
-      updatedFields[index].label = '';
-      updatedFields[index].amount = '';
+    if (index > 0) {
+      // Ensure first field is never disabled
+      const updatedFields = [...formData.fields];
+      if (!updatedFields[index].disabled) {
+        updatedFields[index].label = '';
+        updatedFields[index].amount = '';
+      }
+      updatedFields[index].disabled = !updatedFields[index].disabled;
+      onFormChange('fields', updatedFields);
     }
-    updatedFields[index].disabled = !updatedFields[index].disabled;
-    onFormChange('fields', updatedFields);
+  };
+
+  const toggleTextarea = () => {
+    setShowTextarea(!showTextarea);
   };
 
   return (
@@ -242,8 +257,8 @@ function AmountDetails({ formData, onFormChange }) {
         <div className='md:col-span-6 lg:col-span-6 xl:col-span-6 2xl:col-span-6'>
           <div className="grid grid-cols-1 gap-2">
             {formData.fields.map((field, index) => (
-              <>
-                <div key={index} className="flex gap-4 items-center">
+              <div key={index} className="flex flex-col gap-2">
+                <div className="flex gap-4 items-center">
                   {/* Field Label Input */}
                   <div className="flex-1">
                     <label className="block text-xs font-medium text-gray-700">
@@ -257,7 +272,7 @@ function AmountDetails({ formData, onFormChange }) {
                       }
                       className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-xs"
                       placeholder="Enter label"
-                      disabled={field.disabled}
+                      disabled={index === 0 || field.disabled}
                     />
                   </div>
                   {/* Amount Input */}
@@ -273,12 +288,12 @@ function AmountDetails({ formData, onFormChange }) {
                       }
                       className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-xs"
                       placeholder="Enter amount"
-                      disabled={field.disabled}
+                      disabled={index === 0 || field.disabled}
                     />
                   </div>
 
-                  {/* Delete and Disable Button (only for additional fields) */}
-                  {index !== 0 && (
+                  {/* Delete and Disable Button (only for fields beyond the first one) */}
+                  {index > 0 && (
                     <div style={{ marginTop: '20px', display: 'flex', gap: '5px' }}>
                       <button
                         type="button"
@@ -300,30 +315,30 @@ function AmountDetails({ formData, onFormChange }) {
                     </div>
                   )}
                 </div>
-                <div>
-                  {index === 0 && (
-                    <>
-                      <div
-                        onClick={toggleTextarea}
-                        className='text-blue-500 cursor-pointer underline'
-                      >
-                        {showTextarea ? '-Remove description' : '+Add description'}
+
+                {/* Add Description (Only for the First Field) */}
+                {index === 0 && (
+                  <>
+                    <div
+                      onClick={toggleTextarea}
+                      className='text-blue-500 cursor-pointer underline'
+                    >
+                      {showTextarea ? '-Remove description' : '+Add description'}
+                    </div>
+                    {showTextarea && (
+                      <div className="mt-0">
+                        <textarea
+                          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                          rows={1}
+                          placeholder="Enter additional details about the payment"
+                          value={formData.additionalDetails || ''}
+                          onChange={(e) => onFormChange('additionalDetails', e.target.value)}
+                        />
                       </div>
-                      {showTextarea && (
-                        <div className="mt-0">
-                          <textarea
-                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                            rows={1}
-                            placeholder="Enter additional details about the payment"
-                            value={formData.additionalDetails || ''}
-                            onChange={(e) => onFormChange('additionalDetails', e.target.value)}
-                          />
-                        </div>
-                      )}
-                    </>
-                  )}
-                </div>
-              </>
+                    )}
+                  </>
+                )}
+              </div>
             ))}
           </div>
 
