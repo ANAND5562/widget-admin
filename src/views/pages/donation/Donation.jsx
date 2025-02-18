@@ -368,6 +368,9 @@ function AmountDetails({ formData, onFormChange }) {
           <h6 className="font-semibold text-center">Donation Amount Preview</h6>
           {/* Dynamically Render Entered Donations */}
           <div className="py-5">
+            <div>
+              <p>Header</p>
+            </div>
             {formData.fields
               .filter((field) => field.label && field.amount) // Only show filled fields
               .map((field, index) => (
