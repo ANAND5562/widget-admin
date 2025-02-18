@@ -370,9 +370,29 @@ function AmountDetails({ formData, onFormChange }) {
             paddingBottom: '30px',
           }}
         >
-          <h6>Donation Amount Preview</h6>
-          <div className='flex justify-center items-center py-5'></div>
+          <h6 className="font-semibold">Donation Amount Preview</h6>
+
+          {/* Dynamically Render Entered Donations */}
+          <div className="py-5">
+            {formData.fields
+              .filter((field) => field.label && field.amount) // Only show filled fields
+              .map((field, index) => (
+                <div key={index} className="flex justify-between px-4 py-1 border-b">
+                  <span className="text-gray-700 text-sm font-medium">{field.label}</span>
+                  <span className="text-gray-900 text-sm font-semibold">₹{field.amount}</span>
+                </div>
+              ))}
+
+            {/* Display Total Donation Amount */}
+            <div className="flex justify-between px-4 py-2 mt-3 bg-gray-200 font-semibold">
+              <span className="text-gray-800">Total</span>
+              <span className="text-gray-900">
+                ₹ {formData.fields.reduce((total, field) => total + (parseInt(field.amount) || 0), 0)}
+              </span>
+            </div>
+          </div>
         </div>
+
       </div>
     </div>
   );
