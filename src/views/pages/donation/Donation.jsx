@@ -197,13 +197,14 @@ function ButtonDetails({ formData, onFormChange }) {
 
 function AmountDetails({ formData, onFormChange }) {
   const [showTextarea, setShowTextarea] = useState(false);
+  const [showPresets, setShowPresets] = useState(true); // State to toggle preset visibility
 
   // Ensure at least 3 default fields exist
   if (formData.fields.length < 3) {
     onFormChange("fields", [
-      { label: "", amount: "" }, // First field (non-deletable)
-      { label: "", amount: "" }, // Second field (deletable)
-      { label: "", amount: "" }, // Third field (deletable)
+      { label: "", amount: "" }, // First field (always visible)
+      { label: "", amount: "" }, // Second field (can be hidden)
+      { label: "", amount: "" }, // Third field (can be hidden)
     ]);
   }
 
@@ -231,6 +232,10 @@ function AmountDetails({ formData, onFormChange }) {
     setShowTextarea(!showTextarea);
   };
 
+  const togglePresetVisibility = () => {
+    setShowPresets(!showPresets);
+  };
+
   return (
     <div>
       <h6 className="text-center md:ml-[-40px]">Donation Amount</h6>
@@ -241,7 +246,7 @@ function AmountDetails({ formData, onFormChange }) {
         <div className="md:col-span-6 lg:col-span-6 xl:col-span-6 2xl:col-span-6">
           <div className="grid grid-cols-1 gap-2">
             {formData.fields.map((field, index) => (
-              <div key={index} className="flex flex-col gap-2">
+              <div key={index} className={`flex flex-col gap-2 ${index > 0 && !showPresets ? "hidden" : ""}`}>
                 <div className="flex gap-4 items-center">
                   {/* Field Label Input */}
                   <div className="flex-1">
@@ -308,25 +313,44 @@ function AmountDetails({ formData, onFormChange }) {
                     )}
                   </>
                 )}
+                
+                {/* Toggle Preset Visibility Button */}
+                {
+                  index === 0 && (
+                    <>
+                      <div className="mt-4 flex justify-start">
+                        <button
+                          type="button"
+                          onClick={togglePresetVisibility}
+                          className={`px-3 py-2 rounded-md shadow text-white ${showPresets ? "bg-gray-500 hover:bg-gray-600" : "bg-green-500 hover:bg-green-600"
+                            }`}
+                        >
+                          {showPresets ? "Hide Presets" : "Show Presets"}
+                        </button>
+                      </div>
+                    </>
+                  )
+                }
               </div>
             ))}
           </div>
 
           {/* Add Preset Button */}
-          <div className="mt-4 flex justify-between items-center">
-            <button
-              type="button"
-              onClick={addNewField}
-              disabled={formData.fields.length >= 6}
-              className={`${
-                formData.fields.length >= 6
+          {showPresets && (
+            <div className="mt-4 flex justify-between items-center">
+              <button
+                type="button"
+                onClick={addNewField}
+                disabled={formData.fields.length >= 6}
+                className={`${formData.fields.length >= 6
                   ? "text-gray-700 cursor-not-allowed underline"
                   : "text-blue-500 cursor-pointer underline"
-              }`}
-            >
-              + Add Another Preset
-            </button>
-          </div>
+                  }`}
+              >
+                + Add Another Preset
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>
