@@ -203,7 +203,7 @@ function AmountDetails({ formData, onFormChange }) {
   // Ensure at least 3 default fields exist
   if (formData.fields.length < 3) {
     onFormChange("fields", [
-      { label: "", amount: "" }, // First field (always visible)
+      { label: "NORNAL DONATION", amount: "" }, // First field (always visible)
       { label: "SUPPORT FOR CAUSE1", amount: "500" }, // Second field (can be hidden)
       { label: "SUPPORT FOR CAUSE2", amount: "1000" }, // Third field (can be hidden)
     ]);
@@ -356,7 +356,7 @@ function AmountDetails({ formData, onFormChange }) {
         </div>
         {/* Button Preview */}
         <div
-          className="bg-sky-50 rounded-lg md:col-span-4 lg:col-span-4 xl:col-span-4 2xl:col-span-4 text-center"
+          className="bg-sky-50 rounded-lg md:col-span-4 lg:col-span-4 xl:col-span-4 2xl:col-span-4"
           style={{
             backgroundColor: '#E8F0FF',
             paddingLeft: '80px',
@@ -365,19 +365,26 @@ function AmountDetails({ formData, onFormChange }) {
             paddingBottom: '30px',
           }}
         >
-          <h6 className="font-semibold">Donation Amount Preview</h6>
-
+          <h6 className="font-semibold text-center">Donation Amount Preview</h6>
           {/* Dynamically Render Entered Donations */}
           <div className="py-5">
             {formData.fields
               .filter((field) => field.label && field.amount) // Only show filled fields
               .map((field, index) => (
-                <div key={index} className="flex justify-between px-4 py-1 border-b">
-                  <span className="text-gray-700 text-sm font-medium">{field.label}</span>
-                  <span className="text-gray-900 text-sm font-semibold">₹{field.amount}</span>
+                <div key={index} className="px-4 py-2 border-b">
+                  {/* Label */}
+                  <label className="block text-gray-700 text-sm font-medium mb-1">
+                    {field.label}
+                  </label>
+                  {/* Input Field for Amount */}
+                  <input
+                    type="text"
+                    className="w-full px-3 py-1 border rounded text-gray-900 text-sm font-semibold"
+                    value={field.amount}
+                    readOnly // Remove this if you want it to be editable
+                  />
                 </div>
               ))}
-
             {/* Display Total Donation Amount */}
             <div className="flex justify-between px-4 py-2 mt-3 bg-gray-200 font-semibold">
               <span className="text-gray-800">Total</span>
