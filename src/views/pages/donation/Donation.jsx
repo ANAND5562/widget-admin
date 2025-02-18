@@ -359,6 +359,20 @@ function AmountDetails({ formData, onFormChange }) {
             </div>
           )}
         </div>
+        {/* Button Preview */}
+        <div
+          className="bg-sky-50 rounded-lg md:col-span-4 lg:col-span-4 xl:col-span-4 2xl:col-span-4 text-center"
+          style={{
+            backgroundColor: '#E8F0FF',
+            paddingLeft: '80px',
+            paddingRight: '80px',
+            paddingTop: '30px',
+            paddingBottom: '30px',
+          }}
+        >
+          <h6>Donation Amount Preview</h6>
+          <div className='flex justify-center items-center py-5'></div>
+        </div>
       </div>
     </div>
   );
