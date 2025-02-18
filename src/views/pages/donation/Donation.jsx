@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Plus from '../../../assets/img/plus.png'
 import Minus from '../../../assets/img/Minus.png'
+import Delete from '../../../assets/img/Delete.svg'
 
 function Donation() {
   const [currentStep, setCurrentStep] = useState(1)
@@ -281,13 +282,7 @@ function AmountDetails({ formData, onFormChange }) {
 
                   {/* Delete Button (only for fields beyond the first one) */}
                   {index > 0 && (
-                    <button
-                      type="button"
-                      onClick={() => deleteField(index)}
-                      className="px-2 py-1 rounded-md shadow bg-red-500 text-white hover:bg-red-600 focus:outline-none mt-5"
-                    >
-                      Delete
-                    </button>
+                    <img src={Delete} onClick={() => deleteField(index)} alt="" className='mt-5' style={{ height: '44px', width: '44px' }} />
                   )}
                 </div>
 
