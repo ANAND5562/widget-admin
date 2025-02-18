@@ -203,7 +203,7 @@ function AmountDetails({ formData, onFormChange }) {
   // Ensure at least 3 default fields exist
   if (formData.fields.length < 3) {
     onFormChange("fields", [
-      { label: "NORNAL DONATION", amount: "" }, // First field (always visible)
+      { label: "NORNAL DONATION", amount: "100" }, // First field (always visible)
       { label: "SUPPORT FOR CAUSE1", amount: "500" }, // Second field (can be hidden)
       { label: "SUPPORT FOR CAUSE2", amount: "1000" }, // Third field (can be hidden)
     ]);
@@ -369,7 +369,7 @@ function AmountDetails({ formData, onFormChange }) {
             <p className='font-semibold text-center'>Preview</p>
           </div>
           {/* Header Section */}
-          <div className="py-3 border-b text-sm font-semibold text-white text-center bg-blue-500 rounded-lg">
+          <div className="py-3 border-b text-sm font-semibold text-white text-center bg-blue-500 rounded-lg mt-1">
             <p>The Animal Foundation</p>
           </div>
 
@@ -402,12 +402,12 @@ function AmountDetails({ formData, onFormChange }) {
           </div>
 
           {/* Footer Section */}
-          <div className="flex justify-between px-4 py-3 bg-white shadow-lg font-semibold border-t">
-            <span className="text-gray-900">
+          <div className="flex justify-between px-4 py-3 bg-white shadow-lg border-t">
+            <span className="text-gray-900 font-bold">
               ₹ {formData.fields.reduce((total, field) => total + (parseInt(field.amount) || 0), 0)}
             </span>
             {/* <span className="text-gray-800">Next</span> */}
-            <button class="bg-gray-800 text-white px-12 py-1 rounded" style={{textSize: '10px'}}>Next</button>
+            <button class="bg-blue-500 text-white px-12 py-1 rounded" style={{textSize: '10px'}}>Next</button>
 
           </div>
         </div>
