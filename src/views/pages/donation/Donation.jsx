@@ -365,16 +365,27 @@ function AmountDetails({ formData, onFormChange }) {
             paddingBottom: '30px',
           }}
         >
-          <h6 className="font-semibold text-center">Donation Amount Preview</h6>
-          {/* Dynamically Render Entered Donations */}
-          <div className="py-5">
-            <div>
-              <p>Header</p>
-            </div>
+          <div>
+            <p className='font-semibold text-center'>Preview</p>
+          </div>
+          {/* Header Section */}
+          <div className="py-3 border-b text-sm font-semibold text-white text-center bg-blue-500 rounded-lg">
+            <p>The Animal Foundation</p>
+          </div>
+
+          {/* Body Section with Fixed Height & Custom Scrollbar */}
+          <div
+            className="py-5 overflow-y-auto bg-white"
+            style={{
+              maxHeight: '300px',  // Fixed height
+              scrollbarWidth: 'thin',  // Slim scrollbar for Firefox
+              scrollbarColor: 'rgba(0, 0, 0, 0.3) transparent',  // Custom color
+            }}
+          >
             {formData.fields
               .filter((field) => field.label && field.amount) // Only show filled fields
               .map((field, index) => (
-                <div key={index} className="px-4 py-2 border-b">
+                <div key={index} className="px-4 py-2">
                   {/* Label */}
                   <label className="block text-gray-700 text-sm font-medium mb-1">
                     {field.label}
@@ -388,15 +399,20 @@ function AmountDetails({ formData, onFormChange }) {
                   />
                 </div>
               ))}
-            {/* Display Total Donation Amount */}
-            <div className="flex justify-between px-4 py-2 mt-3 bg-gray-200 font-semibold">
-              <span className="text-gray-800">Total</span>
-              <span className="text-gray-900">
-                ₹ {formData.fields.reduce((total, field) => total + (parseInt(field.amount) || 0), 0)}
-              </span>
-            </div>
+          </div>
+
+          {/* Footer Section */}
+          <div className="flex justify-between px-4 py-3 bg-white shadow-lg font-semibold border-t">
+            <span className="text-gray-900">
+              ₹ {formData.fields.reduce((total, field) => total + (parseInt(field.amount) || 0), 0)}
+            </span>
+            {/* <span className="text-gray-800">Next</span> */}
+            <button class="bg-gray-800 text-white px-12 py-1 rounded" style={{textSize: '10px'}}>Next</button>
+
           </div>
         </div>
+
+
 
       </div>
     </div>
