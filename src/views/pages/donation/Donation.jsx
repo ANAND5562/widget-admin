@@ -197,13 +197,14 @@ function ButtonDetails({ formData, onFormChange }) {
 
 function AmountDetails({ formData, onFormChange }) {
   const [showTextarea, setShowTextarea] = useState(false);
+  const [disableAllPresets, setDisableAllPresets] = useState(false);
 
   // Ensure at least 3 default fields exist
   if (formData.fields.length < 3) {
     onFormChange('fields', [
       { label: '', amount: '', disabled: false }, // First field (non-deletable, non-disablable)
-      { label: '', amount: '', disabled: false }, // Second field (deletable, disablable)
-      { label: '', amount: '', disabled: false }, // Third field (deletable, disablable)
+      { label: '', amount: '', disabled: false }, // Second field (deletable)
+      { label: '', amount: '', disabled: false }, // Third field (deletable)
     ]);
   }
 
@@ -230,17 +231,22 @@ function AmountDetails({ formData, onFormChange }) {
     }
   };
 
-  const toggleDisableField = (index) => {
-    if (index > 0) {
-      // Prevent first field from being disabled
-      const updatedFields = [...formData.fields];
-      updatedFields[index].disabled = !updatedFields[index].disabled;
-      if (updatedFields[index].disabled) {
-        updatedFields[index].label = '';
-        updatedFields[index].amount = '';
+  const toggleDisableAllPresets = () => {
+    setDisableAllPresets(!disableAllPresets);
+
+    const updatedFields = formData.fields.map((field, index) => {
+      if (index > 0) {
+        return {
+          ...field,
+          label: disableAllPresets ? field.label : '',
+          amount: disableAllPresets ? field.amount : '',
+          disabled: !disableAllPresets,
+        };
       }
-      onFormChange('fields', updatedFields);
-    }
+      return field;
+    });
+
+    onFormChange('fields', updatedFields);
   };
 
   const toggleTextarea = () => {
@@ -261,7 +267,11 @@ function AmountDetails({ formData, onFormChange }) {
                 <div className="flex gap-4 items-center">
                   {/* Field Label Input */}
                   <div className="flex-1">
-                    <label className="block text-xs font-medium text-gray-700">
+                    <label
+                      className={`block text-xs font-medium ${
+                        index > 0 && disableAllPresets ? 'text-gray-400' : 'text-gray-700'
+                      }`}
+                    >
                       Field Label
                     </label>
                     <input
@@ -270,14 +280,22 @@ function AmountDetails({ formData, onFormChange }) {
                       onChange={(e) =>
                         handleFieldChange(index, 'label', e.target.value)
                       }
-                      className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-xs"
+                      className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm sm:text-xs focus:outline-none ${
+                        index > 0 && disableAllPresets
+                          ? 'bg-gray-200 text-gray-400 border-gray-300 cursor-not-allowed'
+                          : 'border-gray-300 focus:ring-indigo-500 focus:border-indigo-500'
+                      }`}
                       placeholder="Enter label"
-                      disabled={field.disabled}
+                      disabled={index > 0 && disableAllPresets}
                     />
                   </div>
                   {/* Amount Input */}
                   <div className="flex-1">
-                    <label className="block text-xs font-medium text-gray-700">
+                    <label
+                      className={`block text-xs font-medium ${
+                        index > 0 && disableAllPresets ? 'text-gray-400' : 'text-gray-700'
+                      }`}
+                    >
                       Amount
                     </label>
                     <input
@@ -286,34 +304,30 @@ function AmountDetails({ formData, onFormChange }) {
                       onChange={(e) =>
                         handleFieldChange(index, 'amount', e.target.value)
                       }
-                      className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-xs"
+                      className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm sm:text-xs focus:outline-none ${
+                        index > 0 && disableAllPresets
+                          ? 'bg-gray-200 text-gray-400 border-gray-300 cursor-not-allowed'
+                          : 'border-gray-300 focus:ring-indigo-500 focus:border-indigo-500'
+                      }`}
                       placeholder="Enter amount"
-                      disabled={field.disabled}
+                      disabled={index > 0 && disableAllPresets}
                     />
                   </div>
 
-                  {/* Delete and Disable Button (only for fields beyond the first one) */}
+                  {/* Delete Button (only for fields beyond the first one) */}
                   {index > 0 && (
-                    <div style={{ marginTop: '20px', display: 'flex', gap: '5px' }}>
-                      <button
-                        type="button"
-                        onClick={() => deleteField(index)}
-                        className="px-2 py-1 bg-red-500 text-white rounded-md shadow hover:bg-red-600 focus:outline-none"
-                      >
-                        Delete
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => toggleDisableField(index)}
-                        className={`px-2 py-1 rounded-md shadow focus:outline-none ${
-                          field.disabled
-                            ? 'bg-green-500 text-white hover:bg-green-600'
-                            : 'bg-gray-500 text-white hover:bg-gray-600'
-                        }`}
-                      >
-                        {field.disabled ? 'Enable' : 'Disable'}
-                      </button>
-                    </div>
+                    <button
+                      type="button"
+                      onClick={() => deleteField(index)}
+                      className={`px-2 py-1 rounded-md shadow focus:outline-none ${
+                        disableAllPresets
+                          ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                          : 'bg-red-500 text-white hover:bg-red-600'
+                      }`}
+                      disabled={disableAllPresets}
+                    >
+                      Delete
+                    </button>
                   )}
                 </div>
 
@@ -324,7 +338,7 @@ function AmountDetails({ formData, onFormChange }) {
                       onClick={toggleTextarea}
                       className='text-blue-500 cursor-pointer underline'
                     >
-                      {showTextarea ? '-Remove description' : '+Add description'}
+                      {showTextarea ? '- Remove description' : '+ Add description'}
                     </div>
                     {showTextarea && (
                       <div className="mt-0">
@@ -348,14 +362,27 @@ function AmountDetails({ formData, onFormChange }) {
             <button
               type="button"
               onClick={addNewField}
-              disabled={formData.fields.length >= 6}
+              disabled={formData.fields.length >= 6 || disableAllPresets}
               className={`${
-                formData.fields.length >= 6
+                formData.fields.length >= 6 || disableAllPresets
                   ? 'text-gray-700 cursor-not-allowed underline'
                   : 'text-blue-500 cursor-pointer underline'
               }`}
             >
-              +Add Another Preset
+              + Add Another Preset
+            </button>
+          </div>
+
+          {/* Toggle Disable All Presets Button */}
+          <div className="mt-4 flex justify-center">
+            <button
+              type="button"
+              onClick={toggleDisableAllPresets}
+              className={`px-3 py-2 rounded-md shadow text-white ${
+                disableAllPresets ? 'bg-green-500 hover:bg-green-600' : 'bg-gray-500 hover:bg-gray-600'
+              }`}
+            >
+              {disableAllPresets ? 'Enable All Presets' : 'Disable All Presets'}
             </button>
           </div>
         </div>
