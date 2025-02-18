@@ -284,7 +284,7 @@ function AmountDetails({ formData, onFormChange }) {
                     <button
                       type="button"
                       onClick={() => deleteField(index)}
-                      className="px-2 py-1 rounded-md shadow bg-red-500 text-white hover:bg-red-600 focus:outline-none"
+                      className="px-2 py-1 rounded-md shadow bg-red-500 text-white hover:bg-red-600 focus:outline-none mt-5"
                     >
                       Delete
                     </button>
@@ -313,24 +313,31 @@ function AmountDetails({ formData, onFormChange }) {
                     )}
                   </>
                 )}
-                
-                {/* Toggle Preset Visibility Button */}
-                {
-                  index === 0 && (
-                    <>
-                      <div className="mt-4 flex justify-start">
-                        <button
-                          type="button"
-                          onClick={togglePresetVisibility}
-                          className={`px-3 py-2 rounded-md shadow text-white ${showPresets ? "bg-gray-500 hover:bg-gray-600" : "bg-green-500 hover:bg-green-600"
-                            }`}
-                        >
-                          {showPresets ? "Hide Presets" : "Show Presets"}
-                        </button>
-                      </div>
-                    </>
-                  )
-                }
+
+                {/* Toggle Preset Visibility Switch */}
+                {index === 0 && (
+                  <div className="mt-4 flex items-center gap-3">
+                    <label className="inline-flex items-center cursor-pointer">
+                      <input
+                        type="checkbox"
+                        className="sr-only peer"
+                        checked={showPresets}
+                        onChange={togglePresetVisibility}
+                      />
+                      <div
+                        className={`relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 
+                          peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 
+                          peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white 
+                          after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white 
+                          after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all 
+                          dark:border-gray-600 peer-checked:bg-blue-500 dark:peer-checked:bg-blue-500`}
+                      ></div>
+                    </label>
+                    <span className="text-sm font-medium text-gray-900 dark:text-gray-300">
+                      {showPresets ? "Hide Presets" : "Show Presets"}
+                    </span>
+                  </div>
+                )}
               </div>
             ))}
           </div>
