@@ -203,8 +203,8 @@ function AmountDetails({ formData, onFormChange }) {
   if (formData.fields.length < 3) {
     onFormChange("fields", [
       { label: "", amount: "" }, // First field (always visible)
-      { label: "", amount: "" }, // Second field (can be hidden)
-      { label: "", amount: "" }, // Third field (can be hidden)
+      { label: "SUPPORT FOR CAUSE1", amount: "500" }, // Second field (can be hidden)
+      { label: "SUPPORT FOR CAUSE2", amount: "1000" }, // Third field (can be hidden)
     ]);
   }
 
@@ -334,7 +334,7 @@ function AmountDetails({ formData, onFormChange }) {
                       ></div>
                     </label>
                     <span className="text-sm font-medium text-gray-900 dark:text-gray-300">
-                      {showPresets ? "Hide Presets" : "Show Presets"}
+                      {showPresets ? "Hide presets for donation amount" : "Show Presets for donation amount"}
                     </span>
                   </div>
                 )}
