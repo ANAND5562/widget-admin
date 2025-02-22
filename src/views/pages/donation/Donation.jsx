@@ -30,7 +30,21 @@ function Donation() {
     ],
     additionalDetails: '', // Initial value for the textarea
 
-  })
+    // New fields for donor details with both field type and field label
+    emailField: {
+      type: 'email',
+      label: 'Email',
+    },
+    phoneField: {
+      type: 'tel',
+      label: 'Phone Number',
+    },
+    donorNameField: {
+      type: 'text',
+      label: 'Donor Name',
+    },
+  });
+
   const steps = [
     'Button Details',
     'Amount Details',
@@ -249,17 +263,137 @@ function CustomerDetails({ formData, onFormChange }) {
   return (
     <div>
       <h6 className="text-center">Donor Details</h6>
-      <input
-        type="text"
-        value={formData.donorName}
-        onChange={(e) => onFormChange('donorName', e.target.value)}
-        placeholder="Enter donor's name"
-        style={{ marginTop: '28px' }}
-        className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-      />
+      <div className="grid grid-cols-1 gap-5 mt-4">
+        {/* Email Field */}
+        <div className="flex flex-col gap-2">
+          <div className="flex gap-4 items-center">
+            <div className="flex-1">
+              <label className="block text-xs font-medium text-gray-700">
+                Field Type (Email)
+              </label>
+              <input
+                type="text"
+                value={formData.emailField?.type || ''}
+                onChange={(e) =>
+                  onFormChange("emailField", {
+                    ...formData.emailField,
+                    type: e.target.value,
+                  })
+                }
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 cursor-not-allowed"
+                // placeholder="Enter field type (e.g., email)"
+                disabled
+              />
+            </div>
+            <div className="flex-1">
+              <label className="block text-xs font-medium text-gray-700">
+                Field Label
+              </label>
+              <input
+                type="text"
+                value={formData.emailField?.label || ''}
+                onChange={(e) =>
+                  onFormChange("emailField", {
+                    ...formData.emailField,
+                    label: e.target.value,
+                  })
+                }
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                // placeholder="Enter field label (Email)"
+                disabled
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Phone Field */}
+        <div className="flex flex-col gap-2">
+          <div className="flex gap-4 items-center">
+            <div className="flex-1">
+              <label className="block text-xs font-medium text-gray-700">
+                Field Type (Phone)
+              </label>
+              <input
+                type="text"
+                value={formData.phoneField?.type || ''}
+                onChange={(e) =>
+                  onFormChange("phoneField", {
+                    ...formData.phoneField,
+                    type: e.target.value,
+                  })
+                }
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 cursor-not-allowed"
+                // placeholder="Enter field type (e.g., tel)"
+                disabled
+              />
+            </div>
+            <div className="flex-1">
+              <label className="block text-xs font-medium text-gray-700">
+                Field Label
+              </label>
+              <input
+                type="text"
+                value={formData.phoneField?.label || ''}
+                onChange={(e) =>
+                  onFormChange("phoneField", {
+                    ...formData.phoneField,
+                    label: e.target.value,
+                  })
+                }
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                // placeholder="Enter field label (Phone)"
+                disabled
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Donor Name Field */}
+        <div className="flex flex-col gap-2">
+          <div className="flex gap-4 items-center">
+            <div className="flex-1">
+              <label className="block text-xs font-medium text-gray-700">
+                Field Type (Donor Name)
+              </label>
+              <input
+                type="text"
+                value={formData.donorNameField?.type || ''}
+                onChange={(e) =>
+                  onFormChange("donorNameField", {
+                    ...formData.donorNameField,
+                    type: e.target.value,
+                  })
+                }
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 cursor-not-allowed"
+                // placeholder="Enter field type (e.g., text)"
+                disabled
+              />
+            </div>
+            <div className="flex-1">
+              <label className="block text-xs font-medium text-gray-700">
+                Field Label
+              </label>
+              <input
+                type="text"
+                value={formData.donorNameField?.label || ''}
+                onChange={(e) =>
+                  onFormChange("donorNameField", {
+                    ...formData.donorNameField,
+                    label: e.target.value,
+                  })
+                }
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                // placeholder="Enter field label (Donor Name)"
+                disabled
+              />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  )
+  );
 }
+
 function ReviewPage({ formData }) {
   return (
     <div>
