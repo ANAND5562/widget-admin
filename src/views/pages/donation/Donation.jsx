@@ -1400,7 +1400,7 @@ function CustomerDetails({
 
             {/* Additional Fields (Up to 3) */}
             {customerData.additionalFields?.map((field, index) => (
-              <div key={index} className="grid grid-cols-1 gap-5 gap-2 border rounded-md p-3">
+              <div key={index} className="grid grid-cols-1 gap-2 border rounded-md p-2">
                 {/* Field Type */}
                 <div className="flex flex-col gap-2">
                   <div className="flex gap-4 items-center">
@@ -1421,19 +1421,28 @@ function CustomerDetails({
                     </div>
                     {/* Filed Label */}
                     <div className="flex-1">
-                      <label className="block text-xs font-medium text-gray-700">
-                        Field Label
-                      </label>
-                      <input
-                        type="text"
-                        placeholder="e.g., 'Additional Notes'"
-                        value={field.label}
-                        onChange={(e) =>
-                          handleFieldChange(index, 'label', e.target.value)
-                        }
-                        className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                      />
+                      <div>
+                        <label className="block text-xs font-medium text-gray-700">
+                          Field Label
+                        </label>
+                        <input
+                          type="text"
+                          placeholder="e.g., 'Additional Notes'"
+                          value={field.label}
+                          onChange={(e) =>
+                            handleFieldChange(index, 'label', e.target.value)
+                          }
+                          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                        />
+                      </div>
                     </div>
+                    <img
+                        onClick={() => handleRemoveField(index)}
+                        src={Delete}
+                        alt="Delete"
+                        className='mt-5'
+                        style={{ height: '36px', width: '36px', cursor: 'pointer' }}
+                      />
                   </div>
                 </div>
 
@@ -1455,7 +1464,7 @@ function CustomerDetails({
                     </div>
                     {/* Delete Button and Mandatory Checkbox */}
                     <div className='flex-1'>
-                      <div className="flex items-center justify-between">
+                      <div className="flex items-center justify-between mt-5">
 
                         <div className="flex items-center gap-2">
                           <input
@@ -1474,14 +1483,8 @@ function CustomerDetails({
                             Mandatory
                           </label>
                         </div>
-                        <button
-                          type="button"
-                          onClick={() => handleRemoveField(index)}
-                          className="text-red-500 text-xs font-semibold hover:underline"
-                        >
-                          Delete
-                        </button>
 
+                        <div></div>
                       </div>
                     </div>
                   </div>
