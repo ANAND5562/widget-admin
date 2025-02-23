@@ -1493,14 +1493,11 @@ function CustomerDetails({
 
             {/* Button to Add More Fields */}
             {(customerData.additionalFields?.length || 0) < 3 && (
-              <div>
-                <button
-                  type="button"
-                  onClick={handleAddField}
-                  className="px-3 py-2 text-xs bg-indigo-600 text-white rounded-md"
-                >
-                  Add Extra Field
-                </button>
+              <div 
+              className='text-blue-500 cursor-pointer underline text-xs'
+              onClick={handleAddField}
+              >
+                  + Add Extra Field                
               </div>
             )}
           </div>
