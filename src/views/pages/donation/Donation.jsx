@@ -826,6 +826,7 @@ function AmountDetails({ formData, onFormChange }) {
   )
 }
 
+
 function CustomerDetails({ formData, onFormChange }) {
   // Add a new extra field (up to 3 total)
   const handleAddField = () => {
@@ -834,9 +835,9 @@ function CustomerDetails({ formData, onFormChange }) {
       onFormChange('additionalFields', [
         ...currentFields,
         {
-          type: '',       // e.g., "text", "number", "tel"
-          label: '',      // e.g., "Custom Field Label"
-          value: '',      // text area content
+          type: '', // e.g., "text", "number", "tel"
+          label: '', // e.g., "Custom Field Label"
+          value: '', // text area content
           required: false,
         },
       ])
@@ -863,222 +864,332 @@ function CustomerDetails({ formData, onFormChange }) {
 
   return (
     <div>
-      <h6 className="text-center">Donor Details</h6>
-      <div className="grid grid-cols-1 gap-5 mt-4">
-        {/* Email Field */}
-        <div className="flex flex-col gap-2">
-          <div className="flex gap-4 items-center">
-            <div className="flex-1">
-              <label className="block text-xs font-medium text-gray-700">
-                Field Type (Email)
-              </label>
-              <input
-                type="text"
-                placeholder="e.g., 'email'"
-                value={formData.emailField?.type || ''}
-                onChange={(e) =>
-                  onFormChange('emailField', {
-                    ...formData.emailField,
-                    type: e.target.value,
-                  })
-                }
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 cursor-not-allowed"
-                disabled
-              />
+      {/* Main Title */}
+      <h6 className="text-center md:ml-[-40px]">Donor Details</h6>
+
+      {/* Grid Layout (similar to the Donation Amount code) */}
+      <div
+        className="grid grid-cols-1 gap-5 sm:grid-cols-1 md:grid-cols-10 lg:grid-cols-10 xl:grid-cols-10 2xl:grid-cols-10"
+        style={{ marginTop: '23px' }}
+      >
+        {/* Left Section: Form Fields */}
+        <div className="md:col-span-6 lg:col-span-6 xl:col-span-6 2xl:col-span-6">
+          <div className="grid grid-cols-1 gap-5 mt-1">
+            {/* Email Field */}
+            <div className="flex flex-col gap-2">
+              <div className="flex gap-4 items-center">
+                <div className="flex-1">
+                  <label className="block text-xs font-medium text-gray-700">
+                    Field Type (Email)
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="e.g., 'email'"
+                    value={formData.emailField?.type || ''}
+                    onChange={(e) =>
+                      onFormChange('emailField', {
+                        ...formData.emailField,
+                        type: e.target.value,
+                      })
+                    }
+                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 cursor-not-allowed"
+                    disabled
+                  />
+                </div>
+                <div className="flex-1">
+                  <label className="block text-xs font-medium text-gray-700">
+                    Field Label
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="e.g., 'Email'"
+                    value={formData.emailField?.label || ''}
+                    onChange={(e) =>
+                      onFormChange('emailField', {
+                        ...formData.emailField,
+                        label: e.target.value,
+                      })
+                    }
+                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                    disabled
+                  />
+                </div>
+              </div>
             </div>
-            <div className="flex-1">
-              <label className="block text-xs font-medium text-gray-700">
-                Field Label
-              </label>
-              <input
-                type="text"
-                placeholder="e.g., 'Email'"
-                value={formData.emailField?.label || ''}
-                onChange={(e) =>
-                  onFormChange('emailField', {
-                    ...formData.emailField,
-                    label: e.target.value,
-                  })
-                }
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                disabled
-              />
+
+            {/* Phone Field */}
+            <div className="flex flex-col gap-2">
+              <div className="flex gap-4 items-center">
+                <div className="flex-1">
+                  <label className="block text-xs font-medium text-gray-700">
+                    Field Type (Phone)
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="e.g., 'tel'"
+                    value={formData.phoneField?.type || ''}
+                    onChange={(e) =>
+                      onFormChange('phoneField', {
+                        ...formData.phoneField,
+                        type: e.target.value,
+                      })
+                    }
+                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 cursor-not-allowed"
+                    disabled
+                  />
+                </div>
+                <div className="flex-1">
+                  <label className="block text-xs font-medium text-gray-700">
+                    Field Label
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="e.g., 'Phone'"
+                    value={formData.phoneField?.label || ''}
+                    onChange={(e) =>
+                      onFormChange('phoneField', {
+                        ...formData.phoneField,
+                        label: e.target.value,
+                      })
+                    }
+                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                    disabled
+                  />
+                </div>
+              </div>
             </div>
+
+            {/* Donor Name Field */}
+            <div className="flex flex-col gap-2">
+              <div className="flex gap-4 items-center">
+                <div className="flex-1">
+                  <label className="block text-xs font-medium text-gray-700">
+                    Field Type (Donor Name)
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="e.g., 'text'"
+                    value={formData.donorNameField?.type || ''}
+                    onChange={(e) =>
+                      onFormChange('donorNameField', {
+                        ...formData.donorNameField,
+                        type: e.target.value,
+                      })
+                    }
+                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 cursor-not-allowed"
+                    disabled
+                  />
+                </div>
+                <div className="flex-1">
+                  <label className="block text-xs font-medium text-gray-700">
+                    Field Label
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="e.g., 'Donor Name'"
+                    value={formData.donorNameField?.label || ''}
+                    onChange={(e) =>
+                      onFormChange('donorNameField', {
+                        ...formData.donorNameField,
+                        label: e.target.value,
+                      })
+                    }
+                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                    disabled
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Additional Fields (Up to 3) */}
+            {formData.additionalFields?.map((field, index) => (
+              <div key={index} className="flex flex-col gap-2 border rounded-md p-3">
+                <div className="flex items-center justify-between">
+                  <h6 className="text-xs font-semibold mb-0">Extra Field #{index + 1}</h6>
+                  <button
+                    type="button"
+                    onClick={() => handleRemoveField(index)}
+                    className="text-red-500 text-xs font-semibold hover:underline"
+                  >
+                    Delete
+                  </button>
+                </div>
+
+                {/* Field Type */}
+                <div className="flex flex-col gap-1 mt-2">
+                  <label className="block text-xs font-medium text-gray-700">
+                    Field Type
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="e.g., 'text', 'number', 'tel'"
+                    value={field.type}
+                    onChange={(e) => handleFieldChange(index, 'type', e.target.value)}
+                    className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                  />
+                </div>
+
+                {/* Field Label */}
+                <div className="flex flex-col gap-1">
+                  <label className="block text-xs font-medium text-gray-700">
+                    Field Label
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="e.g., 'Additional Notes'"
+                    value={field.label}
+                    onChange={(e) => handleFieldChange(index, 'label', e.target.value)}
+                    className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                  />
+                </div>
+
+                {/* Textarea */}
+                <div className="flex flex-col gap-1">
+                  <label className="block text-xs font-medium text-gray-700">
+                    Textarea
+                  </label>
+                  <textarea
+                    placeholder="Enter your text here..."
+                    value={field.value || ''}
+                    onChange={(e) => handleFieldChange(index, 'value', e.target.value)}
+                    className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                    rows={1}
+                  />
+                </div>
+
+                {/* Mandatory (Checkbox) */}
+                <div className="flex items-center gap-2">
+                  <input
+                    id={`required-checkbox-${index}`}
+                    type="checkbox"
+                    checked={field.required || false}
+                    onChange={(e) => handleFieldChange(index, 'required', e.target.checked)}
+                    className="h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                  />
+                  <label htmlFor={`required-checkbox-${index}`} className="text-xs text-gray-700">
+                    Mandatory
+                  </label>
+                </div>
+              </div>
+            ))}
+
+            {/* Button to Add More Fields (up to 3) */}
+            {(formData.additionalFields?.length || 0) < 3 && (
+              <div>
+                <button
+                  type="button"
+                  onClick={handleAddField}
+                  className="px-3 py-2 text-xs bg-indigo-600 text-white rounded-md"
+                >
+                  Add Extra Field
+                </button>
+              </div>
+            )}
           </div>
         </div>
 
-        {/* Phone Field */}
-        <div className="flex flex-col gap-2">
-          <div className="flex gap-4 items-center">
-            <div className="flex-1">
-              <label className="block text-xs font-medium text-gray-700">
-                Field Type (Phone)
-              </label>
-              <input
-                type="text"
-                placeholder="e.g., 'tel'"
-                value={formData.phoneField?.type || ''}
-                onChange={(e) =>
-                  onFormChange('phoneField', {
-                    ...formData.phoneField,
-                    type: e.target.value,
-                  })
-                }
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 cursor-not-allowed"
-                disabled
-              />
-            </div>
-            <div className="flex-1">
-              <label className="block text-xs font-medium text-gray-700">
-                Field Label
-              </label>
-              <input
-                type="text"
-                placeholder="e.g., 'Phone'"
-                value={formData.phoneField?.label || ''}
-                onChange={(e) =>
-                  onFormChange('phoneField', {
-                    ...formData.phoneField,
-                    label: e.target.value,
-                  })
-                }
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                disabled
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Donor Name Field */}
-        <div className="flex flex-col gap-2">
-          <div className="flex gap-4 items-center">
-            <div className="flex-1">
-              <label className="block text-xs font-medium text-gray-700">
-                Field Type (Donor Name)
-              </label>
-              <input
-                type="text"
-                placeholder="e.g., 'text'"
-                value={formData.donorNameField?.type || ''}
-                onChange={(e) =>
-                  onFormChange('donorNameField', {
-                    ...formData.donorNameField,
-                    type: e.target.value,
-                  })
-                }
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 cursor-not-allowed"
-                disabled
-              />
-            </div>
-            <div className="flex-1">
-              <label className="block text-xs font-medium text-gray-700">
-                Field Label
-              </label>
-              <input
-                type="text"
-                placeholder="e.g., 'Donor Name'"
-                value={formData.donorNameField?.label || ''}
-                onChange={(e) =>
-                  onFormChange('donorNameField', {
-                    ...formData.donorNameField,
-                    label: e.target.value,
-                  })
-                }
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                disabled
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Additional Fields (Up to 3) */}
-        {formData.additionalFields?.map((field, index) => (
-          <div key={index} className="flex flex-col gap-2 border rounded-md p-3">
-            <div className="flex items-center justify-between">
-              <h6 className="text-xs font-semibold mb-0">Extra Field #{index + 1}</h6>
-              <button
-                type="button"
-                onClick={() => handleRemoveField(index)}
-                className="text-red-500 text-xs font-semibold hover:underline"
-              >
-                Delete
-              </button>
-            </div>
-
-            {/* Field Type */}
-            <div className="flex flex-col gap-1 mt-2">
-              <label className="block text-xs font-medium text-gray-700">
-                Field Type
-              </label>
-              <input
-                type="text"
-                placeholder="e.g., 'text', 'number', 'tel'"
-                value={field.type}
-                onChange={(e) => handleFieldChange(index, 'type', e.target.value)}
-                className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-              />
-            </div>
-
-            {/* Field Label */}
-            <div className="flex flex-col gap-1">
-              <label className="block text-xs font-medium text-gray-700">
-                Field Label
-              </label>
-              <input
-                type="text"
-                placeholder="e.g., 'Additional Notes'"
-                value={field.label}
-                onChange={(e) => handleFieldChange(index, 'label', e.target.value)}
-                className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-              />
-            </div>
-
-            {/* Textarea */}
-            <div className="flex flex-col gap-1">
-              <label className="block text-xs font-medium text-gray-700">
-                Textarea
-              </label>
-              <textarea
-                placeholder="Enter your text here..."
-                value={field.value || ''}
-                onChange={(e) => handleFieldChange(index, 'value', e.target.value)}
-                className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                rows={1}
-              />
-            </div>
-
-            {/* Mandatory (Checkbox) */}
-            <div className="flex items-center gap-2">
-              <input
-                id={`required-checkbox-${index}`}
-                type="checkbox"
-                checked={field.required || false}
-                onChange={(e) => handleFieldChange(index, 'required', e.target.checked)}
-                className="h-4 w-4 text-indigo-600 border-gray-300 rounded"
-              />
-              <label htmlFor={`required-checkbox-${index}`} className="text-xs text-gray-700">
-                Mandatory
-              </label>
-            </div>
-          </div>
-        ))}
-
-        {/* Button to Add More Fields (up to 3) */}
-        {(formData.additionalFields?.length || 0) < 3 && (
+        {/* Right Section: Preview (Mimicking the Donation Amount Preview Style) */}
+        <div
+          className="bg-sky-50 rounded-lg md:col-span-4 lg:col-span-4 xl:col-span-4 2xl:col-span-4"
+          style={{
+            backgroundColor: '#E8F0FF',
+            paddingLeft: '80px',
+            paddingRight: '80px',
+            paddingTop: '30px',
+            paddingBottom: '30px',
+          }}
+        >
           <div>
+            <p className="font-semibold text-center">Preview</p>
+          </div>
+          {/* Header Section */}
+          <div className="py-3 border-b text-sm font-semibold text-white text-center bg-blue-500 rounded-lg mt-1">
+            <p>The Animal Foundation</p>
+          </div>
+
+          {/* Body Section with Fixed Height & Custom Scrollbar */}
+          <div
+            className="py-5 overflow-y-auto bg-white"
+            style={{
+              maxHeight: '300px', // Fixed height
+              scrollbarWidth: 'thin', // Slim scrollbar (Firefox)
+              scrollbarColor: 'rgba(0, 0, 0, 0.3) transparent', // Custom color
+            }}
+          >
+            {/* Example of previewing the core fields - you can adjust as needed */}
+            <div className="px-4 py-2">
+              <label className="block text-gray-700 text-xs font-medium mb-1">
+                {formData.emailField?.label || 'Email'}
+              </label>
+              <input
+                type="email"
+                className="w-full px-3 py-2 border rounded text-gray-900 text-xs font-semibold"
+                value="" // This is just a preview; you could fill it with formData.emailField.value if you track it
+                readOnly
+              />
+            </div>
+
+            <div className="px-4 py-2">
+              <label className="block text-gray-700 text-xs font-medium mb-1">
+                {formData.phoneField?.label || 'Phone'}
+              </label>
+              <input
+                type="tel"
+                className="w-full px-3 py-2 border rounded text-gray-900 text-xs font-semibold"
+                value=""
+                readOnly
+              />
+            </div>
+
+            <div className="px-4 py-2">
+              <label className="block text-gray-700 text-xs font-medium mb-1">
+                {formData.donorNameField?.label || 'Donor Name'}
+              </label>
+              <input
+                type="text"
+                className="w-full px-3 py-2 border rounded text-gray-900 text-xs font-semibold"
+                value=""
+                readOnly
+              />
+            </div>
+
+            {/* Additional Fields Preview */}
+            {formData.additionalFields?.map((field, index) => (
+              <div key={index} className="px-4 py-2">
+                <label className="block text-gray-700 text-xs font-medium mb-1">
+                  {field.label || `Custom Field #${index + 1}`}
+                </label>
+                {/* Show either an input or a textarea preview, 
+                    depending on how you prefer. This is just an example. */}
+                <textarea
+                  className="w-full px-3 py-2 border rounded text-gray-900 text-xs font-semibold"
+                  rows={1}
+                  readOnly
+                  value={field.value || ''}
+                />
+              </div>
+            ))}
+          </div>
+
+          {/* Footer Section */}
+          <div className="flex justify-between px-4 py-3 bg-white shadow-lg border-t">
+            <span className="text-gray-900 font-bold text-xs">
+              {/* You can show some summary here if needed */}
+              Donor Form Preview
+            </span>
             <button
-              type="button"
-              onClick={handleAddField}
-              className="px-3 py-2 text-xs bg-indigo-600 text-white rounded-md"
+              className="bg-blue-500 text-white px-12 py-1 rounded"
+              style={{ fontSize: '10px' }}
             >
-              Add Extra Field
+              Next
             </button>
           </div>
-        )}
+        </div>
       </div>
     </div>
   )
 }
+
 
 function ReviewPage({ formData }) {
   return (
