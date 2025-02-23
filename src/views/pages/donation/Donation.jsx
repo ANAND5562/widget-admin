@@ -1437,12 +1437,12 @@ function CustomerDetails({
                       </div>
                     </div>
                     <img
-                        onClick={() => handleRemoveField(index)}
-                        src={Delete}
-                        alt="Delete"
-                        className='mt-5'
-                        style={{ height: '36px', width: '36px', cursor: 'pointer' }}
-                      />
+                      onClick={() => handleRemoveField(index)}
+                      src={Delete}
+                      alt="Delete"
+                      className='mt-5'
+                      style={{ height: '36px', width: '36px', cursor: 'pointer' }}
+                    />
                   </div>
                 </div>
 
@@ -1450,27 +1450,25 @@ function CustomerDetails({
                   <div className='flex gap-4 items-center'>
                     {/* Field Reason */}
                     <div className="flex-1">
-                      <label className="block text-xs font-medium text-gray-700">
-                        Reason
-                      </label>
                       <textarea
-                        placeholder="Enter reason for this field"
+                        placeholder="Add helper text"
                         value={field.reason || ''}
                         onChange={(e) =>
                           handleFieldChange(index, 'reason', e.target.value)
                         }
-                        className="mt-1 block w-full px-3 py-1 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                        style={{ width: '308px' }}
+                        className="mt-1 block px-3 py-0 border border-gray-300 shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                       />
                     </div>
                     {/* Delete Button and Mandatory Checkbox */}
-                    <div className='flex-1'>
-                      <div className="flex items-center justify-between mt-5">
+                    <div className='flex-1 ml-[-52px]'>
+                      <div className="flex items-center justify-between mt-0">
 
                         <div className="flex items-center gap-2">
                           <input
                             id={`required-checkbox-${index}`}
                             type="checkbox"
-                            checked={field.required || false}
+                            checked={field.require8d || false}
                             onChange={(e) =>
                               handleFieldChange(index, 'required', e.target.checked)
                             }
