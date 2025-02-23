@@ -862,6 +862,14 @@ function CustomerDetails({ formData, onFormChange }) {
     onFormChange('additionalFields', updatedFields)
   }
 
+  // Helper to update any key of a core field object, e.g. emailField, phoneField, donorNameField
+  const handleCoreFieldUpdate = (fieldName, updates) => {
+    onFormChange(fieldName, {
+      ...formData[fieldName],
+      ...updates,
+    })
+  }
+
   return (
     <div>
       {/* Main Title */}
@@ -882,13 +890,13 @@ function CustomerDetails({ formData, onFormChange }) {
                   <label className="block text-xs font-medium text-gray-700">
                     Field Type (Email)
                   </label>
+                  {/* Now user can edit this field type */}
                   <input
                     type="text"
                     placeholder="e.g., 'email'"
                     value={formData.emailField?.type || ''}
                     onChange={(e) =>
-                      onFormChange('emailField', {
-                        ...formData.emailField,
+                      handleCoreFieldUpdate('emailField', {
                         type: e.target.value,
                       })
                     }
@@ -904,9 +912,31 @@ function CustomerDetails({ formData, onFormChange }) {
                     placeholder="e.g., 'Email'"
                     value={formData.emailField?.label || ''}
                     onChange={(e) =>
-                      onFormChange('emailField', {
-                        ...formData.emailField,
+                      handleCoreFieldUpdate('emailField', {
                         label: e.target.value,
+                      })
+                    }
+                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Capture the "Email" value (what user types) */}
+            <div className="flex flex-col gap-2">
+              <div className="flex gap-4 items-center">
+                <div className="flex-1">
+                  <label className="block text-xs font-medium text-gray-700">
+                    Email User Input
+                  </label>
+                  <input
+                    /* For preview, fallback to 'email' if nothing typed yet */
+                    type="text"
+                    placeholder="e.g., user@example.com"
+                    value={formData.emailField?.value || ''}
+                    onChange={(e) =>
+                      handleCoreFieldUpdate('emailField', {
+                        value: e.target.value,
                       })
                     }
                     className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
@@ -927,8 +957,7 @@ function CustomerDetails({ formData, onFormChange }) {
                     placeholder="e.g., 'tel'"
                     value={formData.phoneField?.type || ''}
                     onChange={(e) =>
-                      onFormChange('phoneField', {
-                        ...formData.phoneField,
+                      handleCoreFieldUpdate('phoneField', {
                         type: e.target.value,
                       })
                     }
@@ -944,9 +973,30 @@ function CustomerDetails({ formData, onFormChange }) {
                     placeholder="e.g., 'Phone'"
                     value={formData.phoneField?.label || ''}
                     onChange={(e) =>
-                      onFormChange('phoneField', {
-                        ...formData.phoneField,
+                      handleCoreFieldUpdate('phoneField', {
                         label: e.target.value,
+                      })
+                    }
+                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Capture the "Phone" value (what user types) */}
+            <div className="flex flex-col gap-2">
+              <div className="flex gap-4 items-center">
+                <div className="flex-1">
+                  <label className="block text-xs font-medium text-gray-700">
+                    Phone User Input
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="e.g., 555-123-4567"
+                    value={formData.phoneField?.value || ''}
+                    onChange={(e) =>
+                      handleCoreFieldUpdate('phoneField', {
+                        value: e.target.value,
                       })
                     }
                     className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
@@ -967,8 +1017,7 @@ function CustomerDetails({ formData, onFormChange }) {
                     placeholder="e.g., 'text'"
                     value={formData.donorNameField?.type || ''}
                     onChange={(e) =>
-                      onFormChange('donorNameField', {
-                        ...formData.donorNameField,
+                      handleCoreFieldUpdate('donorNameField', {
                         type: e.target.value,
                       })
                     }
@@ -984,9 +1033,30 @@ function CustomerDetails({ formData, onFormChange }) {
                     placeholder="e.g., 'Donor Name'"
                     value={formData.donorNameField?.label || ''}
                     onChange={(e) =>
-                      onFormChange('donorNameField', {
-                        ...formData.donorNameField,
+                      handleCoreFieldUpdate('donorNameField', {
                         label: e.target.value,
+                      })
+                    }
+                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Capture the "Donor Name" value (what user types) */}
+            <div className="flex flex-col gap-2">
+              <div className="flex gap-4 items-center">
+                <div className="flex-1">
+                  <label className="block text-xs font-medium text-gray-700">
+                    Donor Name User Input
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="e.g., John Doe"
+                    value={formData.donorNameField?.value || ''}
+                    onChange={(e) =>
+                      handleCoreFieldUpdate('donorNameField', {
+                        value: e.target.value,
                       })
                     }
                     className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
@@ -1110,39 +1180,42 @@ function CustomerDetails({ formData, onFormChange }) {
               scrollbarColor: 'rgba(0, 0, 0, 0.3) transparent', // Custom color
             }}
           >
-            {/* Example of previewing the core fields - you can adjust as needed */}
+            {/* Email Preview */}
             <div className="px-4 py-2">
               <label className="block text-gray-700 text-xs font-medium mb-1">
                 {formData.emailField?.label || 'Email'}
               </label>
               <input
-                type="email"
+                /* Use whichever type the user entered or default to 'email' */
+                type={formData.emailField?.type || 'email'}
                 className="w-full px-3 py-2 border rounded text-gray-900 text-xs font-semibold"
-                value="" // This is just a preview; you could fill it with formData.emailField.value if you track it
+                value={formData.emailField?.value || ''}
                 readOnly
               />
             </div>
 
+            {/* Phone Preview */}
             <div className="px-4 py-2">
               <label className="block text-gray-700 text-xs font-medium mb-1">
                 {formData.phoneField?.label || 'Phone'}
               </label>
               <input
-                type="tel"
+                type={formData.phoneField?.type || 'tel'}
                 className="w-full px-3 py-2 border rounded text-gray-900 text-xs font-semibold"
-                value=""
+                value={formData.phoneField?.value || ''}
                 readOnly
               />
             </div>
 
+            {/* Donor Name Preview */}
             <div className="px-4 py-2">
               <label className="block text-gray-700 text-xs font-medium mb-1">
                 {formData.donorNameField?.label || 'Donor Name'}
               </label>
               <input
-                type="text"
+                type={formData.donorNameField?.type || 'text'}
                 className="w-full px-3 py-2 border rounded text-gray-900 text-xs font-semibold"
-                value=""
+                value={formData.donorNameField?.value || ''}
                 readOnly
               />
             </div>
@@ -1153,8 +1226,7 @@ function CustomerDetails({ formData, onFormChange }) {
                 <label className="block text-gray-700 text-xs font-medium mb-1">
                   {field.label || `Custom Field #${index + 1}`}
                 </label>
-                {/* Show either an input or a textarea preview, 
-                    depending on how you prefer. This is just an example. */}
+                {/* Show as textarea in the preview (as in your original code) */}
                 <textarea
                   className="w-full px-3 py-2 border rounded text-gray-900 text-xs font-semibold"
                   rows={1}
@@ -1168,7 +1240,6 @@ function CustomerDetails({ formData, onFormChange }) {
           {/* Footer Section */}
           <div className="flex justify-between px-4 py-3 bg-white shadow-lg border-t">
             <span className="text-gray-900 font-bold text-xs">
-              {/* You can show some summary here if needed */}
               Donor Form Preview
             </span>
             <button
@@ -1183,7 +1254,6 @@ function CustomerDetails({ formData, onFormChange }) {
     </div>
   )
 }
-
 
 function ReviewPage({ formData }) {
   return (
