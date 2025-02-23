@@ -835,9 +835,8 @@ function CustomerDetails({ formData, onFormChange }) {
       onFormChange('additionalFields', [
         ...currentFields,
         {
-          type: '', // e.g., "text", "number", "tel"
+          type: '',  // e.g., "text", "number", "tel"
           label: '', // e.g., "Custom Field Label"
-          value: '', // text area content
           required: false,
         },
       ])
@@ -875,46 +874,40 @@ function CustomerDetails({ formData, onFormChange }) {
       {/* Main Title */}
       <h6 className="text-center md:ml-[-40px]">Donor Details</h6>
 
-      {/* Grid Layout (similar to the Donation Amount code) */}
       <div
         className="grid grid-cols-1 gap-5 sm:grid-cols-1 md:grid-cols-10 lg:grid-cols-10 xl:grid-cols-10 2xl:grid-cols-10"
         style={{ marginTop: '23px' }}
       >
-        {/* Left Section: Form Fields */}
+        {/* Left Section: Form Field Configurations */}
         <div className="md:col-span-6 lg:col-span-6 xl:col-span-6 2xl:col-span-6">
           <div className="grid grid-cols-1 gap-5 mt-1">
-            {/* Email Field */}
+            {/* Email Field (Configure Type & Label) */}
             <div className="flex flex-col gap-2">
               <div className="flex gap-4 items-center">
                 <div className="flex-1">
                   <label className="block text-xs font-medium text-gray-700">
-                    Field Type (Email)
+                    Email Field Type
                   </label>
-                  {/* Now user can edit this field type */}
                   <input
                     type="text"
                     placeholder="e.g., 'email'"
                     value={formData.emailField?.type || ''}
                     onChange={(e) =>
-                      handleCoreFieldUpdate('emailField', {
-                        type: e.target.value,
-                      })
+                      handleCoreFieldUpdate('emailField', { type: e.target.value })
                     }
                     className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                   />
                 </div>
                 <div className="flex-1">
                   <label className="block text-xs font-medium text-gray-700">
-                    Field Label
+                    Email Field Label
                   </label>
                   <input
                     type="text"
                     placeholder="e.g., 'Email'"
                     value={formData.emailField?.label || ''}
                     onChange={(e) =>
-                      handleCoreFieldUpdate('emailField', {
-                        label: e.target.value,
-                      })
+                      handleCoreFieldUpdate('emailField', { label: e.target.value })
                     }
                     className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                   />
@@ -922,60 +915,33 @@ function CustomerDetails({ formData, onFormChange }) {
               </div>
             </div>
 
-            {/* Capture the "Email" value (what user types) */}
+            {/* Phone Field (Configure Type & Label) */}
             <div className="flex flex-col gap-2">
               <div className="flex gap-4 items-center">
                 <div className="flex-1">
                   <label className="block text-xs font-medium text-gray-700">
-                    Email User Input
-                  </label>
-                  <input
-                    /* For preview, fallback to 'email' if nothing typed yet */
-                    type="text"
-                    placeholder="e.g., user@example.com"
-                    value={formData.emailField?.value || ''}
-                    onChange={(e) =>
-                      handleCoreFieldUpdate('emailField', {
-                        value: e.target.value,
-                      })
-                    }
-                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* Phone Field */}
-            <div className="flex flex-col gap-2">
-              <div className="flex gap-4 items-center">
-                <div className="flex-1">
-                  <label className="block text-xs font-medium text-gray-700">
-                    Field Type (Phone)
+                    Phone Field Type
                   </label>
                   <input
                     type="text"
                     placeholder="e.g., 'tel'"
                     value={formData.phoneField?.type || ''}
                     onChange={(e) =>
-                      handleCoreFieldUpdate('phoneField', {
-                        type: e.target.value,
-                      })
+                      handleCoreFieldUpdate('phoneField', { type: e.target.value })
                     }
                     className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                   />
                 </div>
                 <div className="flex-1">
                   <label className="block text-xs font-medium text-gray-700">
-                    Field Label
+                    Phone Field Label
                   </label>
                   <input
                     type="text"
                     placeholder="e.g., 'Phone'"
                     value={formData.phoneField?.label || ''}
                     onChange={(e) =>
-                      handleCoreFieldUpdate('phoneField', {
-                        label: e.target.value,
-                      })
+                      handleCoreFieldUpdate('phoneField', { label: e.target.value })
                     }
                     className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                   />
@@ -983,81 +949,33 @@ function CustomerDetails({ formData, onFormChange }) {
               </div>
             </div>
 
-            {/* Capture the "Phone" value (what user types) */}
+            {/* Donor Name Field (Configure Type & Label) */}
             <div className="flex flex-col gap-2">
               <div className="flex gap-4 items-center">
                 <div className="flex-1">
                   <label className="block text-xs font-medium text-gray-700">
-                    Phone User Input
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="e.g., 555-123-4567"
-                    value={formData.phoneField?.value || ''}
-                    onChange={(e) =>
-                      handleCoreFieldUpdate('phoneField', {
-                        value: e.target.value,
-                      })
-                    }
-                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* Donor Name Field */}
-            <div className="flex flex-col gap-2">
-              <div className="flex gap-4 items-center">
-                <div className="flex-1">
-                  <label className="block text-xs font-medium text-gray-700">
-                    Field Type (Donor Name)
+                    Donor Name Field Type
                   </label>
                   <input
                     type="text"
                     placeholder="e.g., 'text'"
                     value={formData.donorNameField?.type || ''}
                     onChange={(e) =>
-                      handleCoreFieldUpdate('donorNameField', {
-                        type: e.target.value,
-                      })
+                      handleCoreFieldUpdate('donorNameField', { type: e.target.value })
                     }
                     className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                   />
                 </div>
                 <div className="flex-1">
                   <label className="block text-xs font-medium text-gray-700">
-                    Field Label
+                    Donor Name Field Label
                   </label>
                   <input
                     type="text"
                     placeholder="e.g., 'Donor Name'"
                     value={formData.donorNameField?.label || ''}
                     onChange={(e) =>
-                      handleCoreFieldUpdate('donorNameField', {
-                        label: e.target.value,
-                      })
-                    }
-                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* Capture the "Donor Name" value (what user types) */}
-            <div className="flex flex-col gap-2">
-              <div className="flex gap-4 items-center">
-                <div className="flex-1">
-                  <label className="block text-xs font-medium text-gray-700">
-                    Donor Name User Input
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="e.g., John Doe"
-                    value={formData.donorNameField?.value || ''}
-                    onChange={(e) =>
-                      handleCoreFieldUpdate('donorNameField', {
-                        value: e.target.value,
-                      })
+                      handleCoreFieldUpdate('donorNameField', { label: e.target.value })
                     }
                     className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                   />
@@ -1107,20 +1025,6 @@ function CustomerDetails({ formData, onFormChange }) {
                   />
                 </div>
 
-                {/* Textarea */}
-                <div className="flex flex-col gap-1">
-                  <label className="block text-xs font-medium text-gray-700">
-                    Textarea
-                  </label>
-                  <textarea
-                    placeholder="Enter your text here..."
-                    value={field.value || ''}
-                    onChange={(e) => handleFieldChange(index, 'value', e.target.value)}
-                    className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                    rows={1}
-                  />
-                </div>
-
                 {/* Mandatory (Checkbox) */}
                 <div className="flex items-center gap-2">
                   <input
@@ -1130,7 +1034,10 @@ function CustomerDetails({ formData, onFormChange }) {
                     onChange={(e) => handleFieldChange(index, 'required', e.target.checked)}
                     className="h-4 w-4 text-indigo-600 border-gray-300 rounded"
                   />
-                  <label htmlFor={`required-checkbox-${index}`} className="text-xs text-gray-700">
+                  <label
+                    htmlFor={`required-checkbox-${index}`}
+                    className="text-xs text-gray-700"
+                  >
                     Mandatory
                   </label>
                 </div>
@@ -1152,7 +1059,7 @@ function CustomerDetails({ formData, onFormChange }) {
           </div>
         </div>
 
-        {/* Right Section: Preview (Mimicking the Donation Amount Preview Style) */}
+        {/* Right Section: Preview */}
         <div
           className="bg-sky-50 rounded-lg md:col-span-4 lg:col-span-4 xl:col-span-4 2xl:col-span-4"
           style={{
@@ -1166,18 +1073,19 @@ function CustomerDetails({ formData, onFormChange }) {
           <div>
             <p className="font-semibold text-center">Preview</p>
           </div>
+
           {/* Header Section */}
           <div className="py-3 border-b text-sm font-semibold text-white text-center bg-blue-500 rounded-lg mt-1">
             <p>The Animal Foundation</p>
           </div>
 
-          {/* Body Section with Fixed Height & Custom Scrollbar */}
+          {/* Body Section */}
           <div
             className="py-5 overflow-y-auto bg-white"
             style={{
-              maxHeight: '300px', // Fixed height
-              scrollbarWidth: 'thin', // Slim scrollbar (Firefox)
-              scrollbarColor: 'rgba(0, 0, 0, 0.3) transparent', // Custom color
+              maxHeight: '300px', 
+              scrollbarWidth: 'thin',
+              scrollbarColor: 'rgba(0, 0, 0, 0.3) transparent',
             }}
           >
             {/* Email Preview */}
@@ -1185,13 +1093,9 @@ function CustomerDetails({ formData, onFormChange }) {
               <label className="block text-gray-700 text-xs font-medium mb-1">
                 {formData.emailField?.label || 'Email'}
               </label>
-              <input
-                /* Use whichever type the user entered or default to 'email' */
-                type={formData.emailField?.type || 'email'}
-                className="w-full px-3 py-2 border rounded text-gray-900 text-xs font-semibold"
-                value={formData.emailField?.value || ''}
-                readOnly
-              />
+              <div className="border rounded px-3 py-2 text-xs text-gray-900">
+                {formData.emailField?.type || 'email'} Field
+              </div>
             </div>
 
             {/* Phone Preview */}
@@ -1199,12 +1103,9 @@ function CustomerDetails({ formData, onFormChange }) {
               <label className="block text-gray-700 text-xs font-medium mb-1">
                 {formData.phoneField?.label || 'Phone'}
               </label>
-              <input
-                type={formData.phoneField?.type || 'tel'}
-                className="w-full px-3 py-2 border rounded text-gray-900 text-xs font-semibold"
-                value={formData.phoneField?.value || ''}
-                readOnly
-              />
+              <div className="border rounded px-3 py-2 text-xs text-gray-900">
+                {formData.phoneField?.type || 'tel'} Field
+              </div>
             </div>
 
             {/* Donor Name Preview */}
@@ -1212,12 +1113,9 @@ function CustomerDetails({ formData, onFormChange }) {
               <label className="block text-gray-700 text-xs font-medium mb-1">
                 {formData.donorNameField?.label || 'Donor Name'}
               </label>
-              <input
-                type={formData.donorNameField?.type || 'text'}
-                className="w-full px-3 py-2 border rounded text-gray-900 text-xs font-semibold"
-                value={formData.donorNameField?.value || ''}
-                readOnly
-              />
+              <div className="border rounded px-3 py-2 text-xs text-gray-900">
+                {formData.donorNameField?.type || 'text'} Field
+              </div>
             </div>
 
             {/* Additional Fields Preview */}
@@ -1226,22 +1124,17 @@ function CustomerDetails({ formData, onFormChange }) {
                 <label className="block text-gray-700 text-xs font-medium mb-1">
                   {field.label || `Custom Field #${index + 1}`}
                 </label>
-                {/* Show as textarea in the preview (as in your original code) */}
-                <textarea
-                  className="w-full px-3 py-2 border rounded text-gray-900 text-xs font-semibold"
-                  rows={1}
-                  readOnly
-                  value={field.value || ''}
-                />
+                <div className="border rounded px-3 py-2 text-xs text-gray-900">
+                  {field.type || 'text'} Field
+                  {field.required && ' (Required)'}
+                </div>
               </div>
             ))}
           </div>
 
           {/* Footer Section */}
           <div className="flex justify-between px-4 py-3 bg-white shadow-lg border-t">
-            <span className="text-gray-900 font-bold text-xs">
-              Donor Form Preview
-            </span>
+            <span className="text-gray-900 font-bold text-xs">Donor Form Preview</span>
             <button
               className="bg-blue-500 text-white px-12 py-1 rounded"
               style={{ fontSize: '10px' }}
