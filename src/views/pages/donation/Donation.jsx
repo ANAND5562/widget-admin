@@ -170,10 +170,9 @@ function Donation() {
               <div
                 className={`
                   rounded-full w-3 h-3 flex items-center justify-center text-white text-sm 
-                  ${
-                    currentStep === index + 1
-                      ? 'bg-blue-500'
-                      : index + 1 < currentStep
+                  ${currentStep === index + 1
+                    ? 'bg-blue-500'
+                    : index + 1 < currentStep
                       ? 'bg-blue-500'
                       : 'bg-gray-200'
                   }
@@ -183,10 +182,9 @@ function Donation() {
                 <div
                   className={`
                     flex-1 h-0.5 mx-0
-                    ${
-                      index + 1 < currentStep
-                        ? 'bg-blue-500'
-                        : 'bg-gray-300'
+                    ${index + 1 < currentStep
+                      ? 'bg-blue-500'
+                      : 'bg-gray-300'
                     }
                   `}
                 />
@@ -201,10 +199,9 @@ function Donation() {
               key={index}
               className={`
                 text-xs 
-                ${
-                  currentStep === index + 1
-                    ? 'font-semibold text-blue-500'
-                    : 'text-gray-500'
+                ${currentStep === index + 1
+                  ? 'font-semibold text-blue-500'
+                  : 'text-gray-500'
                 }
               `}
               style={{ width: '25%' }}
@@ -236,10 +233,9 @@ function Donation() {
             onClick={nextStep}
             className={`
               px-8 py-1 rounded-md text-white
-              ${
-                currentStep === steps.length
-                  ? 'bg-blue-500 hover:bg-blue-600'
-                  : 'bg-blue-500 hover:bg-blue-600'
+              ${currentStep === steps.length
+                ? 'bg-blue-500 hover:bg-blue-600'
+                : 'bg-blue-500 hover:bg-blue-600'
               }
             `}
           >
@@ -989,9 +985,8 @@ function AmountDetails({ amountData, onFormChange, onFieldsChange }) {
             {amountData.fields.map((field, index) => (
               <div
                 key={index}
-                className={`flex flex-col gap-2 ${
-                  index > 0 && !showPresets ? 'hidden' : ''
-                }`}
+                className={`flex flex-col gap-2 ${index > 0 && !showPresets ? 'hidden' : ''
+                  }`}
               >
                 <div className="flex gap-4 items-center">
                   {/* Field Label */}
@@ -1119,10 +1114,9 @@ function AmountDetails({ amountData, onFormChange, onFieldsChange }) {
                 onClick={addNewField}
                 disabled={amountData.fields.length >= 6}
                 className={`
-                  ${
-                    amountData.fields.length >= 6
-                      ? 'text-gray-700 cursor-not-allowed underline'
-                      : 'text-blue-500 cursor-pointer underline'
+                  ${amountData.fields.length >= 6
+                    ? 'text-gray-700 cursor-not-allowed underline'
+                    : 'text-blue-500 cursor-pointer underline'
                   }
                 `}
               >
@@ -1406,83 +1400,95 @@ function CustomerDetails({
 
             {/* Additional Fields (Up to 3) */}
             {customerData.additionalFields?.map((field, index) => (
-              <div
-                key={index}
-                className="flex flex-col gap-2 border rounded-md p-3"
-              >
-                <div className="flex items-center justify-between">
-                  <h6 className="text-xs font-semibold mb-0">
-                    Extra Field #{index + 1}
-                  </h6>
-                  <button
-                    type="button"
-                    onClick={() => handleRemoveField(index)}
-                    className="text-red-500 text-xs font-semibold hover:underline"
-                  >
-                    Delete
-                  </button>
-                </div>
-
+              <div key={index} className="grid grid-cols-1 gap-5 gap-2 border rounded-md p-3">
                 {/* Field Type */}
-                <div className="flex flex-col gap-1 mt-2">
-                  <label className="block text-xs font-medium text-gray-700">
-                    Field Type
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="e.g., 'text', 'number', 'tel'"
-                    value={field.type}
-                    onChange={(e) =>
-                      handleFieldChange(index, 'type', e.target.value)
-                    }
-                    className="
-                      block w-full px-3 py-2 border border-gray-300
-                      rounded-md shadow-sm text-xs focus:outline-none
-                      focus:ring-indigo-500 focus:border-indigo-500
-                    "
-                  />
+                <div className="flex flex-col gap-2">
+                  <div className="flex gap-4 items-center">
+                    {/* Filed type */}
+                    <div className='flex-1'>
+                      <label className="block text-xs font-medium text-gray-700">
+                        Field Type
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="e.g., 'text', 'number', 'tel'"
+                        value={field.type}
+                        onChange={(e) =>
+                          handleFieldChange(index, 'type', e.target.value)
+                        }
+                        className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                      />
+                    </div>
+                    {/* Filed Label */}
+                    <div className="flex-1">
+                      <label className="block text-xs font-medium text-gray-700">
+                        Field Label
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="e.g., 'Additional Notes'"
+                        value={field.label}
+                        onChange={(e) =>
+                          handleFieldChange(index, 'label', e.target.value)
+                        }
+                        className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                      />
+                    </div>
+                  </div>
                 </div>
 
-                {/* Field Label */}
-                <div className="flex flex-col gap-1">
-                  <label className="block text-xs font-medium text-gray-700">
-                    Field Label
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="e.g., 'Additional Notes'"
-                    value={field.label}
-                    onChange={(e) =>
-                      handleFieldChange(index, 'label', e.target.value)
-                    }
-                    className="
-                      block w-full px-3 py-2 border border-gray-300
-                      rounded-md shadow-sm text-xs focus:outline-none
-                      focus:ring-indigo-500 focus:border-indigo-500
-                    "
-                  />
-                </div>
+                <div className='flex flex-col gap-2'>
+                  <div className='flex gap-4 items-center'>
+                    {/* Field Reason */}
+                    <div className="flex-1">
+                      <label className="block text-xs font-medium text-gray-700">
+                        Reason
+                      </label>
+                      <textarea
+                        placeholder="Enter reason for this field"
+                        value={field.reason || ''}
+                        onChange={(e) =>
+                          handleFieldChange(index, 'reason', e.target.value)
+                        }
+                        className="mt-1 block w-full px-3 py-1 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                      />
+                    </div>
+                    {/* Delete Button and Mandatory Checkbox */}
+                    <div className='flex-1'>
+                      <div className="flex items-center justify-between">
 
-                {/* Mandatory (Checkbox) */}
-                <div className="flex items-center gap-2">
-                  <input
-                    id={`required-checkbox-${index}`}
-                    type="checkbox"
-                    checked={field.required || false}
-                    onChange={(e) =>
-                      handleFieldChange(index, 'required', e.target.checked)
-                    }
-                    className="h-4 w-4 text-indigo-600 border-gray-300 rounded"
-                  />
-                  <label
-                    htmlFor={`required-checkbox-${index}`}
-                    className="text-xs text-gray-700"
-                  >
-                    Mandatory
-                  </label>
+                        <div className="flex items-center gap-2">
+                          <input
+                            id={`required-checkbox-${index}`}
+                            type="checkbox"
+                            checked={field.required || false}
+                            onChange={(e) =>
+                              handleFieldChange(index, 'required', e.target.checked)
+                            }
+                            className="h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                          />
+                          <label
+                            htmlFor={`required-checkbox-${index}`}
+                            className="text-xs text-gray-700"
+                          >
+                            Mandatory
+                          </label>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => handleRemoveField(index)}
+                          className="text-red-500 text-xs font-semibold hover:underline"
+                        >
+                          Delete
+                        </button>
+
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             ))}
+
 
             {/* Button to Add More Fields */}
             {(customerData.additionalFields?.length || 0) < 3 && (
