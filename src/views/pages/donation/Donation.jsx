@@ -1404,8 +1404,8 @@ function CustomerDetails({
                 {/* Field Type */}
                 <div className="flex flex-col gap-2">
                   <div className="flex gap-4 items-center">
-                    {/* Filed type */}
-                    <div className='flex-1'>
+                    {/* Field Type Input */}
+                    <div className="flex-1">
                       <label className="block text-xs font-medium text-gray-700">
                         Field Type
                       </label>
@@ -1419,35 +1419,33 @@ function CustomerDetails({
                         className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                       />
                     </div>
-                    {/* Filed Label */}
+                    {/* Field Label Input */}
                     <div className="flex-1">
-                      <div>
-                        <label className="block text-xs font-medium text-gray-700">
-                          Field Label
-                        </label>
-                        <input
-                          type="text"
-                          placeholder="e.g., 'Additional Notes'"
-                          value={field.label}
-                          onChange={(e) =>
-                            handleFieldChange(index, 'label', e.target.value)
-                          }
-                          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                        />
-                      </div>
+                      <label className="block text-xs font-medium text-gray-700">
+                        Field Label
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="e.g., 'Additional Notes'"
+                        value={field.label}
+                        onChange={(e) =>
+                          handleFieldChange(index, 'label', e.target.value)
+                        }
+                        className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                      />
                     </div>
                     <img
                       onClick={() => handleRemoveField(index)}
                       src={Delete}
                       alt="Delete"
-                      className='mt-5'
+                      className="mt-5"
                       style={{ height: '36px', width: '36px', cursor: 'pointer' }}
                     />
                   </div>
                 </div>
 
-                <div className='flex flex-col gap-2'>
-                  <div className='flex gap-4 items-center'>
+                <div className="flex flex-col gap-2">
+                  <div className="flex gap-4 items-center">
                     {/* Field Reason */}
                     <div className="flex-1">
                       <textarea
@@ -1460,15 +1458,14 @@ function CustomerDetails({
                         className="mt-1 block px-3 py-0 border border-gray-300 shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                       />
                     </div>
-                    {/* Delete Button and Mandatory Checkbox */}
-                    <div className='flex-1 ml-[-52px]'>
+                    {/* Mandatory Checkbox */}
+                    <div className="flex-1 ml-[-52px]">
                       <div className="flex items-center justify-between mt-0">
-
                         <div className="flex items-center gap-2">
                           <input
                             id={`required-checkbox-${index}`}
                             type="checkbox"
-                            checked={field.require8d || false}
+                            checked={field.required || false}
                             onChange={(e) =>
                               handleFieldChange(index, 'required', e.target.checked)
                             }
@@ -1481,7 +1478,6 @@ function CustomerDetails({
                             Mandatory
                           </label>
                         </div>
-
                         <div></div>
                       </div>
                     </div>
@@ -1490,14 +1486,13 @@ function CustomerDetails({
               </div>
             ))}
 
-
             {/* Button to Add More Fields */}
             {(customerData.additionalFields?.length || 0) < 3 && (
-              <div 
-              className='text-blue-500 cursor-pointer underline text-xs'
-              onClick={handleAddField}
+              <div
+                className="text-blue-500 cursor-pointer underline text-xs"
+                onClick={handleAddField}
               >
-                  + Add Extra Field                
+                + Add Extra Field
               </div>
             )}
           </div>
@@ -1585,22 +1580,15 @@ function CustomerDetails({
           </div>
 
           {/* Footer */}
-          <div className="flex justify-between px-4 py-3 bg-white shadow-lg border-t">
-            <span className="text-gray-900 font-bold text-xs">
-              Donor Form Preview
-            </span>
-            <button
-              className="bg-blue-500 text-white px-12 py-1 rounded"
-              style={{ fontSize: '10px' }}
-            >
-              Next
-            </button>
+          <div className="text-center text-md px-4 py-3 bg-blue-500 shadow-lg border-t text-white">
+            Preceed to Pay
           </div>
         </div>
       </div>
     </div>
   );
 }
+
 
 // --------------------- REVIEW & CREATE STEP ---------------------
 function ReviewPage({ formData }) {
