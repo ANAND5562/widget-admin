@@ -1599,12 +1599,11 @@ function ReviewPage({ formData }) {
       <h6 className="text-center font-bold text-lg mb-6">Review & Create</h6>
 
       {/* Flex Container for three columns */}
-      <div className="flex flex-col md:flex-row gap-4 justify-center">
+      <div className="flex flex-col md:flex-row gap-4 justify-center" style={{ marginTop: '20px' }}>
 
         {/* Button Preview Section */}
-        
-        <div className="flex-1 bg-gray-100 p-4 rounded-lg shadow">
-          <h6 className="text-center font-semibold mb-4">Button Preview</h6>
+
+        <div className="flex-1">
           <div className="flex justify-center">
             <button
               className={`
@@ -1743,6 +1742,7 @@ function ReviewPage({ formData }) {
             Proceed to Pay
           </div>
         </div>
+
       </div>
     </div>
   );
