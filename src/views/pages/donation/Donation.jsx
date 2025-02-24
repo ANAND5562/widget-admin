@@ -1592,102 +1592,87 @@ function CustomerDetails({
 
 // --------------------- REVIEW & CREATE STEP ---------------------
 function ReviewPage({ formData }) {
-  // Destructure the correct names from formData
   const { buttonDetails, amountDetails, customerDetails } = formData;
 
   return (
-    <div>
-      <h6 className="text-center">Review & Create</h6>
+    <div className="container mx-auto p-6">
+      <h6 className="text-center font-bold text-lg mb-6">Review & Create</h6>
 
-      <div
-        className="flex"
-        style={{ marginTop: '56px', justifyContent: 'center' }}
-      >
-        {/* 1button preview */}
-        <div>
-          <button
-            className={`
-                text-lg flex items-center justify-between
+      {/* Flex Container for three columns */}
+      <div className="flex flex-col md:flex-row gap-4 justify-center">
+
+        {/* Button Preview Section */}
+        
+        <div className="flex-1 bg-gray-100 p-4 rounded-lg shadow">
+          <h6 className="text-center font-semibold mb-4">Button Preview</h6>
+          <div className="flex justify-center">
+            <button
+              className={`
+                text-lg flex items-center justify-between px-4 py-2
                 transition-all duration-300 ease-in-out
                 ${buttonDetails.border ? 'border-2 border-gray-700' : ''}
                 ${buttonDetails.buttonShadow ? 'shadow-lg' : ''}
               `}
-            style={{
-              fontFamily: buttonDetails.fontStyle,
-              fontStyle: buttonDetails.italicText ? 'italic' : 'normal',
-              fontWeight: buttonDetails.boldText ? 'bold' : 'normal',
-              color: buttonDetails.textColor,
-              backgroundColor: buttonDetails.buttonColor,
-              textShadow: buttonDetails.textShadow
-                ? '2px 2px 4px rgba(0, 0, 0, 0.5)'
-                : 'none',
-              fontSize: `${buttonDetails.textSize}px`,
-              borderRadius: `${buttonDetails.cornerRadius}px`,
-              paddingLeft: `${buttonDetails.horizontalPadding}px`,
-              paddingRight: `${buttonDetails.horizontalPadding}px`,
-              paddingTop: `${buttonDetails.verticalPadding}px`,
-              paddingBottom: `${buttonDetails.verticalPadding}px`
-            }}
-          >
-            {buttonDetails.logo && (
-              <img
-                src={buttonDetails.logo}
-                alt="Logo"
-                className="h-10 mr-2"
-              />
-            )}
-            <span>
-              {buttonDetails.buttonLabel && (
-                <span className="mr-2">{buttonDetails.buttonLabel}</span>
+              style={{
+                fontFamily: buttonDetails.fontStyle,
+                fontStyle: buttonDetails.italicText ? 'italic' : 'normal',
+                fontWeight: buttonDetails.boldText ? 'bold' : 'normal',
+                color: buttonDetails.textColor,
+                backgroundColor: buttonDetails.buttonColor,
+                textShadow: buttonDetails.textShadow
+                  ? '2px 2px 4px rgba(0, 0, 0, 0.5)'
+                  : 'none',
+                fontSize: `${buttonDetails.textSize}px`,
+                borderRadius: `${buttonDetails.cornerRadius}px`,
+                paddingLeft: `${buttonDetails.horizontalPadding}px`,
+                paddingRight: `${buttonDetails.horizontalPadding}px`,
+                paddingTop: `${buttonDetails.verticalPadding}px`,
+                paddingBottom: `${buttonDetails.verticalPadding}px`,
+              }}
+            >
+              {buttonDetails.logo && (
+                <img src={buttonDetails.logo} alt="Logo" className="h-10 mr-2" />
               )}
-              <p className="text-xs">Secured by SabPaisa</p>
-            </span>
-          </button>
+              <span>
+                {buttonDetails.buttonLabel && (
+                  <span className="mr-2">{buttonDetails.buttonLabel}</span>
+                )}
+                <p className="text-xs">Secured by SabPaisa</p>
+              </span>
+            </button>
+          </div>
         </div>
 
-        {/* Donation Amount preview */}
-        <div>
-          {/* Header */}
-          <div
-            className="
-              py-3 border-b text-sm font-semibold text-white
-              text-center bg-blue-500 rounded-lg mt-1
-            "
-          >
-            <p>The Animal Foundation</p>
+        {/* Donation Amount Preview Section */}
+        <div className="flex-1 bg-gray-100 p-4 rounded-lg shadow">
+          <h6 className="text-center font-semibold mb-4">Donation Amount</h6>
+
+          <div className="bg-blue-500 text-white text-center py-2 rounded-md font-semibold">
+            The Animal Foundation
           </div>
-          {/* Body */}
+
           <div
-            className="py-5 overflow-y-auto bg-white"
-            style={{
-              maxHeight: '300px',
-              scrollbarWidth: 'thin',
-              scrollbarColor: 'rgba(0, 0, 0, 0.3) transparent'
-            }}
+            className="py-5 overflow-y-auto bg-white rounded-md mt-2 p-3"
+            style={{ maxHeight: '300px' }}
           >
             {amountDetails.fields
               .filter((field) => field.label && field.amount)
               .map((field, index) => (
-                <div key={index} className="px-4 py-2">
+                <div key={index} className="mb-3">
                   <label className="block text-gray-700 text-xs font-medium mb-1">
                     {field.label}
                   </label>
                   <input
                     type="text"
-                    className="
-                      w-full px-3 py-2 border rounded
-                      text-gray-900 text-xs font-semibold
-                    "
+                    className="w-full px-3 py-2 border rounded text-gray-900 text-xs font-semibold"
                     value={field.amount}
                     readOnly
                   />
                 </div>
               ))}
           </div>
-          {/* Footer */}
-          <div
-            className="flex justify-between px-4 py-3 bg-white shadow-lg border-t"
-          >
+
+          <div className="flex justify-between px-4 py-3 bg-white shadow-lg border-t mt-2 rounded-md">
             <span className="text-gray-900 font-bold">
               ₹{' '}
               {amountDetails.fields.reduce(
@@ -1695,38 +1680,23 @@ function ReviewPage({ formData }) {
                 0
               )}
             </span>
-            <button
-              className="bg-blue-500 text-white px-12 py-1 rounded"
-              style={{ textSize: '10px' }}
-            >
+            <button className="bg-blue-500 text-white px-4 py-1 rounded text-sm">
               Next
             </button>
           </div>
         </div>
 
-        {/* Customer Preview */}
-        <div>
-          {/* Header */}
-          <div
-            className="
-              py-3 border-b text-sm font-semibold text-white
-              text-center bg-blue-500 rounded-lg mt-1
-            "
-          >
-            <p>The Animal Foundation</p>
+        {/* Customer Information Preview Section */}
+        <div className="flex-1 bg-gray-100 p-4 rounded-lg shadow">
+          <h6 className="text-center font-semibold mb-4">Customer Information</h6>
+
+          <div className="bg-blue-500 text-white text-center py-2 rounded-md font-semibold">
+            The Animal Foundation
           </div>
 
-          {/* Body */}
-          <div
-            className="py-5 overflow-y-auto bg-white"
-            style={{
-              maxHeight: '300px',
-              scrollbarWidth: 'thin',
-              scrollbarColor: 'rgba(0, 0, 0, 0.3) transparent'
-            }}
-          >
+          <div className="py-5 overflow-y-auto bg-white rounded-md mt-2 p-3" style={{ maxHeight: '300px' }}>
             {/* Email Preview */}
-            <div className="px-4 py-2">
+            <div className="mb-3">
               <label className="block text-gray-700 text-xs font-medium mb-1">
                 {customerDetails.emailField.label}
               </label>
@@ -1736,7 +1706,7 @@ function ReviewPage({ formData }) {
             </div>
 
             {/* Phone Preview */}
-            <div className="px-4 py-2">
+            <div className="mb-3">
               <label className="block text-gray-700 text-xs font-medium mb-1">
                 {customerDetails.phoneField.label}
               </label>
@@ -1746,7 +1716,7 @@ function ReviewPage({ formData }) {
             </div>
 
             {/* Donor Name Preview */}
-            <div className="px-4 py-2">
+            <div className="mb-3">
               <label className="block text-gray-700 text-xs font-medium mb-1">
                 {customerDetails.donorNameField.label}
               </label>
@@ -1757,7 +1727,7 @@ function ReviewPage({ formData }) {
 
             {/* Additional Fields Preview */}
             {customerDetails.additionalFields?.map((field, index) => (
-              <div key={index} className="px-4 py-2">
+              <div key={index} className="mb-3">
                 <label className="block text-gray-700 text-xs font-medium mb-1">
                   {field.label || `Custom Field #${index + 1}`}
                 </label>
@@ -1769,15 +1739,15 @@ function ReviewPage({ formData }) {
             ))}
           </div>
 
-          {/* Footer */}
-          <div className="text-center text-md px-4 py-3 bg-blue-500 shadow-lg border-t text-white">
-            Preceed to Pay
+          <div className="text-center text-md px-4 py-3 bg-blue-500 shadow-lg border-t text-white rounded-md">
+            Proceed to Pay
           </div>
         </div>
       </div>
     </div>
   );
 }
+
 
 
 export default Donation;
