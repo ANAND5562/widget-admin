@@ -1652,7 +1652,6 @@ function ReviewPage({ formData }) {
           >
             <p>The Animal Foundation</p>
           </div>
-
           {/* Body */}
           <div
             className="py-5 overflow-y-auto bg-white"
@@ -1678,7 +1677,7 @@ function ReviewPage({ formData }) {
                 </div>
               ))}
           </div>
-
+          {/* Footer */}
           <div className="flex justify-between px-4 py-3 bg-white shadow-lg border-t">
             <span className="text-gray-900 font-bold">
               ₹{' '}
@@ -1695,12 +1694,12 @@ function ReviewPage({ formData }) {
 
         {/* Customer Information Preview Section */}
         <div className="flex-1 bg-gray-100 p-4 rounded-lg shadow">
-          <h6 className="text-center font-semibold mb-4">Customer Information</h6>
-
+          {/* Header */}
           <div className="bg-blue-500 text-white text-center py-2 rounded-md font-semibold">
             The Animal Foundation
           </div>
-
+          
+          {/* Body */}
           <div className="py-5 overflow-y-auto bg-white rounded-md mt-2 p-3" style={{ maxHeight: '300px' }}>
             {/* Email Preview */}
             <div className="mb-3">
@@ -1745,7 +1744,8 @@ function ReviewPage({ formData }) {
               </div>
             ))}
           </div>
-
+          
+          {/* Footer */}
           <div className="text-center text-md px-4 py-3 bg-blue-500 shadow-lg border-t text-white rounded-md">
             Proceed to Pay
           </div>
