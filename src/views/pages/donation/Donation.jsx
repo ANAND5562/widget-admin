@@ -1600,7 +1600,7 @@ function ReviewPage({ formData }) {
 
       {/* Flex Container for three columns */}
       <div className="flex flex-col md:flex-row gap-4 justify-center" style={{ marginTop: '20px' }}>
-        
+
         {/* Button Preview Section */}
         <div className="flex-1">
           <div className="flex justify-center">
@@ -1642,21 +1642,30 @@ function ReviewPage({ formData }) {
         </div>
 
         {/* Donation Amount Preview Section */}
-        <div className="flex-1 bg-gray-100 p-4 rounded-lg shadow">
-          <h6 className="text-center font-semibold mb-4">Donation Amount</h6>
-
-          <div className="bg-blue-500 text-white text-center py-2 rounded-md font-semibold">
-            The Animal Foundation
+        <div className="flex-1">
+          {/* Header */}
+          <div
+            className="
+              py-3 border-b text-sm font-semibold text-white
+              text-center bg-blue-500 rounded-lg mt-1
+            "
+          >
+            <p>The Animal Foundation</p>
           </div>
 
+          {/* Body */}
           <div
-            className="py-5 overflow-y-auto bg-white rounded-md mt-2 p-3"
-            style={{ maxHeight: '300px' }}
+            className="py-5 overflow-y-auto bg-white"
+            style={{
+              maxHeight: '300px',
+              scrollbarWidth: 'thin',
+              scrollbarColor: 'rgba(0, 0, 0, 0.3) transparent'
+            }}
           >
             {amountDetails.fields
               .filter((field) => field.label && field.amount)
               .map((field, index) => (
-                <div key={index} className="mb-3">
+                <div key={index} className="px-4 py-2">
                   <label className="block text-gray-700 text-xs font-medium mb-1">
                     {field.label}
                   </label>
@@ -1670,7 +1679,7 @@ function ReviewPage({ formData }) {
               ))}
           </div>
 
-          <div className="flex justify-between px-4 py-3 bg-white shadow-lg border-t mt-2 rounded-md">
+          <div className="flex justify-between px-4 py-3 bg-white shadow-lg border-t">
             <span className="text-gray-900 font-bold">
               ₹{' '}
               {amountDetails.fields.reduce(
@@ -1678,7 +1687,7 @@ function ReviewPage({ formData }) {
                 0
               )}
             </span>
-            <button className="bg-blue-500 text-white px-4 py-1 rounded text-sm">
+            <button className="bg-blue-500 text-white px-4 py-1 rounded">
               Next
             </button>
           </div>
