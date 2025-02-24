@@ -1599,7 +1599,7 @@ function ReviewPage({ formData }) {
       <h6 className="text-center font-bold text-lg mb-6">Review & Create</h6>
 
       {/* Flex Container for three columns */}
-      <div className="flex flex-col md:flex-row gap-4 justify-center" style={{ marginTop: '20px' }}>
+      <div className="flex flex-col md:flex-row gap-12 justify-center" style={{ marginTop: '20px' }}>
 
         {/* Button Preview Section */}
         <div className="flex-1">
@@ -1642,12 +1642,12 @@ function ReviewPage({ formData }) {
         </div>
 
         {/* Donation Amount Preview Section */}
-        <div className="flex-1">
+        <div className="flex-1 shadow">
           {/* Header */}
           <div
             className="
               py-3 border-b text-sm font-semibold text-white
-              text-center bg-blue-500 rounded-lg mt-1
+              text-center bg-blue-500 mt-1
             "
           >
             <p>The Animal Foundation</p>
@@ -1693,26 +1693,30 @@ function ReviewPage({ formData }) {
         </div>
 
         {/* Customer Information Preview Section */}
-        <div className="flex-1 bg-gray-100 p-4 rounded-lg shadow">
+        <div className="flex-1 shadow">
           {/* Header */}
-          <div className="bg-blue-500 text-white text-center py-2 rounded-md font-semibold">
+          <div className="py-3 border-b text-sm font-semibold text-white text-center bg-blue-500 mt-1">
             The Animal Foundation
           </div>
-          
+
           {/* Body */}
-          <div className="py-5 overflow-y-auto bg-white rounded-md mt-2 p-3" style={{ maxHeight: '300px' }}>
+          <div className="py-5 overflow-y-auto bg-white" style={{ maxHeight: '300px', scrollbarWidth: 'thin', scrollbarColor: 'rgba(0, 0, 0, 0.3) transparent' }}>
             {/* Email Preview */}
-            <div className="mb-3">
+
+            <div className="px-4 py-2">
               <label className="block text-gray-700 text-xs font-medium mb-1">
                 {customerDetails.emailField.label}
               </label>
-              <div className="border rounded px-3 py-2 text-xs text-gray-900">
-                {customerDetails.emailField.type} Field
-              </div>
+              <input
+                type="text"
+                className="w-full px-3 py-2 border rounded text-gray-900 text-xs font-semibold"
+                value={`${customerDetails.emailField.type} Field`}
+                readOnly
+              />
             </div>
 
             {/* Phone Preview */}
-            <div className="mb-3">
+            <div className="px-4 py-2">
               <label className="block text-gray-700 text-xs font-medium mb-1">
                 {customerDetails.phoneField.label}
               </label>
@@ -1722,7 +1726,7 @@ function ReviewPage({ formData }) {
             </div>
 
             {/* Donor Name Preview */}
-            <div className="mb-3">
+            <div className="px-4 py-2">
               <label className="block text-gray-700 text-xs font-medium mb-1">
                 {customerDetails.donorNameField.label}
               </label>
@@ -1733,7 +1737,7 @@ function ReviewPage({ formData }) {
 
             {/* Additional Fields Preview */}
             {customerDetails.additionalFields?.map((field, index) => (
-              <div key={index} className="mb-3">
+              <div key={index} className="px-4 py-2">
                 <label className="block text-gray-700 text-xs font-medium mb-1">
                   {field.label || `Custom Field #${index + 1}`}
                 </label>
@@ -1744,9 +1748,9 @@ function ReviewPage({ formData }) {
               </div>
             ))}
           </div>
-          
+
           {/* Footer */}
-          <div className="text-center text-md px-4 py-3 bg-blue-500 shadow-lg border-t text-white rounded-md">
+          <div className="text-center text-md px-4 py-3 bg-blue-500 shadow-lg border-t text-white">
             Proceed to Pay
           </div>
         </div>
