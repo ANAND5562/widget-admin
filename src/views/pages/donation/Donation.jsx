@@ -1141,7 +1141,7 @@ function AmountDetails({ amountData, onFormChange, onFieldsChange }) {
           }}
         >
           <div>
-            <p className="font-semibold text-center">Preview</p>
+            <p className="font-semibold text-center">Donation Amount Preview</p>
           </div>
           {/* Header */}
           <div
@@ -1513,7 +1513,7 @@ function CustomerDetails({
           }}
         >
           <div>
-            <p className="font-semibold text-center">Preview</p>
+            <p className="font-semibold text-center">Donor Detail Preview</p>
           </div>
 
           {/* Header */}
@@ -1595,9 +1595,13 @@ function ReviewPage({ formData }) {
   return (
     <div>
       <h6 className="text-center">Review & Create</h6>
-      <pre style={{ marginTop: '28px' }}>
-        {JSON.stringify(formData, null, 2)}
-      </pre>
+
+      <div className="flex" style={{ marginTop: '56px', paddingLeft: '120px', paddingRight: '120px' }}>
+        <div>Button preview</div>
+        <div className="mx-auto">Donation Amount Preview</div>
+        <div>Donor Detail Preview</div>
+      </div>
+
     </div>
   );
 }
