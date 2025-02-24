@@ -1600,9 +1600,8 @@ function ReviewPage({ formData }) {
 
       {/* Flex Container for three columns */}
       <div className="flex flex-col md:flex-row gap-4 justify-center" style={{ marginTop: '20px' }}>
-
+        
         {/* Button Preview Section */}
-
         <div className="flex-1">
           <div className="flex justify-center">
             <button
