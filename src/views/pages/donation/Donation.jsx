@@ -102,7 +102,7 @@ function Donation() {
       console.log('Form data ::', formData);
       setCurrentStep(currentStep + 1);
     } else {
-      alert('Form completed successfully!');
+      alert('Widget Cteated Successfully!');
     }
   };
 
@@ -1595,11 +1595,11 @@ function ReviewPage({ formData }) {
   const { buttonDetails, amountDetails, customerDetails } = formData;
 
   return (
-    <div className="container mx-auto p-6">
-      <h6 className="text-center font-bold text-lg mb-6">Review & Create</h6>
+    <div className="container mx-auto">
+      <h6 className="text-center font-bold text-lg">Review & Create</h6>
 
       {/* Flex Container for three columns */}
-      <div className="flex flex-col md:flex-row gap-12 justify-center" style={{ marginTop: '20px' }}>
+      <div className="flex flex-col md:flex-row gap-12 justify-center" style={{ marginTop: '60px' }}>
 
         {/* Button Preview Section */}
         <div className="flex-1">
@@ -1642,12 +1642,12 @@ function ReviewPage({ formData }) {
         </div>
 
         {/* Donation Amount Preview Section */}
-        <div className="flex-1 shadow">
+        <div className="flex-1 shadow ml-[-40px]">
           {/* Header */}
           <div
             className="
               py-3 border-b text-sm font-semibold text-white
-              text-center bg-blue-500 mt-1
+              text-center bg-blue-500 mt-0
             "
           >
             <p>The Animal Foundation</p>
@@ -1678,7 +1678,7 @@ function ReviewPage({ formData }) {
               ))}
           </div>
           {/* Footer */}
-          <div className="flex justify-between px-4 py-3 bg-white shadow-lg border-t">
+          <div className="flex justify-between px-4 py-3 bg-white shadow-lg border-t mt-1">
             <span className="text-gray-900 font-bold">
               ₹{' '}
               {amountDetails.fields.reduce(
@@ -1695,14 +1695,20 @@ function ReviewPage({ formData }) {
         {/* Customer Information Preview Section */}
         <div className="flex-1 shadow">
           {/* Header */}
-          <div className="py-3 border-b text-sm font-semibold text-white text-center bg-blue-500 mt-1">
+          <div className="py-3 border-b text-sm font-semibold text-white text-center bg-blue-500 mt-0">
             The Animal Foundation
           </div>
 
           {/* Body */}
-          <div className="py-5 overflow-y-auto bg-white" style={{ maxHeight: '300px', scrollbarWidth: 'thin', scrollbarColor: 'rgba(0, 0, 0, 0.3) transparent' }}>
+          <div
+            className="py-5 overflow-y-auto bg-white"
+            style={{
+              maxHeight: '300px',
+              scrollbarWidth: 'thin',
+              scrollbarColor: 'rgba(0, 0, 0, 0.3) transparent',
+            }}
+          >
             {/* Email Preview */}
-
             <div className="px-4 py-2">
               <label className="block text-gray-700 text-xs font-medium mb-1">
                 {customerDetails.emailField.label}
@@ -1720,9 +1726,12 @@ function ReviewPage({ formData }) {
               <label className="block text-gray-700 text-xs font-medium mb-1">
                 {customerDetails.phoneField.label}
               </label>
-              <div className="border rounded px-3 py-2 text-xs text-gray-900">
-                {customerDetails.phoneField.type} Field
-              </div>
+              <input
+                type="text"
+                className="w-full px-3 py-2 border rounded text-gray-900 text-xs font-semibold"
+                value={`${customerDetails.phoneField.type} Field`}
+                readOnly
+              />
             </div>
 
             {/* Donor Name Preview */}
@@ -1730,9 +1739,12 @@ function ReviewPage({ formData }) {
               <label className="block text-gray-700 text-xs font-medium mb-1">
                 {customerDetails.donorNameField.label}
               </label>
-              <div className="border rounded px-3 py-2 text-xs text-gray-900">
-                {customerDetails.donorNameField.type} Field
-              </div>
+              <input
+                type="text"
+                className="w-full px-3 py-2 border rounded text-gray-900 text-xs font-semibold"
+                value={`${customerDetails.donorNameField.type} Field`}
+                readOnly
+              />
             </div>
 
             {/* Additional Fields Preview */}
@@ -1741,16 +1753,19 @@ function ReviewPage({ formData }) {
                 <label className="block text-gray-700 text-xs font-medium mb-1">
                   {field.label || `Custom Field #${index + 1}`}
                 </label>
-                <div className="border rounded px-3 py-2 text-xs text-gray-900">
-                  {field.type || 'text'} Field
-                  {field.required && ' (Required)'}
-                </div>
+                <input
+                  type="text"
+                  className="w-full px-3 py-2 border rounded text-gray-900 text-xs font-semibold"
+                  value={`${field.type || 'text'} Field${field.required ? ' (Required)' : ''}`}
+                  readOnly
+                />
               </div>
             ))}
           </div>
 
+
           {/* Footer */}
-          <div className="text-center text-md px-4 py-3 bg-blue-500 shadow-lg border-t text-white">
+          <div className="text-center text-md px-4 py-3 bg-blue-500 shadow-lg border-t text-white mt-3">
             Proceed to Pay
           </div>
         </div>
