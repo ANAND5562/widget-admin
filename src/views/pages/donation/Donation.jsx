@@ -1592,18 +1592,192 @@ function CustomerDetails({
 
 // --------------------- REVIEW & CREATE STEP ---------------------
 function ReviewPage({ formData }) {
+  // Destructure the correct names from formData
+  const { buttonDetails, amountDetails, customerDetails } = formData;
+
   return (
     <div>
       <h6 className="text-center">Review & Create</h6>
 
-      <div className="flex" style={{ marginTop: '56px', paddingLeft: '120px', paddingRight: '120px' }}>
-        <div>Button preview</div>
-        <div className="mx-auto">Donation Amount Preview</div>
-        <div>Donor Detail Preview</div>
-      </div>
+      <div
+        className="flex"
+        style={{ marginTop: '56px', justifyContent: 'center' }}
+      >
+        {/* 1button preview */}
+        <div>
+          <button
+            className={`
+                text-lg flex items-center justify-between
+                transition-all duration-300 ease-in-out
+                ${buttonDetails.border ? 'border-2 border-gray-700' : ''}
+                ${buttonDetails.buttonShadow ? 'shadow-lg' : ''}
+              `}
+            style={{
+              fontFamily: buttonDetails.fontStyle,
+              fontStyle: buttonDetails.italicText ? 'italic' : 'normal',
+              fontWeight: buttonDetails.boldText ? 'bold' : 'normal',
+              color: buttonDetails.textColor,
+              backgroundColor: buttonDetails.buttonColor,
+              textShadow: buttonDetails.textShadow
+                ? '2px 2px 4px rgba(0, 0, 0, 0.5)'
+                : 'none',
+              fontSize: `${buttonDetails.textSize}px`,
+              borderRadius: `${buttonDetails.cornerRadius}px`,
+              paddingLeft: `${buttonDetails.horizontalPadding}px`,
+              paddingRight: `${buttonDetails.horizontalPadding}px`,
+              paddingTop: `${buttonDetails.verticalPadding}px`,
+              paddingBottom: `${buttonDetails.verticalPadding}px`
+            }}
+          >
+            {buttonDetails.logo && (
+              <img
+                src={buttonDetails.logo}
+                alt="Logo"
+                className="h-10 mr-2"
+              />
+            )}
+            <span>
+              {buttonDetails.buttonLabel && (
+                <span className="mr-2">{buttonDetails.buttonLabel}</span>
+              )}
+              <p className="text-xs">Secured by SabPaisa</p>
+            </span>
+          </button>
+        </div>
 
+        {/* Donation Amount preview */}
+        <div>
+          {/* Header */}
+          <div
+            className="
+              py-3 border-b text-sm font-semibold text-white
+              text-center bg-blue-500 rounded-lg mt-1
+            "
+          >
+            <p>The Animal Foundation</p>
+          </div>
+          {/* Body */}
+          <div
+            className="py-5 overflow-y-auto bg-white"
+            style={{
+              maxHeight: '300px',
+              scrollbarWidth: 'thin',
+              scrollbarColor: 'rgba(0, 0, 0, 0.3) transparent'
+            }}
+          >
+            {amountDetails.fields
+              .filter((field) => field.label && field.amount)
+              .map((field, index) => (
+                <div key={index} className="px-4 py-2">
+                  <label className="block text-gray-700 text-xs font-medium mb-1">
+                    {field.label}
+                  </label>
+                  <input
+                    type="text"
+                    className="
+                      w-full px-3 py-2 border rounded
+                      text-gray-900 text-xs font-semibold
+                    "
+                    value={field.amount}
+                    readOnly
+                  />
+                </div>
+              ))}
+          </div>
+          {/* Footer */}
+          <div
+            className="flex justify-between px-4 py-3 bg-white shadow-lg border-t"
+          >
+            <span className="text-gray-900 font-bold">
+              ₹{' '}
+              {amountDetails.fields.reduce(
+                (total, field) => total + (parseInt(field.amount) || 0),
+                0
+              )}
+            </span>
+            <button
+              className="bg-blue-500 text-white px-12 py-1 rounded"
+              style={{ textSize: '10px' }}
+            >
+              Next
+            </button>
+          </div>
+        </div>
+
+        {/* Customer Preview */}
+        <div>
+          {/* Header */}
+          <div
+            className="
+              py-3 border-b text-sm font-semibold text-white
+              text-center bg-blue-500 rounded-lg mt-1
+            "
+          >
+            <p>The Animal Foundation</p>
+          </div>
+
+          {/* Body */}
+          <div
+            className="py-5 overflow-y-auto bg-white"
+            style={{
+              maxHeight: '300px',
+              scrollbarWidth: 'thin',
+              scrollbarColor: 'rgba(0, 0, 0, 0.3) transparent'
+            }}
+          >
+            {/* Email Preview */}
+            <div className="px-4 py-2">
+              <label className="block text-gray-700 text-xs font-medium mb-1">
+                {customerDetails.emailField.label}
+              </label>
+              <div className="border rounded px-3 py-2 text-xs text-gray-900">
+                {customerDetails.emailField.type} Field
+              </div>
+            </div>
+
+            {/* Phone Preview */}
+            <div className="px-4 py-2">
+              <label className="block text-gray-700 text-xs font-medium mb-1">
+                {customerDetails.phoneField.label}
+              </label>
+              <div className="border rounded px-3 py-2 text-xs text-gray-900">
+                {customerDetails.phoneField.type} Field
+              </div>
+            </div>
+
+            {/* Donor Name Preview */}
+            <div className="px-4 py-2">
+              <label className="block text-gray-700 text-xs font-medium mb-1">
+                {customerDetails.donorNameField.label}
+              </label>
+              <div className="border rounded px-3 py-2 text-xs text-gray-900">
+                {customerDetails.donorNameField.type} Field
+              </div>
+            </div>
+
+            {/* Additional Fields Preview */}
+            {customerDetails.additionalFields?.map((field, index) => (
+              <div key={index} className="px-4 py-2">
+                <label className="block text-gray-700 text-xs font-medium mb-1">
+                  {field.label || `Custom Field #${index + 1}`}
+                </label>
+                <div className="border rounded px-3 py-2 text-xs text-gray-900">
+                  {field.type || 'text'} Field
+                  {field.required && ' (Required)'}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Footer */}
+          <div className="text-center text-md px-4 py-3 bg-blue-500 shadow-lg border-t text-white">
+            Preceed to Pay
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
+
 
 export default Donation;
