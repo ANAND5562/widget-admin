@@ -1599,7 +1599,7 @@ function ReviewPage({ formData }) {
       <h6 className="text-center font-bold text-lg">Review & Create</h6>
 
       {/* Flex Container for three columns */}
-      <div className="flex flex-col md:flex-row gap-12 justify-center" style={{ marginTop: '60px' }}>
+      <div className="flex flex-col md:flex-row gap-12 justify-center" style={{ marginTop: '60px', paddingLeft: '80px', paddingRight: '80px' }}>
 
         {/* Button Preview Section */}
         <div className="flex-1">
