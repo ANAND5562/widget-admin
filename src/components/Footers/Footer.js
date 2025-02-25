@@ -146,7 +146,7 @@ export default function Footer() {
               <div className="text-sm text-blueGray-500 font-semibold py-1">
                 Copyright © {new Date().getFullYear()} by{" "}
                 <a
-                  href="https://sabpaisa.in/"
+                  href="#"
                   className="text-blueGray-500 hover:text-blueGray-800"
                 >
                   SabPaisa

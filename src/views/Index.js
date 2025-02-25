@@ -42,7 +42,7 @@ export default function Index() {
                 Secure transactions with smooth integrations.
                 Power up your payments today with{" "}
                 <a
-                  href="https://developer.sabpaisa.in/"
+                  href="#"
                   className="text-blueGray-600 font-semibold hover:underline"
                   target="_blank"
                   rel="noopener noreferrer"

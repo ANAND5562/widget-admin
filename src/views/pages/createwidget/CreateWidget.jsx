@@ -137,7 +137,7 @@ function CreateWidget() {
 
             </div> */}
             <div className='grid grid-cols-1 gap-6 mb-4 sm:grid-cols-1 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-4'>
-                <Link to={'/admin/dashboard'}>
+                <Link to={'/admin/createwidget/quickpay'}>
                     <div className="bg-gray-50 rounded-md shadow-md flex flex-col h-full">
                         <div style={{ backgroundImage: `url(${Background})`, backgroundSize: 'cover', backgroundPosition: 'center', borderRadius: '8px 8px 0px 0px', overflow: 'hidden', padding: '12px' }}>
                             <img src={QuickPay} alt="Something went wrong!" className="w-full h-[210px] object-cover" />
