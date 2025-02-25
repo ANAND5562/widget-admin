@@ -16,14 +16,14 @@ const Faq = () => {
             "Customers simply click the button, and the payment is processed immediately without additional steps.",
         },
         {
-          question: "Can I customize the Quick-Pay Button?",
+          question: "Is there a transaction limit on Quick-Pay?",
           answer:
-            "Yes, you can modify the design and link it to your preferred payment gateway.",
+            "Transaction limits depend on your bank policies and the payment provider.",
         },
         {
           question: "Is the Quick-Pay Button secure?",
           answer:
-            "Yes, it follows industry-standard security protocols to ensure safe transactions.",
+            "Yes, it follows industry-standard security protocols, including encryption and fraud detection.",
         },
       ],
     },
@@ -33,22 +33,22 @@ const Faq = () => {
         {
           question: "What is the Donations Button?",
           answer:
-            "The Donations Button enables supporters to contribute effortlessly using preset or custom donation amounts.",
+            "The Donations Button allows supporters to contribute effortlessly using preset or custom donation amounts.",
         },
         {
-          question: "Can donors choose their own amount?",
+          question: "Can I set up recurring donations?",
           answer:
-            "Yes, donors can select from preset amounts or enter a custom amount based on their preference.",
+            "Yes, users can choose one-time or recurring donations if supported by your payment provider.",
         },
         {
-          question: "Is there an option to track donations?",
+          question: "How do I track donations?",
           answer:
-            "Most payment platforms provide tracking features, allowing you to monitor contributions.",
+            "Most platforms provide a dashboard where you can view donor history and manage contributions.",
         },
         {
-          question: "Can I integrate the Donations Button into my website?",
+          question: "Are donations refundable?",
           answer:
-            "Yes, you can embed it on your website or landing page to facilitate easy donations.",
+            "Refund policies depend on the organization. Some offer refunds, while others do not.",
         },
       ],
     },
@@ -58,22 +58,22 @@ const Faq = () => {
         {
           question: "What is the Buy Now Button?",
           answer:
-            "The Buy Now Button simplifies purchases by allowing customers to select quantities and make quick payments.",
+            "The Buy Now Button allows customers to purchase items instantly without navigating through multiple steps.",
         },
         {
-          question: "Can I use this button for multiple products?",
+          question: "Does the Buy Now Button support discounts?",
           answer:
-            "Yes, you can configure it for different products and services with quantity selection.",
+            "Yes, depending on your e-commerce platform, discounts and promo codes can be applied at checkout.",
         },
         {
-          question: "How does the checkout process work?",
+          question: "Can I use Buy Now for subscriptions?",
           answer:
-            "Customers click the button, select the quantity (if applicable), and proceed to checkout instantly.",
+            "Yes, if integrated with a subscription-based payment system.",
         },
         {
-          question: "Does the Buy Now Button work with all e-commerce platforms?",
+          question: "Is there a way to prevent fraudulent transactions?",
           answer:
-            "It depends on the payment gateway used, but most platforms support this functionality.",
+            "Yes, anti-fraud tools such as 3D Secure, CAPTCHA, and address verification can be enabled.",
         },
       ],
     },
@@ -83,33 +83,33 @@ const Faq = () => {
         {
           question: "What is the Custom Button?",
           answer:
-            "The Custom Button offers advanced customization options, allowing users to set payment amounts and modify forms as needed.",
+            "The Custom Button provides advanced options for setting payment amounts and customizing the payment form.",
         },
         {
-          question: "Can I collect additional customer information with the Custom Button?",
+          question: "Can I collect additional customer details?",
           answer:
-            "Yes, you can add custom fields to collect necessary information during the transaction.",
+            "Yes, custom fields allow businesses to collect necessary details such as addresses and phone numbers.",
         },
         {
-          question: "Can I integrate this button with my CRM or database?",
+          question: "Does the Custom Button support international payments?",
           answer:
-            "Yes, depending on the platform you use, you can integrate it with customer management systems.",
+            "Yes, if integrated with a global payment provider that supports multiple currencies.",
         },
         {
-          question: "Is there an option to enable recurring payments with the Custom Button?",
+          question: "Can I restrict who uses the Custom Button?",
           answer:
-            "Yes, if supported by your payment provider, you can set up recurring payment options.",
+            "Yes, access can be restricted based on IP addresses, customer groups, or authentication requirements.",
         },
       ],
     },
   ];
 
   return (
-    <div className="bg-gray-100 min-h-screen py-10">
-      <div className="max-w-4xl mx-auto px-4">
-        <h1 className="text-3xl font-bold text-center text-gray-800 mb-8">
+    <div className="min-h-screen bg-gray-50">
+      <div className="w-full max-w-7xl mx-auto">
+        <h4 className="text-3xl font-semibold text-gray-800 text-center border-b border-gray-300 py-4 px-4">
           Frequently Asked Questions (FAQ)
-        </h1>
+        </h4>
         {faqs.map((faq, index) => (
           <FAQCategory key={index} category={faq.category} questions={faq.questions} />
         ))}
@@ -120,11 +120,15 @@ const Faq = () => {
 
 const FAQCategory = ({ category, questions }) => {
   return (
-    <div className="mb-6">
-      <h2 className="text-2xl font-semibold text-gray-700 mb-4">{category}</h2>
-      {questions.map((item, index) => (
-        <FAQItem key={index} question={item.question} answer={item.answer} />
-      ))}
+    <div className="w-full border-b border-gray-300">
+      <h2 className="text-lg font-semibold text-gray-900 bg-gray-200 px-4 py-3">
+        {category}
+      </h2>
+      <div className="px-4">
+        {questions.map((item, index) => (
+          <FAQItem key={index} question={item.question} answer={item.answer} />
+        ))}
+      </div>
     </div>
   );
 };
@@ -133,16 +137,16 @@ const FAQItem = ({ question, answer }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="border-b border-gray-300">
+    <div className="border-b border-gray-200 last:border-none">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full text-left py-3 px-4 bg-white shadow-sm text-lg font-medium text-gray-800 flex justify-between items-center focus:outline-none"
+        className="w-full text-left py-2 flex justify-between items-center text-md font-medium text-gray-800 hover:bg-gray-100 focus:outline-none"
       >
-        {question}
+        <span>{question}</span>
         <span className="text-gray-500">{isOpen ? "−" : "+"}</span>
       </button>
       {isOpen && (
-        <div className="p-4 text-gray-600 bg-gray-50">{answer}</div>
+        <div className="p-2 bg-gray-100 text-gray-700">{answer}</div>
       )}
     </div>
   );
