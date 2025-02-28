@@ -278,7 +278,7 @@ function ButtonDetails({ buttonData, onFormChange }) {
 
   return (
     <>
-      <h6 className="text-center md: ml-[-40px]">Create Your Button</h6>
+      <h6 className="text-center md: ml-[-40px]">Create Your Donation Button</h6>
 
       <div
         className="
