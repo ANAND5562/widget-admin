@@ -1078,7 +1078,10 @@ function AmountDetails({ amountData, onFormChange }) {
                 No donation amount specified
               </p>
             )}
+            <div style={{ marginTop: '140px' }}></div>
           </div>
+
+
           {/* Footer */}
           <div
             className="flex justify-between px-4 py-3 bg-white shadow-lg border-t"
