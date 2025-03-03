@@ -980,7 +980,8 @@ function CustomerDetails({
 
   return (
     <div>
-      <h6 className="text-center md:ml-[-40px]">Customer Details</h6>
+      <h6 className="text-center md:ml-[-40px]">Payer Details</h6>
+      <p>Supporters will fill this form before making the final payment</p>
       <div
         className="
           grid grid-cols-1 gap-5 sm:grid-cols-1 md:grid-cols-10
@@ -1408,6 +1409,7 @@ function ReviewPage({ formData }) {
                   />
                 </div>
               ))}
+            <div style={{ marginTop: '140px' }}></div>
           </div>
           {/* Footer */}
           <div className="flex justify-between px-4 py-3 bg-white shadow-lg border-t mt-1">
