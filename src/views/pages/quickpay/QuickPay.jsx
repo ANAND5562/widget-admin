@@ -1076,7 +1076,7 @@ function AmountDetails({ amountData, onFormChange }) {
               </div>
             ) : (
               <p className="text-center text-sm text-gray-500">
-                No donation amount specified
+                No amount type specified
               </p>
             )}
             <div style={{ marginTop: '140px' }}></div>
