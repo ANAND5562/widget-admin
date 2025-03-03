@@ -1236,13 +1236,15 @@ function ReviewPage({ formData }) {
             </button>
           </div>
         </div>
-        {/* Donation Amount Preview Section */}
+        {/* Quick-Pay Amount Preview Section */}
         <div className="flex-1 shadow ml-[-40px]">
+          {/* Header */}
           <div
             className="py-3 border-b text-sm font-semibold text-white text-center bg-blue-500 mt-0"
           >
             <p>The Animal Foundation</p>
           </div>
+          {/* Body */}
           <div
             className="py-5 overflow-y-auto bg-white"
             style={{
@@ -1268,8 +1270,9 @@ function ReviewPage({ formData }) {
                 No amount specified
               </p>
             )}
-            <div style={{ marginTop: '140px' }}></div>
+            <div style={{ marginTop: '190px' }}></div>
           </div>
+          {/* Footer */}
           <div className="flex justify-between px-4 py-3 bg-white shadow-lg border-t mt-1">
             <span className="text-gray-900 font-bold">
               ₹ {parseInt(amountDetails.amount) || 0}
