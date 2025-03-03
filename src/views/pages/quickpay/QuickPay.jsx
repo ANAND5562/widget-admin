@@ -278,7 +278,7 @@ function ButtonDetails({ buttonData, onFormChange }) {
 
   return (
     <>
-      <h6 className="text-center md: ml-[-40px] font-semibold">Create Your Quick Pay Button</h6>
+      <h6 className="text-center md: ml-[-40px] font-semibold">Create Your Quick-Pay Button</h6>
 
       <div
         className="
@@ -924,7 +924,6 @@ function ButtonDetails({ buttonData, onFormChange }) {
 }
 
 // --------------------- AMOUNT DETAILS STEP ---------------------
-
 function AmountDetails({ amountData, onFormChange }) {
   const [showTextarea, setShowTextarea] = useState(false);
 
@@ -945,7 +944,7 @@ function AmountDetails({ amountData, onFormChange }) {
 
   return (
     <div>
-      <h6 className="text-center md:ml-[-40px] font-semibold">Donation Amount</h6>
+      <h6 className="text-center md:ml-[-40px] font-semibold">Customise Amount</h6>
       <p className='text-center text-xs md:ml-[-40px]'>Customise your button as per your requirement you can give it customer specific amount or fixed amount</p>
       <div
         className="
@@ -1001,7 +1000,7 @@ function AmountDetails({ amountData, onFormChange }) {
                 onClick={toggleTextarea}
                 className="text-blue-500 cursor-pointer underline text-xs"
               >
-                {showTextarea ? '- Remove description' : '+ Add description'}
+                {showTextarea ? '- Remove helper text' : '+ Add helper text'}
               </div>
               {showTextarea && (
                 <div className="mt-0">
@@ -1393,7 +1392,7 @@ function CustomerDetails({
                 className="text-blue-500 cursor-pointer underline text-xs"
                 onClick={handleAddField}
               >
-                + Add Extra Field
+                + Add Another Field
               </div>
             )}
           </div>
@@ -1496,7 +1495,7 @@ function ReviewPage({ formData }) {
 
   return (
     <div className="container mx-auto">
-      <h6 className="text-center font-semibold text-lg">Review and Create</h6>
+      <h6 className="text-center font-semibold">Review and Create</h6>
       <p className='text-center text-xs'>Customers will see the button and forms as shown below</p>
 
       {/* Flex Container for three columns */}
