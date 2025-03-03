@@ -102,7 +102,7 @@ function Donation() {
       console.log('Form data ::', formData);
       setCurrentStep(currentStep + 1);
     } else {
-      alert('Widget Cteated Successfully!');
+      alert('Donation Widget Cteated Successfully!');
     }
   };
 
@@ -876,7 +876,7 @@ function ButtonDetails({ buttonData, onFormChange }) {
             paddingBottom: '30px'
           }}
         >
-          <h6>Button Preview</h6>
+          <p className='font-semibold'>Button Preview</p>
           <div className="flex justify-center items-center py-5">
             <button
               className={`

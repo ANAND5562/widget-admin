@@ -102,7 +102,7 @@ function QuickPay() {
       console.log('Form data ::', formData);
       setCurrentStep(currentStep + 1);
     } else {
-      alert('Widget Cteated Successfully!');
+      alert('Quick-Pay Widget Cteated Successfully!');
     }
   };
 
@@ -876,7 +876,7 @@ function ButtonDetails({ buttonData, onFormChange }) {
             paddingBottom: '30px'
           }}
         >
-          <h6>Button Preview</h6>
+          <p className='font-semibold'>Button Preview</p>
           <div className="flex justify-center items-center py-5">
             <button
               className={`
@@ -945,7 +945,8 @@ function AmountDetails({ amountData, onFormChange }) {
 
   return (
     <div>
-      <h6 className="text-center md:ml-[-40px]">Donation Amount</h6>
+      <h6 className="text-center md:ml-[-40px] font-semibold">Donation Amount</h6>
+      <p className='text-center text-xs md:ml-[-40px]'>Customise your button as per your requirement you can give it customer specific amount or fixed amount</p>
       <div
         className="
           grid grid-cols-1 gap-5 sm:grid-cols-1 md:grid-cols-10
@@ -979,7 +980,7 @@ function AmountDetails({ amountData, onFormChange }) {
                 {/* Amount */}
                 <div className="flex-1">
                   <label className="block text-xs font-medium text-gray-700">
-                    Amount
+                    Field Type (amount)
                   </label>
                   <input
                     type="number"
@@ -1010,7 +1011,7 @@ function AmountDetails({ amountData, onFormChange }) {
                       rounded-md shadow-sm focus:outline-none
                       focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm
                     "
-                    rows={1}
+                    rows={2}
                     placeholder="Enter additional details about the payment"
                     value={amountData.additionalDetails || ''}
                     onChange={(e) =>
@@ -1038,13 +1039,13 @@ function AmountDetails({ amountData, onFormChange }) {
           }}
         >
           <div>
-            <p className="font-semibold text-center">Donation Amount Preview</p>
+            <p className="font-semibold text-center">Preview</p>
           </div>
           {/* Header */}
           <div
             className="
               py-3 border-b text-sm font-semibold text-white
-              text-center bg-blue-500 rounded-lg mt-1
+              text-center bg-blue-500 rounded-lg mt-2
             "
           >
             <p>The Animal Foundation</p>
