@@ -926,280 +926,11 @@ function ButtonDetails({ buttonData, onFormChange }) {
 // --------------------- AMOUNT DETAILS STEP ---------------------
 function AmountDetails({ amountData, onFormChange, onFieldsChange }) {
   const [showTextarea, setShowTextarea] = useState(false);
-  const [showPresets, setShowPresets] = useState(true);
-
-  // Ensure at least 3 default fields exist if needed
-  // (Example logic: you can remove this if you prefer.)
-  if (amountData.fields.length < 3) {
-    onFieldsChange([
-      { label: 'NORNAL DONATION', amount: '100' },
-      { label: 'SUPPORT FOR CAUSE1', amount: '500' },
-      { label: 'SUPPORT FOR CAUSE2', amount: '1000' }
-    ]);
-  }
-
-  // Handling fields array updates
-  const handleFieldChange = (index, key, value) => {
-    const updatedFields = [...amountData.fields];
-    updatedFields[index][key] = value;
-    onFieldsChange(updatedFields);
-  };
-
-  const addNewField = () => {
-    if (amountData.fields.length < 6) {
-      onFieldsChange([
-        ...amountData.fields,
-        { label: '', amount: '' }
-      ]);
-    }
-  };
-
-  const deleteField = (index) => {
-    if (index > 0) {
-      const updatedFields = amountData.fields.filter((_, i) => i !== index);
-      onFieldsChange(updatedFields);
-    }
-  };
-
-  const toggleTextarea = () => {
-    setShowTextarea(!showTextarea);
-  };
-
-  const togglePresetVisibility = () => {
-    setShowPresets(!showPresets);
-  };
 
   return (
     <div>
-      <h6 className="text-center md:ml-[-40px]">Donation Amount</h6>
-      <div
-        className="
-          grid grid-cols-1 gap-5 sm:grid-cols-1 md:grid-cols-10
-          lg:grid-cols-10 xl:grid-cols-10 2xl:grid-cols-10
-        "
-        style={{ marginTop: '23px' }}
-      >
-        {/* Left: Form Fields */}
-        <div className="md:col-span-6 lg:col-span-6 xl:col-span-6 2xl:col-span-6">
-          <div className="grid grid-cols-1 gap-2">
-            {amountData.fields.map((field, index) => (
-              <div
-                key={index}
-                className={`flex flex-col gap-2 ${index > 0 && !showPresets ? 'hidden' : ''
-                  }`}
-              >
-                <div className="flex gap-4 items-center">
-                  {/* Field Label */}
-                  <div className="flex-1">
-                    <label className="block text-xs font-medium text-gray-700">
-                      Field Label
-                    </label>
-                    <input
-                      type="text"
-                      value={field.label}
-                      onChange={(e) =>
-                        handleFieldChange(index, 'label', e.target.value)
-                      }
-                      className="
-                        mt-1 block w-full px-3 py-2 border border-gray-300
-                        rounded-md shadow-sm text-xs focus:outline-none
-                        focus:ring-indigo-500 focus:border-indigo-500
-                      "
-                      placeholder="Enter label"
-                    />
-                  </div>
-                  {/* Amount */}
-                  <div className="flex-1">
-                    <label className="block text-xs font-medium text-gray-700">
-                      Amount
-                    </label>
-                    <input
-                      type="number"
-                      value={field.amount}
-                      onChange={(e) =>
-                        handleFieldChange(index, 'amount', e.target.value)
-                      }
-                      className="
-                        mt-1 block w-full px-3 py-2 border border-gray-300
-                        rounded-md shadow-sm text-xs focus:outline-none
-                        focus:ring-indigo-500 focus:border-indigo-500
-                      "
-                      placeholder="Enter amount"
-                    />
-                  </div>
-
-                  {/* Delete Button (only for fields beyond the first one) */}
-                  {index > 0 && (
-                    <img
-                      src={Delete}
-                      onClick={() => deleteField(index)}
-                      alt=""
-                      className="mt-5"
-                      style={{ height: '36px', width: '36px', cursor: 'pointer' }}
-                    />
-                  )}
-                </div>
-
-                {/* Description toggle (only for index=0) */}
-                {index === 0 && (
-                  <>
-                    <div
-                      onClick={toggleTextarea}
-                      className="text-blue-500 cursor-pointer underline text-xs"
-                    >
-                      {showTextarea ? '- Remove description' : '+ Add description'}
-                    </div>
-                    {showTextarea && (
-                      <div className="mt-0">
-                        <textarea
-                          className="
-                            mt-1 block w-full px-3 py-2 border border-gray-300
-                            rounded-md shadow-sm focus:outline-none
-                            focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm
-                          "
-                          rows={1}
-                          placeholder="Enter additional details about the payment"
-                          value={amountData.additionalDetails}
-                          onChange={(e) =>
-                            onFormChange('amountDetails', 'additionalDetails', e.target.value)
-                          }
-                        />
-                      </div>
-                    )}
-                  </>
-                )}
-
-                {/* Preset Visibility Switch (only for index=0) */}
-                {index === 0 && (
-                  <div className="mt-4 flex items-center gap-3">
-                    <label className="inline-flex items-center cursor-pointer">
-                      <input
-                        type="checkbox"
-                        className="sr-only peer"
-                        checked={showPresets}
-                        onChange={togglePresetVisibility}
-                      />
-                      <div
-                        className={`
-                          relative w-11 h-6 bg-gray-200 peer-focus:outline-none
-                          peer-focus:ring-4 peer-focus:ring-blue-300
-                          dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700
-                          peer-checked:after:translate-x-full
-                          rtl:peer-checked:after:-translate-x-full
-                          peer-checked:after:border-white after:content-['']
-                          after:absolute after:top-[2px] after:start-[2px]
-                          after:bg-white after:border-gray-300 after:border
-                          after:rounded-full after:h-5 after:w-5 after:transition-all
-                          dark:border-gray-600 peer-checked:bg-blue-500
-                          dark:peer-checked:bg-blue-500
-                        `}
-                      ></div>
-                    </label>
-                    <span className="text-sm font-medium text-gray-900 dark:text-gray-300">
-                      {showPresets
-                        ? 'Hide presets for donation amount'
-                        : 'Show Presets for donation amount'}
-                    </span>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-
-          {/* Add Preset Button */}
-          {showPresets && (
-            <div className="mt-4 flex justify-between items-center text-xs">
-              <button
-                type="button"
-                onClick={addNewField}
-                disabled={amountData.fields.length >= 6}
-                className={`
-                  ${amountData.fields.length >= 6
-                    ? 'text-gray-700 cursor-not-allowed underline'
-                    : 'text-blue-500 cursor-pointer underline'
-                  }
-                `}
-              >
-                + Add Another Preset
-              </button>
-            </div>
-          )}
-        </div>
-
-        {/* Right: Preview Section */}
-        <div
-          className="
-            bg-sky-50 rounded-lg md:col-span-4 lg:col-span-4
-            xl:col-span-4 2xl:col-span-4
-          "
-          style={{
-            backgroundColor: '#E8F0FF',
-            paddingLeft: '80px',
-            paddingRight: '80px',
-            paddingTop: '30px',
-            paddingBottom: '30px'
-          }}
-        >
-          <div>
-            <p className="font-semibold text-center">Donation Amount Preview</p>
-          </div>
-          {/* Header */}
-          <div
-            className="
-              py-3 border-b text-sm font-semibold text-white
-              text-center bg-blue-500 rounded-lg mt-1
-            "
-          >
-            <p>The Animal Foundation</p>
-          </div>
-          {/* Body */}
-          <div
-            className="py-5 overflow-y-auto bg-white"
-            style={{
-              maxHeight: '300px',
-              scrollbarWidth: 'thin',
-              scrollbarColor: 'rgba(0, 0, 0, 0.3) transparent'
-            }}
-          >
-            {amountData.fields
-              .filter((field) => field.label && field.amount)
-              .map((field, index) => (
-                <div key={index} className="px-4 py-2">
-                  <label className="block text-gray-700 text-xs font-medium mb-1">
-                    {field.label}
-                  </label>
-                  <input
-                    type="text"
-                    className="
-                      w-full px-3 py-2 border rounded
-                      text-gray-900 text-xs font-semibold
-                    "
-                    value={field.amount}
-                    readOnly
-                  />
-                </div>
-              ))}
-          </div>
-          {/* Footer */}
-          <div
-            className="flex justify-between px-4 py-3 bg-white shadow-lg border-t"
-          >
-            <span className="text-gray-900 font-bold">
-              ₹{' '}
-              {amountData.fields.reduce(
-                (total, field) => total + (parseInt(field.amount) || 0),
-                0
-              )}
-            </span>
-            <button
-              className="bg-blue-500 text-white px-12 py-1 rounded"
-              style={{ textSize: '10px' }}
-            >
-              Next
-            </button>
-          </div>
-        </div>
-      </div>
+      <h6 className="text-center md:ml-[-40px]">Amount Details</h6>
+      <p>Lorem ipsum dolor sit amet.</p>
     </div>
   );
 }
@@ -1249,7 +980,7 @@ function CustomerDetails({
 
   return (
     <div>
-      <h6 className="text-center md:ml-[-40px]">Donor Details</h6>
+      <h6 className="text-center md:ml-[-40px]">Customer Details</h6>
       <div
         className="
           grid grid-cols-1 gap-5 sm:grid-cols-1 md:grid-cols-10
@@ -1513,7 +1244,7 @@ function CustomerDetails({
           }}
         >
           <div>
-            <p className="font-semibold text-center">Donor Detail Preview</p>
+            <p className="font-semibold text-center">Preview</p>
           </div>
 
           {/* Header */}
@@ -1596,7 +1327,8 @@ function ReviewPage({ formData }) {
 
   return (
     <div className="container mx-auto">
-      <h6 className="text-center font-bold text-lg">Review & Create</h6>
+      <h6 className="text-center font-semibold text-lg">Review and Create</h6>
+      <p className='text-center text-xs'>Customers will see the button and forms as shown below</p>
 
       {/* Flex Container for three columns */}
       <div className="flex flex-col md:flex-row gap-12 justify-center" style={{ marginTop: '60px', paddingLeft: '80px', paddingRight: '80px' }}>
