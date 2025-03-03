@@ -1045,7 +1045,7 @@ function AmountDetails({ amountData, onFormChange }) {
           <div
             className="
               py-3 border-b text-sm font-semibold text-white
-              text-center bg-blue-500 rounded-lg mt-2
+              text-center bg-blue-500 rounded-lg mt-1
             "
           >
             <p>The Animal Foundation</p>
