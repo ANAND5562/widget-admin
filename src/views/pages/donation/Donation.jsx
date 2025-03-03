@@ -278,7 +278,7 @@ function ButtonDetails({ buttonData, onFormChange }) {
 
   return (
     <>
-      <h6 className="text-center md: ml-[-40px]">Create Your Donation Button</h6>
+      <h6 className="text-center md: ml-[-40px] font-semibold">Create Your Donation Button</h6>
 
       <div
         className="
@@ -971,7 +971,8 @@ function AmountDetails({ amountData, onFormChange, onFieldsChange }) {
 
   return (
     <div>
-      <h6 className="text-center md:ml-[-40px]">Donation Amount</h6>
+      <h6 className="text-center md:ml-[-40px] font-semibold">Donation Amount</h6>
+      <p className='text-center text-xs md:ml-[-40px]'>Configure how supporters will see the donation options</p>
       <div
         className="
           grid grid-cols-1 gap-5 sm:grid-cols-1 md:grid-cols-10
@@ -1249,7 +1250,8 @@ function CustomerDetails({
 
   return (
     <div>
-      <h6 className="text-center md:ml-[-40px]">Donor Details</h6>
+      <h6 className="text-center md:ml-[-40px] font-semibold">Donor Details</h6>
+      <p className='text-xs text-center md:ml-[-40px]'>Supporters will fill this form before making the final payment</p>
       <div
         className="
           grid grid-cols-1 gap-5 sm:grid-cols-1 md:grid-cols-10
@@ -1596,7 +1598,7 @@ function ReviewPage({ formData }) {
 
   return (
     <div className="container mx-auto">
-      <h6 className="text-center">Review & Create</h6>
+      <h6 className="text-center font-semibold">Review & Create</h6>
 
       {/* Flex Container for three columns */}
       <div className="flex flex-col md:flex-row gap-12 justify-center" style={{ marginTop: '60px', paddingLeft: '80px', paddingRight: '80px' }}>
