@@ -4,7 +4,6 @@ import Minus from '../../../assets/img/Minus.png';
 import Delete from '../../../assets/img/Delete.svg';
 
 function QuickPay() {
-  // Restructured initial state
   const [formData, setFormData] = useState({
     // Button Details
     buttonDetails: {
@@ -26,15 +25,11 @@ function QuickPay() {
       verticalPadding: 5,
       paddingSize: 10
     },
-
-    // Amount Details
+    // Amount Details without default values
     amountDetails: {
-      fields: [
-        { label: 'SUPPORT FOR CAUSE 1', amount: '500' }
-      ],
-      additionalDetails: ''
+      label: '',
+      amount: ''
     },
-
     // Customer Details
     customerDetails: {
       emailField: {
@@ -55,7 +50,6 @@ function QuickPay() {
 
   const [currentStep, setCurrentStep] = useState(1);
 
-  // Step titles
   const steps = [
     'Button Details',
     'Amount Details',
@@ -63,8 +57,7 @@ function QuickPay() {
     'Review and Create'
   ];
 
-  // For updating a simple field inside one of the nested objects, e.g.
-  // onFormChange('buttonDetails', 'companyName', 'New Name')
+  // Update any nested field in a section
   const handleFormChange = (section, key, value) => {
     setFormData((prevData) => ({
       ...prevData,
@@ -75,18 +68,7 @@ function QuickPay() {
     }));
   };
 
-  // For updating the entire fields array in amountDetails
-  const handleAmountFieldsChange = (newFields) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      amountDetails: {
-        ...prevData.amountDetails,
-        fields: newFields
-      }
-    }));
-  };
-
-  // For updating the additionalFields array in customerDetails
+  // Update the additionalFields array in customerDetails
   const handleCustomerAdditionalFieldsChange = (newFields) => {
     setFormData((prevData) => ({
       ...prevData,
@@ -102,7 +84,7 @@ function QuickPay() {
       console.log('Form data ::', formData);
       setCurrentStep(currentStep + 1);
     } else {
-      alert('Quick-Pay Widget Cteated Successfully!');
+      alert('Quick-Pay Widget Created Successfully!');
     }
   };
 
@@ -126,7 +108,6 @@ function QuickPay() {
           <AmountDetails
             amountData={formData.amountDetails}
             onFormChange={handleFormChange}
-            onFieldsChange={handleAmountFieldsChange}
           />
         );
       case 3:
@@ -138,11 +119,7 @@ function QuickPay() {
           />
         );
       case 4:
-        return (
-          <ReviewPage
-            formData={formData}
-          />
-        );
+        return <ReviewPage formData={formData} />;
       default:
         return (
           <ButtonDetails
@@ -163,29 +140,18 @@ function QuickPay() {
       <div className="flex flex-col md:ml-[195px]">
         <div className="flex justify-between items-between w-full">
           {steps.map((step, index) => (
-            <div
-              key={index}
-              className="flex items-center text-center flex-1"
-            >
+            <div key={index} className="flex items-center text-center flex-1">
               <div
                 className={`
                   rounded-full w-3 h-3 flex items-center justify-center text-white text-sm 
-                  ${currentStep === index + 1
-                    ? 'bg-blue-500'
-                    : index + 1 < currentStep
-                      ? 'bg-blue-500'
-                      : 'bg-gray-200'
-                  }
+                  ${currentStep === index + 1 ? 'bg-blue-500' : index + 1 < currentStep ? 'bg-blue-500' : 'bg-gray-200'}
                 `}
               />
               {index !== steps.length - 1 && (
                 <div
                   className={`
                     flex-1 h-0.5 mx-0
-                    ${index + 1 < currentStep
-                      ? 'bg-blue-500'
-                      : 'bg-gray-300'
-                    }
+                    ${index + 1 < currentStep ? 'bg-blue-500' : 'bg-gray-300'}
                   `}
                 />
               )}
@@ -199,10 +165,7 @@ function QuickPay() {
               key={index}
               className={`
                 text-xs 
-                ${currentStep === index + 1
-                  ? 'font-semibold text-blue-500'
-                  : 'text-gray-500'
-                }
+                ${currentStep === index + 1 ? 'font-semibold text-blue-500' : 'text-gray-500'}
               `}
               style={{ width: '25%' }}
             >
@@ -220,11 +183,7 @@ function QuickPay() {
             type="button"
             onClick={prevStep}
             disabled={currentStep === 1}
-            className="
-              px-8 py-1 border border-gray-300 rounded-md shadow-sm
-              text-sm font-medium text-gray-700 bg-white
-              hover:bg-gray-50 focus:outline-none mr-2
-            "
+            className="px-8 py-1 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none mr-2"
           >
             Back
           </button>
@@ -233,10 +192,7 @@ function QuickPay() {
             onClick={nextStep}
             className={`
               px-8 py-1 rounded-md text-white
-              ${currentStep === steps.length
-                ? 'bg-blue-500 hover:bg-blue-600'
-                : 'bg-blue-500 hover:bg-blue-600'
-              }
+              ${currentStep === steps.length ? 'bg-blue-500 hover:bg-blue-600' : 'bg-blue-500 hover:bg-blue-600'}
             `}
           >
             {currentStep === steps.length ? 'Create Button' : 'Next'}
@@ -245,18 +201,14 @@ function QuickPay() {
       </div>
 
       {/* Step Content */}
-      <div className="md:mt-[-32px]">
-        {renderStep()}
-      </div>
+      <div className="md:mt-[-32px]">{renderStep()}</div>
     </div>
   );
 }
 
-// --------------------- BUTTON DETAILS STEP ---------------------
 function ButtonDetails({ buttonData, onFormChange }) {
-  const [logoUploadEnabled, setLogoUploadEnabled] = React.useState(true);
+  const [logoUploadEnabled, setLogoUploadEnabled] = useState(true);
 
-  // Helper to increment/decrement text size
   const increaseTextSize = () => {
     const newSize = Math.min(buttonData.textSize + 8, 28);
     onFormChange('buttonDetails', 'textSize', newSize);
@@ -267,24 +219,18 @@ function ButtonDetails({ buttonData, onFormChange }) {
     onFormChange('buttonDetails', 'textSize', newSize);
   };
 
-  // Generic helper to adjust numeric properties
   const adjustSize = (key, delta, min, max) => {
-    const newValue = Math.max(
-      Math.min(buttonData[key] + delta, max),
-      min
-    );
+    const newValue = Math.max(Math.min(buttonData[key] + delta, max), min);
     onFormChange('buttonDetails', key, newValue);
   };
 
   return (
     <>
-      <h6 className="text-center md: ml-[-40px] font-semibold">Create Your Quick-Pay Button</h6>
-
+      <h6 className="text-center md:ml-[-40px] font-semibold">
+        Create Your Quick-Pay Button
+      </h6>
       <div
-        className="
-          grid grid-cols-1 gap-0 sm:grid-cols-1 md:grid-cols-10
-          lg:grid-cols-10 xl:grid-cols-10 2xl:grid-cols-10
-        "
+        className="grid grid-cols-1 gap-0 sm:grid-cols-1 md:grid-cols-10 lg:grid-cols-10 xl:grid-cols-10 2xl:grid-cols-10"
         style={{ marginTop: '23px' }}
       >
         {/* Left Form Section */}
@@ -292,16 +238,9 @@ function ButtonDetails({ buttonData, onFormChange }) {
           <p className="mb-2 md:mt-[-10px] text-slate-900 font-semibold">
             Name and Logo
           </p>
-
           <form className="space-y-3 md:mr-5">
             {/* 1st row */}
-            <div
-              className="
-                grid grid-cols-1 gap-6 mb-0 sm:grid-cols-1 md:grid-cols-2
-                lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2
-              "
-            >
-              {/* Company Name */}
+            <div className="grid grid-cols-1 gap-6 mb-0 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2">
               <div>
                 <label className="block text-xs font-medium text-gray-700">
                   Company name
@@ -312,16 +251,10 @@ function ButtonDetails({ buttonData, onFormChange }) {
                   onChange={(e) =>
                     onFormChange('buttonDetails', 'companyName', e.target.value)
                   }
-                  className="
-                    mt-1 block w-full px-3 py-2 border border-gray-300
-                    rounded-md shadow-sm focus:outline-none
-                    focus:ring-indigo-500 focus:border-indigo-500 sm:text-xs
-                  "
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-xs"
                   placeholder="company name"
                 />
               </div>
-
-              {/* Logo */}
               <div className="flex items-center gap-1">
                 <div className="flex items-center gap-2">
                   <label className="block text-xs font-medium text-gray-700">
@@ -379,12 +312,7 @@ function ButtonDetails({ buttonData, onFormChange }) {
             </div>
 
             {/* 2nd row: Button Title & Label */}
-            <div
-              className="
-                grid grid-cols-1 gap-6 mb-0 sm:grid-cols-1 md:grid-cols-2
-                lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2
-              "
-            >
+            <div className="grid grid-cols-1 gap-6 mb-0 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2">
               <div>
                 <label className="block text-xs font-medium text-gray-700">
                   Button Title
@@ -395,11 +323,7 @@ function ButtonDetails({ buttonData, onFormChange }) {
                   onChange={(e) =>
                     onFormChange('buttonDetails', 'buttonTitle', e.target.value)
                   }
-                  className="
-                    mt-1 block w-full px-3 py-2 border border-gray-300
-                    rounded-md shadow-sm focus:outline-none
-                    focus:ring-indigo-500 focus:border-indigo-500 sm:text-xs
-                  "
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-xs"
                   placeholder="Enter button title"
                 />
               </div>
@@ -413,23 +337,14 @@ function ButtonDetails({ buttonData, onFormChange }) {
                   onChange={(e) =>
                     onFormChange('buttonDetails', 'buttonLabel', e.target.value)
                   }
-                  className="
-                    mt-1 block w-full px-3 py-2 border border-gray-300
-                    rounded-md shadow-sm focus:outline-none
-                    focus:ring-indigo-500 focus:border-indigo-500 sm:text-xs
-                  "
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-xs"
                   placeholder="Button label"
                 />
               </div>
             </div>
 
             {/* 3rd row: Font Style */}
-            <div
-              className="
-                grid grid-cols-1 gap-6 mb-0 sm:grid-cols-1 md:grid-cols-1
-                lg:grid-cols-1 xl:grid-cols-1 2xl:grid-cols-1
-              "
-            >
+            <div className="grid grid-cols-1 gap-6 mb-0 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-1 2xl:grid-cols-1">
               <div>
                 <label className="block text-xs font-medium text-gray-700">
                   Font Style
@@ -439,11 +354,7 @@ function ButtonDetails({ buttonData, onFormChange }) {
                   onChange={(e) =>
                     onFormChange('buttonDetails', 'fontStyle', e.target.value)
                   }
-                  className="
-                    mt-1 block w-full px-3 py-2 border border-gray-300
-                    rounded-md shadow-sm focus:outline-none
-                    focus:ring-indigo-500 focus:border-indigo-500 sm:text-xs
-                  "
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-xs"
                 >
                   <option value="sans-serif">Sans-serif</option>
                   <option value="cursive">Cursive</option>
@@ -455,20 +366,8 @@ function ButtonDetails({ buttonData, onFormChange }) {
             </div>
 
             {/* 4th row: Bold, Italic, Shadow, Text Size, Text Color */}
-            <div
-              className="
-                grid grid-cols-1 gap-2 mb-0 sm:grid-cols-1 md:grid-cols-2
-                lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2
-              "
-            >
-              {/* Left side: bold, italic, textShadow */}
-              <div
-                className="
-                  grid grid-cols-1 gap-2 mb-0 sm:grid-cols-1 md:grid-cols-3
-                  lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3
-                "
-              >
-                {/* Bold */}
+            <div className="grid grid-cols-1 gap-2 mb-0 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2">
+              <div className="grid grid-cols-1 gap-2 mb-0 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3">
                 <div className="flex items-center gap-2 mt-1">
                   <label className="block text-xs font-medium text-gray-700">
                     Bold
@@ -483,7 +382,6 @@ function ButtonDetails({ buttonData, onFormChange }) {
                     style={{ width: '18px', height: '18px', cursor: 'pointer' }}
                   />
                 </div>
-                {/* Italic */}
                 <div className="flex items-center gap-2 mt-1">
                   <label className="block text-xs font-medium text-gray-700">
                     Italic
@@ -498,7 +396,6 @@ function ButtonDetails({ buttonData, onFormChange }) {
                     style={{ width: '18px', height: '18px', cursor: 'pointer' }}
                   />
                 </div>
-                {/* Text Shadow */}
                 <div className="flex items-center gap-2 mt-1 md:ml-[-0px]">
                   <label className="block text-xs font-medium text-gray-700">
                     Shadow
@@ -514,15 +411,7 @@ function ButtonDetails({ buttonData, onFormChange }) {
                   />
                 </div>
               </div>
-
-              {/* Right side: textSize, textColor */}
-              <div
-                className="
-                  grid grid-cols-1 gap-2 mb-0 sm:grid-cols-1 md:grid-cols-2
-                  lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2
-                "
-              >
-                {/* Text Size Stepper */}
+              <div className="grid grid-cols-1 gap-2 mb-0 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2">
                 <div>
                   <div className="flex items-center gap-1 mt-2 md:ml[8px]">
                     <label className="block text-xs font-medium text-gray-700">
@@ -578,11 +467,7 @@ function ButtonDetails({ buttonData, onFormChange }) {
                     </div>
                   </div>
                 </div>
-                {/* Text Color Picker */}
-                <div
-                  className="flex items-center gap-2"
-                  style={{ marginLeft: '44px' }}
-                >
+                <div className="flex items-center gap-2" style={{ marginLeft: '44px' }}>
                   <label className="block text-xs font-medium text-gray-700">
                     Text Color
                   </label>
@@ -592,29 +477,18 @@ function ButtonDetails({ buttonData, onFormChange }) {
                     onChange={(e) =>
                       onFormChange('buttonDetails', 'textColor', e.target.value)
                     }
-                    className="
-                      mt-1 block w-6 h-7 border border-gray-300
-                      rounded-md shadow-sm focus:outline-none
-                      focus:ring-indigo-500 focus:border-indigo-500
-                    "
+                    className="mt-1 block w-6 h-7 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                   />
                 </div>
               </div>
             </div>
-
             <p className="mb-2 md:mt-[-10px] text-slate-900 font-semibold">
               Button Size
             </p>
-
-            {/* 5th row: Horizontal & Vertical Padding */}
             <div
-              className="
-                grid grid-cols-1 gap-6 mb-0 sm:grid-cols-1 md:grid-cols-2
-                lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2
-              "
+              className="grid grid-cols-1 gap-6 mb-0 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2"
               style={{ marginTop: '5px' }}
             >
-              {/* Horizontal Padding */}
               <div className="flex items-center gap-2">
                 <label className="block text-xs font-medium text-gray-700">
                   Horizontal Padding
@@ -622,9 +496,7 @@ function ButtonDetails({ buttonData, onFormChange }) {
                 <div className="flex items-center space-x-0">
                   <button
                     type="button"
-                    onClick={() =>
-                      adjustSize('horizontalPadding', -5, 0, 100)
-                    }
+                    onClick={() => adjustSize('horizontalPadding', -5, 0, 100)}
                     className="px-2 rounded"
                     style={{ backgroundColor: '#E8F0FF' }}
                   >
@@ -653,9 +525,7 @@ function ButtonDetails({ buttonData, onFormChange }) {
                   </span>
                   <button
                     type="button"
-                    onClick={() =>
-                      adjustSize('horizontalPadding', 5, 0, 100)
-                    }
+                    onClick={() => adjustSize('horizontalPadding', 5, 0, 100)}
                     className="px-2 rounded"
                     style={{ backgroundColor: '#E8F0FF' }}
                   >
@@ -672,8 +542,6 @@ function ButtonDetails({ buttonData, onFormChange }) {
                   </button>
                 </div>
               </div>
-
-              {/* Vertical Padding */}
               <div className="flex items-center gap-2 md:ml-[-80px]">
                 <label className="block text-xs font-medium text-gray-700">
                   Vertical Padding
@@ -681,9 +549,7 @@ function ButtonDetails({ buttonData, onFormChange }) {
                 <div className="flex items-center space-x-0">
                   <button
                     type="button"
-                    onClick={() =>
-                      adjustSize('verticalPadding', -5, 0, 100)
-                    }
+                    onClick={() => adjustSize('verticalPadding', -5, 0, 100)}
                     className="px-2 rounded"
                     style={{ backgroundColor: '#E8F0FF' }}
                   >
@@ -712,9 +578,7 @@ function ButtonDetails({ buttonData, onFormChange }) {
                   </span>
                   <button
                     type="button"
-                    onClick={() =>
-                      adjustSize('verticalPadding', 5, 0, 100)
-                    }
+                    onClick={() => adjustSize('verticalPadding', 5, 0, 100)}
                     className="px-2 rounded"
                     style={{ backgroundColor: '#E8F0FF' }}
                   >
@@ -732,16 +596,10 @@ function ButtonDetails({ buttonData, onFormChange }) {
                 </div>
               </div>
             </div>
-
-            {/* 6th row: Corner Radius, Button Color, Border, Button Shadow */}
             <div
-              className="
-                grid grid-cols-1 gap-2 mb-0 sm:grid-cols-1 md:grid-cols-2
-                lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2
-              "
+              className="grid grid-cols-1 gap-2 mb-0 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2"
               style={{ marginTop: '15px' }}
             >
-              {/* Corner Radius */}
               <div className="flex items-center gap-2">
                 <label className="block text-xs font-medium text-gray-700">
                   Corner Radius
@@ -749,9 +607,7 @@ function ButtonDetails({ buttonData, onFormChange }) {
                 <div className="flex items-center space-x-0">
                   <button
                     type="button"
-                    onClick={() =>
-                      adjustSize('cornerRadius', -1, 0, 100)
-                    }
+                    onClick={() => adjustSize('cornerRadius', -1, 0, 100)}
                     className="px-2 rounded"
                     style={{ backgroundColor: '#E8F0FF' }}
                   >
@@ -780,9 +636,7 @@ function ButtonDetails({ buttonData, onFormChange }) {
                   </span>
                   <button
                     type="button"
-                    onClick={() =>
-                      adjustSize('cornerRadius', 1, 0, 100)
-                    }
+                    onClick={() => adjustSize('cornerRadius', 1, 0, 100)}
                     className="px-2 rounded"
                     style={{ backgroundColor: '#E8F0FF' }}
                   >
@@ -799,15 +653,7 @@ function ButtonDetails({ buttonData, onFormChange }) {
                   </button>
                 </div>
               </div>
-
-              {/* Button Color, Border, Shadow */}
-              <div
-                className="
-                  grid grid-cols-1 gap-2 mb-0 sm:grid-cols-1 md:grid-cols-3
-                  lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3
-                "
-              >
-                {/* Button Color Picker */}
+              <div className="grid grid-cols-1 gap-2 mb-0 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3">
                 <div className="flex items-center gap-2 md:ml-[-100px]">
                   <label className="block text-xs font-medium text-gray-700">
                     Button Color
@@ -818,15 +664,9 @@ function ButtonDetails({ buttonData, onFormChange }) {
                     onChange={(e) =>
                       onFormChange('buttonDetails', 'buttonColor', e.target.value)
                     }
-                    className="
-                      mt-1 block w-6 h-7 border border-gray-300
-                      rounded-md shadow-sm focus:outline-none
-                      focus:ring-indigo-500 focus:border-indigo-500
-                    "
+                    className="mt-1 block w-6 h-7 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                   />
                 </div>
-
-                {/* Border Checkbox */}
                 <div className="flex items-center gap-2 md:ml-[-50px]">
                   <label className="block text-xs font-medium text-gray-700">
                     Border
@@ -841,8 +681,6 @@ function ButtonDetails({ buttonData, onFormChange }) {
                     style={{ width: '18px', height: '18px', cursor: 'pointer' }}
                   />
                 </div>
-
-                {/* Button Shadow Checkbox */}
                 <div className="flex items-center gap-2 md:ml-[-50px]">
                   <label className="block text-xs font-medium text-gray-700">
                     Button Shadow
@@ -864,10 +702,7 @@ function ButtonDetails({ buttonData, onFormChange }) {
 
         {/* Button Preview */}
         <div
-          className="
-            bg-sky-50 rounded-lg md:col-span-4 lg:col-span-4
-            xl:col-span-4 2xl:col-span-4 text-center
-          "
+          className="bg-sky-50 rounded-lg md:col-span-4 lg:col-span-4 xl:col-span-4 2xl:col-span-4 text-center"
           style={{
             backgroundColor: '#E8F0FF',
             paddingLeft: '80px',
@@ -876,7 +711,7 @@ function ButtonDetails({ buttonData, onFormChange }) {
             paddingBottom: '30px'
           }}
         >
-          <p className='font-semibold'>Button Preview</p>
+          <p className="font-semibold">Button Preview</p>
           <div className="flex justify-center items-center py-5">
             <button
               className={`
@@ -903,11 +738,7 @@ function ButtonDetails({ buttonData, onFormChange }) {
               }}
             >
               {buttonData.logo && (
-                <img
-                  src={buttonData.logo}
-                  alt="Logo"
-                  className="h-10 mr-2"
-                />
+                <img src={buttonData.logo} alt="Logo" className="h-10 mr-2" />
               )}
               <span>
                 {buttonData.buttonLabel && (
@@ -923,112 +754,62 @@ function ButtonDetails({ buttonData, onFormChange }) {
   );
 }
 
-// --------------------- AMOUNT DETAILS STEP ---------------------
 function AmountDetails({ amountData, onFormChange }) {
-  const [showTextarea, setShowTextarea] = useState(false);
-
-  // Update label
   const handleLabelChange = (e) => {
     onFormChange('amountDetails', 'label', e.target.value);
   };
 
-  // Update amount
   const handleAmountChange = (e) => {
     onFormChange('amountDetails', 'amount', e.target.value);
   };
 
-  // Toggle showing/hiding description textarea
-  const toggleTextarea = () => {
-    setShowTextarea(!showTextarea);
-  };
-
   return (
     <div>
-      <h6 className="text-center md:ml-[-40px] font-semibold">Customise Amount</h6>
-      <p className='text-center text-xs md:ml-[-40px]'>Customise your button as per your requirement you can give it customer specific amount or fixed amount</p>
+      <h6 className="text-center md:ml-[-40px] font-semibold">
+        Customise Amount
+      </h6>
+      <p className="text-center text-xs md:ml-[-40px]">
+        Customise your button as per your requirement. You can give it a
+        customer-specific or fixed amount.
+      </p>
       <div
-        className="
-          grid grid-cols-1 gap-5 sm:grid-cols-1 md:grid-cols-10
-          lg:grid-cols-10 xl:grid-cols-10 2xl:grid-cols-10
-        "
+        className="grid grid-cols-1 gap-5 sm:grid-cols-1 md:grid-cols-10 lg:grid-cols-10 xl:grid-cols-10 2xl:grid-cols-10"
         style={{ marginTop: '23px' }}
       >
-        {/* Left: Single Field + Description */}
+        {/* Left: Single Field */}
         <div className="md:col-span-6 lg:col-span-6 xl:col-span-6 2xl:col-span-6">
           <div className="grid grid-cols-1 gap-2">
-            <div className="flex flex-col gap-2">
-              <div className="flex gap-4 items-center">
-                {/* Field Label */}
-                <div className="flex-1">
-                  <label className="block text-xs font-medium text-gray-700">
-                    Field Label
-                  </label>
-                  <input
-                    type="text"
-                    value={amountData.label || ''}
-                    onChange={handleLabelChange}
-                    className="
-                      mt-1 block w-full px-3 py-2 border border-gray-300
-                      rounded-md shadow-sm text-xs focus:outline-none
-                      focus:ring-indigo-500 focus:border-indigo-500
-                    "
-                    placeholder="Enter label (e.g. Donation)"
-                  />
-                </div>
-
-                {/* Amount */}
-                <div className="flex-1">
-                  <label className="block text-xs font-medium text-gray-700">
-                    Field Type (amount)
-                  </label>
-                  <input
-                    type="number"
-                    value={amountData.amount || ''}
-                    onChange={handleAmountChange}
-                    className="
-                      mt-1 block w-full px-3 py-2 border border-gray-300
-                      rounded-md shadow-sm text-xs focus:outline-none
-                      focus:ring-indigo-500 focus:border-indigo-500
-                    "
-                    placeholder="Enter amount"
-                  />
-                </div>
+            <div className="flex gap-4 items-center">
+              <div className="flex-1">
+                <label className="block text-xs font-medium text-gray-700">
+                  Field Label
+                </label>
+                <input
+                  type="text"
+                  value={amountData.label}
+                  onChange={handleLabelChange}
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                  placeholder="Enter label (e.g. Donation)"
+                />
               </div>
-
-              {/* Description toggle */}
-              <div
-                onClick={toggleTextarea}
-                className="text-blue-500 cursor-pointer underline text-xs"
-              >
-                {showTextarea ? '- Remove helper text' : '+ Add helper text'}
+              <div className="flex-1">
+                <label className="block text-xs font-medium text-gray-700">
+                  Amount
+                </label>
+                <input
+                  type="number"
+                  value={amountData.amount}
+                  onChange={handleAmountChange}
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                  placeholder="Enter amount"
+                />
               </div>
-              {showTextarea && (
-                <div className="mt-0">
-                  <textarea
-                    className="
-                      mt-1 block w-full px-3 py-2 border border-gray-300
-                      rounded-md shadow-sm focus:outline-none
-                      focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm
-                    "
-                    rows={2}
-                    placeholder="Enter additional details about the payment"
-                    value={amountData.additionalDetails || ''}
-                    onChange={(e) =>
-                      onFormChange('amountDetails', 'additionalDetails', e.target.value)
-                    }
-                  />
-                </div>
-              )}
             </div>
           </div>
         </div>
-
         {/* Right: Preview Section */}
         <div
-          className="
-            bg-sky-50 rounded-lg md:col-span-4 lg:col-span-4
-            xl:col-span-4 2xl:col-span-4
-          "
+          className="bg-sky-50 rounded-lg md:col-span-4 lg:col-span-4 xl:col-span-4 2xl:col-span-4"
           style={{
             backgroundColor: '#E8F0FF',
             paddingLeft: '80px',
@@ -1042,10 +823,7 @@ function AmountDetails({ amountData, onFormChange }) {
           </div>
           {/* Header */}
           <div
-            className="
-              py-3 border-b text-sm font-semibold text-white
-              text-center bg-blue-500 rounded-lg mt-1
-            "
+            className="py-3 border-b text-sm font-semibold text-white text-center bg-blue-500 rounded-lg mt-1"
           >
             <p>The Animal Foundation</p>
           </div>
@@ -1065,27 +843,20 @@ function AmountDetails({ amountData, onFormChange }) {
                 </label>
                 <input
                   type="text"
-                  className="
-                    w-full px-3 py-2 border rounded
-                    text-gray-900 text-xs font-semibold
-                  "
+                  className="w-full px-3 py-2 border rounded text-gray-900 text-xs font-semibold"
                   value={amountData.amount}
                   readOnly
                 />
               </div>
             ) : (
               <p className="text-center text-sm text-gray-500">
-                No amount type specified
+                No amount specified
               </p>
             )}
             <div style={{ marginTop: '140px' }}></div>
           </div>
-
-
           {/* Footer */}
-          <div
-            className="flex justify-between px-4 py-3 bg-white shadow-lg border-t"
-          >
+          <div className="flex justify-between px-4 py-3 bg-white shadow-lg border-t">
             <span className="text-gray-900 font-bold">
               ₹ {parseInt(amountData.amount) || 0}
             </span>
@@ -1102,14 +873,7 @@ function AmountDetails({ amountData, onFormChange }) {
   );
 }
 
-
-// --------------------- CUSTOMER (DONOR) DETAILS STEP ---------------------
-function CustomerDetails({
-  customerData,
-  onFormChange,
-  onAdditionalFieldsChange
-}) {
-  // Add a new extra field (up to 3 total)
+function CustomerDetails({ customerData, onFormChange, onAdditionalFieldsChange }) {
   const handleAddField = () => {
     const currentFields = customerData.additionalFields || [];
     if (currentFields.length < 3) {
@@ -1120,7 +884,6 @@ function CustomerDetails({
     }
   };
 
-  // Remove a specific extra field
   const handleRemoveField = (index) => {
     const currentFields = customerData.additionalFields || [];
     const updatedFields = [...currentFields];
@@ -1128,7 +891,6 @@ function CustomerDetails({
     onAdditionalFieldsChange(updatedFields);
   };
 
-  // Update a specific property in an additional field
   const handleFieldChange = (index, key, value) => {
     const updatedFields = [...(customerData.additionalFields || [])];
     updatedFields[index] = {
@@ -1138,7 +900,6 @@ function CustomerDetails({
     onAdditionalFieldsChange(updatedFields);
   };
 
-  // Helper to update any key of a main field object (emailField, phoneField, donorNameField)
   const handleCoreFieldUpdate = (fieldName, updates) => {
     onFormChange('customerDetails', fieldName, {
       ...customerData[fieldName],
@@ -1149,12 +910,11 @@ function CustomerDetails({
   return (
     <div>
       <h6 className="text-center md:ml-[-40px] font-semibold">Payer Details</h6>
-      <p className='text-center text-xs md:ml-[-40px]'>Supporters will fill this form before making the final payment</p>
+      <p className="text-center text-xs md:ml-[-40px]">
+        Supporters will fill this form before making the final payment
+      </p>
       <div
-        className="
-          grid grid-cols-1 gap-5 sm:grid-cols-1 md:grid-cols-10
-          lg:grid-cols-10 xl:grid-cols-10 2xl:grid-cols-10
-        "
+        className="grid grid-cols-1 gap-5 sm:grid-cols-1 md:grid-cols-10 lg:grid-cols-10 xl:grid-cols-10 2xl:grid-cols-10"
         style={{ marginTop: '23px' }}
       >
         {/* Left Section: Configure Fields */}
@@ -1172,15 +932,9 @@ function CustomerDetails({
                     placeholder="e.g., 'email'"
                     value={customerData.emailField.type}
                     onChange={(e) =>
-                      handleCoreFieldUpdate('emailField', {
-                        type: e.target.value
-                      })
+                      handleCoreFieldUpdate('emailField', { type: e.target.value })
                     }
-                    className="
-                      mt-1 block w-full px-3 py-2 border border-gray-300
-                      rounded-md shadow-sm text-xs focus:outline-none
-                      focus:ring-indigo-500 focus:border-indigo-500
-                    "
+                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                   />
                 </div>
                 <div className="flex-1">
@@ -1192,20 +946,13 @@ function CustomerDetails({
                     placeholder="e.g., 'Email'"
                     value={customerData.emailField.label}
                     onChange={(e) =>
-                      handleCoreFieldUpdate('emailField', {
-                        label: e.target.value
-                      })
+                      handleCoreFieldUpdate('emailField', { label: e.target.value })
                     }
-                    className="
-                      mt-1 block w-full px-3 py-2 border border-gray-300
-                      rounded-md shadow-sm text-xs focus:outline-none
-                      focus:ring-indigo-500 focus:border-indigo-500
-                    "
+                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                   />
                 </div>
               </div>
             </div>
-
             {/* Phone Field */}
             <div className="flex flex-col gap-2">
               <div className="flex gap-4 items-center">
@@ -1218,15 +965,9 @@ function CustomerDetails({
                     placeholder="e.g., 'tel'"
                     value={customerData.phoneField.type}
                     onChange={(e) =>
-                      handleCoreFieldUpdate('phoneField', {
-                        type: e.target.value
-                      })
+                      handleCoreFieldUpdate('phoneField', { type: e.target.value })
                     }
-                    className="
-                      mt-1 block w-full px-3 py-2 border border-gray-300
-                      rounded-md shadow-sm text-xs focus:outline-none
-                      focus:ring-indigo-500 focus:border-indigo-500
-                    "
+                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                   />
                 </div>
                 <div className="flex-1">
@@ -1238,20 +979,13 @@ function CustomerDetails({
                     placeholder="e.g., 'Phone'"
                     value={customerData.phoneField.label}
                     onChange={(e) =>
-                      handleCoreFieldUpdate('phoneField', {
-                        label: e.target.value
-                      })
+                      handleCoreFieldUpdate('phoneField', { label: e.target.value })
                     }
-                    className="
-                      mt-1 block w-full px-3 py-2 border border-gray-300
-                      rounded-md shadow-sm text-xs focus:outline-none
-                      focus:ring-indigo-500 focus:border-indigo-500
-                    "
+                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                   />
                 </div>
               </div>
             </div>
-
             {/* Donor Name Field */}
             <div className="flex flex-col gap-2">
               <div className="flex gap-4 items-center">
@@ -1264,15 +998,9 @@ function CustomerDetails({
                     placeholder="e.g., 'text'"
                     value={customerData.donorNameField.type}
                     onChange={(e) =>
-                      handleCoreFieldUpdate('donorNameField', {
-                        type: e.target.value
-                      })
+                      handleCoreFieldUpdate('donorNameField', { type: e.target.value })
                     }
-                    className="
-                      mt-1 block w-full px-3 py-2 border border-gray-300
-                      rounded-md shadow-sm text-xs focus:outline-none
-                      focus:ring-indigo-500 focus:border-indigo-500
-                    "
+                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                   />
                 </div>
                 <div className="flex-1">
@@ -1284,27 +1012,18 @@ function CustomerDetails({
                     placeholder="e.g., 'Donor Name'"
                     value={customerData.donorNameField.label}
                     onChange={(e) =>
-                      handleCoreFieldUpdate('donorNameField', {
-                        label: e.target.value
-                      })
+                      handleCoreFieldUpdate('donorNameField', { label: e.target.value })
                     }
-                    className="
-                      mt-1 block w-full px-3 py-2 border border-gray-300
-                      rounded-md shadow-sm text-xs focus:outline-none
-                      focus:ring-indigo-500 focus:border-indigo-500
-                    "
+                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                   />
                 </div>
               </div>
             </div>
-
             {/* Additional Fields (Up to 3) */}
             {customerData.additionalFields?.map((field, index) => (
               <div key={index} className="grid grid-cols-1 gap-2 border rounded-md p-2">
-                {/* Field Type */}
                 <div className="flex flex-col gap-2">
                   <div className="flex gap-4 items-center">
-                    {/* Field Type Input */}
                     <div className="flex-1">
                       <label className="block text-xs font-medium text-gray-700">
                         Field Type
@@ -1319,7 +1038,6 @@ function CustomerDetails({
                         className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                       />
                     </div>
-                    {/* Field Label Input */}
                     <div className="flex-1">
                       <label className="block text-xs font-medium text-gray-700">
                         Field Label
@@ -1343,10 +1061,8 @@ function CustomerDetails({
                     />
                   </div>
                 </div>
-
                 <div className="flex flex-col gap-2">
                   <div className="flex gap-4 items-center">
-                    {/* Field Reason */}
                     <div className="flex-1">
                       <textarea
                         placeholder="Add helper text"
@@ -1358,7 +1074,6 @@ function CustomerDetails({
                         className="mt-1 block px-3 py-0 border border-gray-300 shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                       />
                     </div>
-                    {/* Mandatory Checkbox */}
                     <div className="flex-1 ml-[-52px]">
                       <div className="flex items-center justify-between mt-0">
                         <div className="flex items-center gap-2">
@@ -1385,8 +1100,6 @@ function CustomerDetails({
                 </div>
               </div>
             ))}
-
-            {/* Button to Add More Fields */}
             {(customerData.additionalFields?.length || 0) < 3 && (
               <div
                 className="text-blue-500 cursor-pointer underline text-xs"
@@ -1397,13 +1110,9 @@ function CustomerDetails({
             )}
           </div>
         </div>
-
         {/* Right Section: Preview */}
         <div
-          className="
-            bg-sky-50 rounded-lg md:col-span-4 lg:col-span-4
-            xl:col-span-4 2xl:col-span-4
-          "
+          className="bg-sky-50 rounded-lg md:col-span-4 lg:col-span-4 xl:col-span-4 2xl:col-span-4"
           style={{
             backgroundColor: '#E8F0FF',
             paddingLeft: '80px',
@@ -1415,17 +1124,12 @@ function CustomerDetails({
           <div>
             <p className="font-semibold text-center">Preview</p>
           </div>
-
           {/* Header */}
           <div
-            className="
-              py-3 border-b text-sm font-semibold text-white
-              text-center bg-blue-500 rounded-lg mt-1
-            "
+            className="py-3 border-b text-sm font-semibold text-white text-center bg-blue-500 rounded-lg mt-1"
           >
             <p>The Animal Foundation</p>
           </div>
-
           {/* Body */}
           <div
             className="py-5 overflow-y-auto bg-white"
@@ -1435,7 +1139,6 @@ function CustomerDetails({
               scrollbarColor: 'rgba(0, 0, 0, 0.3) transparent'
             }}
           >
-            {/* Email Preview */}
             <div className="px-4 py-2">
               <label className="block text-gray-700 text-xs font-medium mb-1">
                 {customerData.emailField.label}
@@ -1444,8 +1147,6 @@ function CustomerDetails({
                 {customerData.emailField.type} Field
               </div>
             </div>
-
-            {/* Phone Preview */}
             <div className="px-4 py-2">
               <label className="block text-gray-700 text-xs font-medium mb-1">
                 {customerData.phoneField.label}
@@ -1454,8 +1155,6 @@ function CustomerDetails({
                 {customerData.phoneField.type} Field
               </div>
             </div>
-
-            {/* Donor Name Preview */}
             <div className="px-4 py-2">
               <label className="block text-gray-700 text-xs font-medium mb-1">
                 {customerData.donorNameField.label}
@@ -1464,8 +1163,6 @@ function CustomerDetails({
                 {customerData.donorNameField.type} Field
               </div>
             </div>
-
-            {/* Additional Fields Preview */}
             {customerData.additionalFields?.map((field, index) => (
               <div key={index} className="px-4 py-2">
                 <label className="block text-gray-700 text-xs font-medium mb-1">
@@ -1478,7 +1175,6 @@ function CustomerDetails({
               </div>
             ))}
           </div>
-
           {/* Footer */}
           <div className="text-center text-md px-4 py-3 bg-blue-500 shadow-lg border-t text-white">
             Preceed to Pay
@@ -1489,18 +1185,18 @@ function CustomerDetails({
   );
 }
 
-// --------------------- REVIEW & CREATE STEP ---------------------
 function ReviewPage({ formData }) {
   const { buttonDetails, amountDetails, customerDetails } = formData;
-
   return (
     <div className="container mx-auto">
       <h6 className="text-center font-semibold">Review and Create</h6>
-      <p className='text-center text-xs'>Customers will see the button and forms as shown below</p>
-
-      {/* Flex Container for three columns */}
-      <div className="flex flex-col md:flex-row gap-12 justify-center" style={{ marginTop: '60px', paddingLeft: '80px', paddingRight: '80px' }}>
-
+      <p className="text-center text-xs">
+        Customers will see the button and forms as shown below
+      </p>
+      <div
+        className="flex flex-col md:flex-row gap-12 justify-center"
+        style={{ marginTop: '60px', paddingLeft: '80px', paddingRight: '80px' }}
+      >
         {/* Button Preview Section */}
         <div className="flex-1">
           <div className="flex justify-center">
@@ -1525,7 +1221,7 @@ function ReviewPage({ formData }) {
                 paddingLeft: `${buttonDetails.horizontalPadding}px`,
                 paddingRight: `${buttonDetails.horizontalPadding}px`,
                 paddingTop: `${buttonDetails.verticalPadding}px`,
-                paddingBottom: `${buttonDetails.verticalPadding}px`,
+                paddingBottom: `${buttonDetails.verticalPadding}px`
               }}
             >
               {buttonDetails.logo && (
@@ -1540,19 +1236,13 @@ function ReviewPage({ formData }) {
             </button>
           </div>
         </div>
-
         {/* Donation Amount Preview Section */}
         <div className="flex-1 shadow ml-[-40px]">
-          {/* Header */}
           <div
-            className="
-              py-3 border-b text-sm font-semibold text-white
-              text-center bg-blue-500 mt-0
-            "
+            className="py-3 border-b text-sm font-semibold text-white text-center bg-blue-500 mt-0"
           >
             <p>The Animal Foundation</p>
           </div>
-          {/* Body */}
           <div
             className="py-5 overflow-y-auto bg-white"
             style={{
@@ -1561,55 +1251,49 @@ function ReviewPage({ formData }) {
               scrollbarColor: 'rgba(0, 0, 0, 0.3) transparent'
             }}
           >
-            {amountDetails.fields
-              .filter((field) => field.label && field.amount)
-              .map((field, index) => (
-                <div key={index} className="px-4 py-2">
-                  <label className="block text-gray-700 text-xs font-medium mb-1">
-                    {field.label}
-                  </label>
-                  <input
-                    type="text"
-                    className="w-full px-3 py-2 border rounded text-gray-900 text-xs font-semibold"
-                    value={field.amount}
-                    readOnly
-                  />
-                </div>
-              ))}
+            {amountDetails.label && amountDetails.amount ? (
+              <div className="px-4 py-2">
+                <label className="block text-gray-700 text-xs font-medium mb-1">
+                  {amountDetails.label}
+                </label>
+                <input
+                  type="text"
+                  className="w-full px-3 py-2 border rounded text-gray-900 text-xs font-semibold"
+                  value={amountDetails.amount}
+                  readOnly
+                />
+              </div>
+            ) : (
+              <p className="text-center text-sm text-gray-500">
+                No amount specified
+              </p>
+            )}
             <div style={{ marginTop: '140px' }}></div>
           </div>
-          {/* Footer */}
           <div className="flex justify-between px-4 py-3 bg-white shadow-lg border-t mt-1">
             <span className="text-gray-900 font-bold">
-              ₹{' '}
-              {amountDetails.fields.reduce(
-                (total, field) => total + (parseInt(field.amount) || 0),
-                0
-              )}
+              ₹ {parseInt(amountDetails.amount) || 0}
             </span>
             <button className="bg-blue-500 text-white px-4 py-1 rounded">
               Next
             </button>
           </div>
         </div>
-
         {/* Customer Information Preview Section */}
         <div className="flex-1 shadow">
-          {/* Header */}
-          <div className="py-3 border-b text-sm font-semibold text-white text-center bg-blue-500 mt-0">
+          <div
+            className="py-3 border-b text-sm font-semibold text-white text-center bg-blue-500 mt-0"
+          >
             The Animal Foundation
           </div>
-
-          {/* Body */}
           <div
             className="py-5 overflow-y-auto bg-white"
             style={{
               maxHeight: '300px',
               scrollbarWidth: 'thin',
-              scrollbarColor: 'rgba(0, 0, 0, 0.3) transparent',
+              scrollbarColor: 'rgba(0, 0, 0, 0.3) transparent'
             }}
           >
-            {/* Email Preview */}
             <div className="px-4 py-2">
               <label className="block text-gray-700 text-xs font-medium mb-1">
                 {customerDetails.emailField.label}
@@ -1621,8 +1305,6 @@ function ReviewPage({ formData }) {
                 readOnly
               />
             </div>
-
-            {/* Phone Preview */}
             <div className="px-4 py-2">
               <label className="block text-gray-700 text-xs font-medium mb-1">
                 {customerDetails.phoneField.label}
@@ -1634,8 +1316,6 @@ function ReviewPage({ formData }) {
                 readOnly
               />
             </div>
-
-            {/* Donor Name Preview */}
             <div className="px-4 py-2">
               <label className="block text-gray-700 text-xs font-medium mb-1">
                 {customerDetails.donorNameField.label}
@@ -1647,8 +1327,6 @@ function ReviewPage({ formData }) {
                 readOnly
               />
             </div>
-
-            {/* Additional Fields Preview */}
             {customerDetails.additionalFields?.map((field, index) => (
               <div key={index} className="px-4 py-2">
                 <label className="block text-gray-700 text-xs font-medium mb-1">
@@ -1663,14 +1341,10 @@ function ReviewPage({ formData }) {
               </div>
             ))}
           </div>
-
-
-          {/* Footer */}
           <div className="text-center text-md px-4 py-3 bg-blue-500 shadow-lg border-t text-white mt-3">
-            Proceed to Pay
+            Preceed to Pay
           </div>
         </div>
-
       </div>
     </div>
   );
