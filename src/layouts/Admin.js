@@ -17,6 +17,8 @@ import Donation from "views/pages/donation/Donation";
 import PaymentForm from "views/pages/paymentform/PaymentForm";
 import QuickPay from "views/pages/quickpay/QuickPay";
 import Faq from "views/pages/faq/Faq";
+import CustomForm from "views/pages/customform/CustomForm";
+import Buynowbutton from "views/pages/buynowbutton/Buynowbutton";
 
 export default function Admin() {
   const location = useLocation();
@@ -35,8 +37,10 @@ export default function Admin() {
             <Route path="/admin/tables" exact component={Tables} />
             {/* Manually added */}
             <Route path="/admin/createwidget" exact component={CreateWidget} />
-            <Route path="/admin/createwidget/donation" component={Donation} />
             <Route path="/admin/createwidget/quickpay" component={QuickPay} />
+            <Route path="/admin/createwidget/donation" component={Donation} />
+            <Route path="/admin/createwidget/buynowbutton" exact component={Buynowbutton} />
+            <Route path='/admin/createwidget/customform' component={CustomForm} />
             <Route path="/admin/payment-form" exact component={PaymentForm} />
             <Route path="/admin/faq" exact component={Faq} />
 
