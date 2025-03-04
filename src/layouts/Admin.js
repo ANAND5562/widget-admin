@@ -19,6 +19,7 @@ import QuickPay from "views/pages/quickpay/QuickPay";
 import Faq from "views/pages/faq/Faq";
 import CustomForm from "views/pages/customform/CustomForm";
 import Buynowbutton from "views/pages/buynowbutton/Buynowbutton";
+import Parammapper from "views/pages/parammapper/Parammapper";
 
 export default function Admin() {
   const location = useLocation();
@@ -41,6 +42,7 @@ export default function Admin() {
             <Route path="/admin/createwidget/donation" component={Donation} />
             <Route path="/admin/createwidget/buynowbutton" exact component={Buynowbutton} />
             <Route path='/admin/createwidget/customform' component={CustomForm} />
+            <Route path="/admin/parammapper" exact component={Parammapper} />
             <Route path="/admin/payment-form" exact component={PaymentForm} />
             <Route path="/admin/faq" exact component={Faq} />
 
