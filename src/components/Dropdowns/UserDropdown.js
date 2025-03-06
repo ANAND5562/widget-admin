@@ -27,12 +27,15 @@ const UserDropdown = () => {
         }}
       >
         <div className="items-center flex">
-          <span className="w-12 h-12 text-sm text-white bg-blueGray-200 inline-flex items-center justify-center rounded-full">
+          {/* <span className="w-12 h-12 text-sm text-white bg-blueGray-200 inline-flex items-center justify-center rounded-full">
             <img
               alt="..."
               className="w-full rounded-full align-middle border-none shadow-lg"
               src={require("assets/img/team-1-800x800.jpg").default}
             />
+          </span> */}
+          <span className="w-12 h-12 text-2xl bg-blueGray-200 inline-flex items-center justify-center rounded-full">
+            A
           </span>
         </div>
       </a>
@@ -79,6 +82,15 @@ const UserDropdown = () => {
           onClick={(e) => e.preventDefault()}
         >
           Seprated link
+        </a>
+        <a
+          href="/"
+          className={
+            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+          }
+        // onClick={(e) => e.preventDefault()}
+        >
+          log Out
         </a>
       </div>
     </>
