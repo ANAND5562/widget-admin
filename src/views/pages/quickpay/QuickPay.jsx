@@ -767,6 +767,10 @@ function AmountDetails({ amountData, onFormChange }) {
     onFormChange('amountDetails', 'selectedPlan', e.target.value);
   };
 
+  const handleFixedAmountValueChange = (e) => {
+    onFormChange('amountDetails', 'fixedAmount', e.target.value);
+  };
+
   const handleDynamicAmountChange = (e) => {
     onFormChange('amountDetails', 'dynamicAmount', e.target.value);
   };
@@ -844,11 +848,26 @@ function AmountDetails({ amountData, onFormChange }) {
                   Dynamic Amount
                 </label>
               </div>
+              {/* Input Field for Fixed Amount */}
+              {amountData.fixedAmountType === 'fixed' && (
+                <div className="mt-4">
+                  <label className="block text-xs font-medium text-gray-700 mb-1">
+                    Enter Fixed Amount (you can't change the amount in the widget while payment)
+                  </label>
+                  <input
+                    type="number"
+                    value={amountData.fixedAmount || ""}
+                    onChange={handleFixedAmountValueChange}
+                    placeholder="Enter fixed amount"
+                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs"
+                  />
+                </div>
+              )}
               {/* Input Field for Dynamic Amount */}
               {amountData.fixedAmountType === 'dynamic' && (
                 <div className="mt-4">
                   <label className="block text-xs font-medium text-gray-700 mb-1">
-                    Enter Amount
+                    Enter Dynamic Amount
                   </label>
                   <input
                     type="number"
@@ -914,8 +933,8 @@ function AmountDetails({ amountData, onFormChange }) {
               {amountData.amountType === 'fixed' && amountData.fixedAmountType ? (
                 <p className="w-full px-3 py-2 border rounded text-gray-900 text-xs font-semibold">
                   {amountData.fixedAmountType === 'fixed'
-                    ? 'Fixed Amount'
-                    : `Dynamic Amount${amountData.dynamicAmount ? ` - ${amountData.dynamicAmount}` : ''}`}
+                    ? `Fixed Amount${amountData.fixedAmount ? ` : ${amountData.fixedAmount}` : ''}`
+                    : `Dynamic Amount${amountData.dynamicAmount ? ` : ${amountData.dynamicAmount}` : ''}`}
                 </p>
               ) : amountData.amountType === 'selectPlan' && amountData.selectedPlan ? (
                 <p className="w-full px-3 py-2 border rounded text-gray-900 text-xs font-semibold">
@@ -934,8 +953,8 @@ function AmountDetails({ amountData, onFormChange }) {
             <span className="text-gray-900 font-bold">
               {amountData.amountType === 'fixed' && amountData.fixedAmountType
                 ? amountData.fixedAmountType === 'fixed'
-                  ? 'Fixed Amount'
-                  : `Total: ${amountData.dynamicAmount ? `${amountData.dynamicAmount}` : '0'}`
+                  ? `Total${amountData.fixedAmount ? ` : ${amountData.fixedAmount}` : ''}`
+                  : `Total${amountData.dynamicAmount ? ` : ${amountData.dynamicAmount}` : ''}`
                 : amountData.amountType === 'selectPlan' && amountData.selectedPlan
                   ? amountData.selectedPlan
                   : 'No amount specified'}
