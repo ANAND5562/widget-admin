@@ -944,29 +944,29 @@ function AmountDetails({ amountData, onFormChange }) {
             }}
           >
             <div className="px-4 py-2">
-  {amountData.amountType === 'fixed' && amountData.fixedAmountType ? (
-    <>
-      <div className="text-xs font-medium text-gray-700 mb-1">
-        {amountData.fixedAmountType === 'fixed'
-          ? (amountData.fixedAmountLabel || 'Fixed Amount')
-          : (amountData.dynamicAmountLabel || 'Dynamic Amount')}
-      </div>
-      {amountData.fixedAmountType === 'fixed' && (
-        <p className="w-full px-3 py-2 border rounded text-gray-900 text-xs font-semibold">
-          {`${amountData.fixedAmount ? amountData.fixedAmount : '0'}`}
-        </p>
-      )}
-    </>
-  ) : amountData.amountType === 'selectPlan' && amountData.selectedPlan ? (
-    <p className="w-full px-3 py-2 border rounded text-gray-900 text-xs font-semibold">
-      {amountData.selectedPlan}
-    </p>
-  ) : (
-    <p className="text-center text-sm text-gray-500">
-      No amount specified
-    </p>
-  )}
-</div>
+              {amountData.amountType === 'fixed' && amountData.fixedAmountType ? (
+                <>
+                  <div className="text-xs font-medium text-gray-700 mb-1">
+                    {amountData.fixedAmountType === 'fixed'
+                      ? (amountData.fixedAmountLabel || 'Fixed Amount')
+                      : (amountData.dynamicAmountLabel || 'Dynamic Amount')}
+                  </div>
+                  {amountData.fixedAmountType === 'fixed' && (
+                    <p className="w-full px-3 py-2 border rounded text-gray-900 text-xs font-semibold">
+                      {`${amountData.fixedAmount ? amountData.fixedAmount : '0'}`}
+                    </p>
+                  )}
+                </>
+              ) : amountData.amountType === 'selectPlan' && amountData.selectedPlan ? (
+                <p className="w-full px-3 py-2 border rounded text-gray-900 text-xs font-semibold">
+                  {amountData.selectedPlan}
+                </p>
+              ) : (
+                <p className="text-center text-sm text-gray-500">
+                  No amount specified
+                </p>
+              )}
+            </div>
 
             <div style={{ marginTop: '140px' }}></div>
           </div>
