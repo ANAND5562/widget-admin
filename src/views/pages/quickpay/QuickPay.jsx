@@ -951,9 +951,13 @@ function AmountDetails({ amountData, onFormChange }) {
                       ? (amountData.fixedAmountLabel || 'Fixed Amount')
                       : (amountData.dynamicAmountLabel || 'Dynamic Amount')}
                   </div>
-                  {amountData.fixedAmountType === 'fixed' && (
+                  {amountData.fixedAmountType === 'fixed' ? (
                     <p className="w-full px-3 py-2 border rounded text-gray-900 text-xs font-semibold">
                       {`${amountData.fixedAmount ? amountData.fixedAmount : '0'}`}
+                    </p>
+                  ) : (
+                    <p className="w-full px-3 py-2 border rounded text-gray-900 text-xs font-semibold">
+                      {`0`}
                     </p>
                   )}
                 </>
@@ -967,6 +971,7 @@ function AmountDetails({ amountData, onFormChange }) {
                 </p>
               )}
             </div>
+
 
             <div style={{ marginTop: '140px' }}></div>
           </div>
