@@ -779,6 +779,36 @@ function AmountDetails({ amountData, onFormChange }) {
     onFormChange('amountDetails', 'dynamicAmountLabel', e.target.value);
   };
 
+  // Helper functions for managing products in "Select Plan"
+  const handleProductChange = (index, field, value) => {
+    const products = amountData.products ? [...amountData.products] : [];
+    if (!products[index]) {
+      products[index] = { productName: '', productPrice: '' };
+    }
+    products[index] = { ...products[index], [field]: value };
+    onFormChange('amountDetails', 'products', products);
+  };
+
+  const handleAddProduct = () => {
+    const products = amountData.products ? [...amountData.products] : [];
+    if (products.length < 5) {
+      products.push({ productName: '', productPrice: '' });
+      onFormChange('amountDetails', 'products', products);
+    }
+  };
+
+  const handleDeleteProduct = (index) => {
+    const products = amountData.products ? [...amountData.products] : [];
+    products.splice(index, 1);
+    onFormChange('amountDetails', 'products', products);
+  };
+
+  // For rendering: ensure at least one product option is shown.
+  const actualProducts = amountData.products || [];
+  const productsToRender =
+    actualProducts.length > 0 ? actualProducts : [{ productName: '', productPrice: '' }];
+  const actualCount = actualProducts.length;
+
   return (
     <div>
       <h6 className="text-center md:ml-[-40px] font-semibold">
@@ -822,7 +852,7 @@ function AmountDetails({ amountData, onFormChange }) {
               </label>
             </div>
           </div>
-          {/* Nested Options */}
+          {/* Nested Options for Fixed/Dynamic Amount */}
           {amountData.amountType === 'fixed' && (
             <div className="mt-4">
               <p className="block text-xs font-medium text-gray-700 mb-1">
@@ -877,7 +907,7 @@ function AmountDetails({ amountData, onFormChange }) {
                   />
                 </div>
               )}
-              {/* Input Field for Dynamic Amount Option (Only label, no amount field) */}
+              {/* Input Field for Dynamic Amount Option (Only label) */}
               {amountData.fixedAmountType === 'dynamic' && (
                 <div className="mt-4">
                   <label className="block text-xs font-medium text-gray-700 mb-1">
@@ -894,23 +924,52 @@ function AmountDetails({ amountData, onFormChange }) {
               )}
             </div>
           )}
+          {/* Select Plan Section with product inputs */}
           {amountData.amountType === 'selectPlan' && (
             <div className="mt-4">
               <label className="block text-xs font-medium text-gray-700 mb-1">
-                Select Plan
+                Add Products (up to 5)
               </label>
-              <select
-                value={amountData.selectedPlan || ""}
-                onChange={handlePlanChange}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs"
-              >
-                <option value="">--Select a plan--</option>
-                <option value="Product A - 10000">Product A - 10000</option>
-                <option value="Product B - 20000">Product B - 20000</option>
-                <option value="Product C - 30000">Product C - 30000</option>
-                <option value="Product D - 40000">Product D - 40000</option>
-                <option value="Product E - 50000">Product E - 50000</option>
-              </select>
+              {productsToRender.map((product, index) => (
+                <div key={index} className="flex gap-2 items-center mb-2">
+                  <input
+                    type="text"
+                    value={product.productName || ""}
+                    placeholder="Product Name"
+                    onChange={(e) =>
+                      handleProductChange(index, 'productName', e.target.value)
+                    }
+                    className="block w-1/2 px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs"
+                  />
+                  <input
+                    type="number"
+                    value={product.productPrice || ""}
+                    placeholder="Product Price"
+                    onChange={(e) =>
+                      handleProductChange(index, 'productPrice', e.target.value)
+                    }
+                    className="block w-1/2 px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs"
+                  />
+                  {actualCount > 1 && (
+                    <button
+                      type="button"
+                      onClick={() => handleDeleteProduct(index)}
+                      className="text-red-500 text-xs"
+                    >
+                      Delete
+                    </button>
+                  )}
+                </div>
+              ))}
+              {actualCount < 5 && (
+                <button
+                  type="button"
+                  onClick={handleAddProduct}
+                  className="mt-2 text-blue-500 text-xs"
+                >
+                  Add Product
+                </button>
+              )}
             </div>
           )}
         </div>
@@ -961,18 +1020,25 @@ function AmountDetails({ amountData, onFormChange }) {
                     </p>
                   )}
                 </>
-              ) : amountData.amountType === 'selectPlan' && amountData.selectedPlan ? (
-                <p className="w-full px-3 py-2 border rounded text-gray-900 text-xs font-semibold">
-                  {amountData.selectedPlan}
-                </p>
+              ) : amountData.amountType === 'selectPlan' && (amountData.products || []).length > 0 ? (
+                <div>
+                  {(amountData.products || []).map((product, index) => (
+                    <div key={index} className="mb-2">
+                      <div className="text-xs font-medium text-gray-700 mb-1">
+                        {product.productName || 'Product Name'}
+                      </div>
+                      <p className="w-full px-3 py-2 border rounded text-gray-900 text-xs font-semibold">
+                        {product.productPrice ? product.productPrice : '0'}
+                      </p>
+                    </div>
+                  ))}
+                </div>
               ) : (
                 <p className="text-center text-sm text-gray-500">
                   No amount specified
                 </p>
               )}
             </div>
-
-
             <div style={{ marginTop: '140px' }}></div>
           </div>
           {/* Footer */}
@@ -982,8 +1048,8 @@ function AmountDetails({ amountData, onFormChange }) {
                 ? amountData.fixedAmountType === 'fixed'
                   ? `Total: ${amountData.fixedAmount ? amountData.fixedAmount : '0'}`
                   : `${amountData.dynamicAmountLabel || 'Dynamic Amount'}`
-                : amountData.amountType === 'selectPlan' && amountData.selectedPlan
-                  ? amountData.selectedPlan
+                : amountData.amountType === 'selectPlan' && (amountData.products || []).length > 0
+                  ? `Products: ${amountData.products.length}`
                   : 'No amount specified'}
             </span>
             <button
