@@ -1541,9 +1541,7 @@ function ReviewPage({ formData }) {
         {/* Quick-Pay Amount Preview Section */}
         <div className="flex-1 shadow ml-[-40px]">
           {/* Header */}
-          <div
-            className="py-3 border-b text-sm font-semibold text-white text-center bg-blue-500 mt-0"
-          >
+          <div className="py-3 border-b text-sm font-semibold text-white text-center bg-blue-500 mt-0">
             <p>The Animal Foundation</p>
           </div>
           {/* Body */}
@@ -1555,35 +1553,74 @@ function ReviewPage({ formData }) {
               scrollbarColor: 'rgba(0, 0, 0, 0.3) transparent'
             }}
           >
-            {amountDetails.label && amountDetails.amount ? (
-              <div className="px-4 py-2">
-                <label className="block text-gray-700 text-xs font-medium mb-1">
-                  {amountDetails.label}
-                </label>
-                <input
-                  type="text"
-                  className="w-full px-3 py-2 border rounded text-gray-900 text-xs font-semibold"
-                  value={amountDetails.amount}
-                  readOnly
-                />
-              </div>
+            {amountDetails.amountType === 'fixed' ? (
+              <>
+                <div className="px-4 py-2">
+                  <label className="block text-gray-700 text-xs font-medium mb-1">
+                    {amountDetails.fixedAmountType === 'fixed'
+                      ? (amountDetails.fixedAmountLabel || 'Fixed Amount')
+                      : (amountDetails.dynamicAmountLabel || 'Dynamic Amount')}
+                  </label>
+                  {amountDetails.fixedAmountType === 'fixed' ? (
+                    <input
+                      type="text"
+                      className="w-full px-3 py-2 border rounded text-gray-900 text-xs font-semibold"
+                      value={amountDetails.fixedAmount || ''}
+                      readOnly
+                    />
+                  ) : (
+                    <p className="w-full px-3 py-2 border rounded text-gray-900 text-xs font-semibold">
+                      0
+                    </p>
+                  )}
+                </div>
+              </>
+            ) : amountDetails.amountType === 'selectPlan' ? (
+              <>
+                {amountDetails.products && amountDetails.products.length > 0 ? (
+                  amountDetails.products.map((product, index) => (
+                    <div key={index} className="px-4 py-2">
+                      <label className="block text-gray-700 text-xs font-medium mb-1">
+                        {product.productName || 'Product Name'}
+                      </label>
+                      <input
+                        type="text"
+                        className="w-full px-3 py-2 border rounded text-gray-900 text-xs font-semibold"
+                        value={product.productPrice || ''}
+                        readOnly
+                      />
+                    </div>
+                  ))
+                ) : (
+                  <p className="text-center text-sm text-gray-500">No products specified</p>
+                )}
+              </>
             ) : (
-              <p className="text-center text-sm text-gray-500">
-                No amount specified
-              </p>
+              <p className="text-center text-sm text-gray-500">No amount specified</p>
             )}
             <div style={{ marginTop: '190px' }}></div>
           </div>
           {/* Footer */}
           <div className="flex justify-between px-4 py-3 bg-white shadow-lg border-t mt-1">
             <span className="text-gray-900 font-bold">
-              ₹ {parseInt(amountDetails.amount) || 0}
+              {amountDetails.amountType === 'fixed'
+                ? (amountDetails.fixedAmountType === 'fixed'
+                  ? `₹ ${parseInt(amountDetails.fixedAmount) || 0}`
+                  : `₹ 0`)
+                : (amountDetails.amountType === 'selectPlan'
+                  ? `₹ ${amountDetails.products.reduce(
+                    (acc, product) => acc + (parseInt(product.productPrice) || 0),
+                    0
+                  )
+                  }`
+                  : `₹ 0`)}
             </span>
             <button className="bg-blue-500 text-white px-4 py-1 rounded">
               Next
             </button>
           </div>
         </div>
+
         {/* Customer Information Preview Section */}
         <div className="flex-1 shadow">
           <div
