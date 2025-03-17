@@ -755,12 +755,8 @@ function ButtonDetails({ buttonData, onFormChange }) {
 }
 
 function AmountDetails({ amountData, onFormChange }) {
-  const handleLabelChange = (e) => {
-    onFormChange('amountDetails', 'label', e.target.value);
-  };
-
-  const handleAmountChange = (e) => {
-    onFormChange('amountDetails', 'amount', e.target.value);
+  const handleAmountTypeChange = (e) => {
+    onFormChange('amountDetails', 'amountType', e.target.value);
   };
 
   return (
@@ -776,34 +772,35 @@ function AmountDetails({ amountData, onFormChange }) {
         className="grid grid-cols-1 gap-5 sm:grid-cols-1 md:grid-cols-10 lg:grid-cols-10 xl:grid-cols-10 2xl:grid-cols-10"
         style={{ marginTop: '23px' }}
       >
-        {/* Left: Single Field */}
+        {/* Left: Radio Options */}
         <div className="md:col-span-6 lg:col-span-6 xl:col-span-6 2xl:col-span-6">
-          <div className="grid grid-cols-1 gap-2">
-            <div className="flex gap-4 items-center">
-              <div className="flex-1">
-                <label className="block text-xs font-medium text-gray-700">
-                  Field Label
-                </label>
+          <div>
+            <p className="block text-xs font-medium text-gray-700 mb-1">
+              Amount Option
+            </p>
+            <div className="flex items-center gap-4">
+              <label className="flex items-center">
                 <input
-                  type="text"
-                  value={amountData.label}
-                  onChange={handleLabelChange}
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                  placeholder="Enter label (e.g. Donation)"
+                  type="radio"
+                  name="amountType"
+                  value="fixed"
+                  checked={amountData.amountType === 'fixed'}
+                  onChange={handleAmountTypeChange}
+                  className="mr-1"
                 />
-              </div>
-              <div className="flex-1">
-                <label className="block text-xs font-medium text-gray-700">
-                  Amount
-                </label>
+                Fixed/Dynamic Amount
+              </label>
+              <label className="flex items-center">
                 <input
-                  type="number"
-                  value={amountData.amount}
-                  onChange={handleAmountChange}
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                  placeholder="Enter amount"
+                  type="radio"
+                  name="amountType"
+                  value="selectPlan"
+                  checked={amountData.amountType === 'selectPlan'}
+                  onChange={handleAmountTypeChange}
+                  className="mr-1"
                 />
-              </div>
+                Select Plan
+              </label>
             </div>
           </div>
         </div>
@@ -836,17 +833,13 @@ function AmountDetails({ amountData, onFormChange }) {
               scrollbarColor: 'rgba(0, 0, 0, 0.3) transparent'
             }}
           >
-            {amountData.label && amountData.amount ? (
+            {amountData.amountType ? (
               <div className="px-4 py-2">
-                <label className="block text-gray-700 text-xs font-medium mb-1">
-                  {amountData.label}
-                </label>
-                <input
-                  type="text"
-                  className="w-full px-3 py-2 border rounded text-gray-900 text-xs font-semibold"
-                  value={amountData.amount}
-                  readOnly
-                />
+                <p className="w-full px-3 py-2 border rounded text-gray-900 text-xs font-semibold">
+                  {amountData.amountType === 'fixed'
+                    ? 'Fixed/Dynamic Amount'
+                    : 'Select Plan'}
+                </p>
               </div>
             ) : (
               <p className="text-center text-sm text-gray-500">
@@ -858,7 +851,9 @@ function AmountDetails({ amountData, onFormChange }) {
           {/* Footer */}
           <div className="flex justify-between px-4 py-3 bg-white shadow-lg border-t">
             <span className="text-gray-900 font-bold">
-              ₹ {parseInt(amountData.amount) || 0}
+              {amountData.amountType === 'fixed'
+                ? 'Fixed/Dynamic Amount'
+                : 'Select Plan'}
             </span>
             <button
               className="bg-blue-500 text-white px-12 py-1 rounded"
@@ -872,6 +867,7 @@ function AmountDetails({ amountData, onFormChange }) {
     </div>
   );
 }
+
 
 function CustomerDetails({ customerData, onFormChange, onAdditionalFieldsChange }) {
   const handleAddField = () => {
