@@ -877,9 +877,18 @@ function CustomerDetails({ customerData, onFormChange, onAdditionalFieldsChange 
   const handleAddField = () => {
     const currentFields = customerData.additionalFields || [];
     if (currentFields.length < 3) {
+      // Initialize new field as a date field by default, including properties for both single and range selections.
       onAdditionalFieldsChange([
         ...currentFields,
-        { type: '', label: '', required: false }
+        { 
+          type: 'date', 
+          label: '', 
+          required: false,
+          dateType: 'single',      // "single" or "range"
+          defaultDate: '',         // For single date selection
+          defaultStartDate: '',    // For range: start date
+          defaultEndDate: ''       // For range: end date
+        }
       ]);
     }
   };
@@ -920,7 +929,7 @@ function CustomerDetails({ customerData, onFormChange, onAdditionalFieldsChange 
         {/* Left Section: Configure Fields */}
         <div className="md:col-span-6 lg:col-span-6 xl:col-span-6 2xl:col-span-6">
           <div className="grid grid-cols-1 gap-5 mt-1">
-            {/* Email Field */}
+            {/* Core Fields (Email, Phone, Donor Name) */}
             <div className="flex flex-col gap-2">
               <div className="flex gap-4 items-center">
                 <div className="flex-1">
@@ -1093,11 +1102,71 @@ function CustomerDetails({ customerData, onFormChange, onAdditionalFieldsChange 
                             Mandatory
                           </label>
                         </div>
-                        <div></div>
                       </div>
                     </div>
                   </div>
                 </div>
+                {/* For date fields, render a date picker or date range picker */}
+                {field.type === 'date' && (
+                  <>
+                    <div className="flex flex-col gap-2 mt-2">
+                      <label className="block text-xs font-medium text-gray-700">
+                        Date Selection Type
+                      </label>
+                      <select
+                        value={field.dateType}
+                        onChange={(e) =>
+                          handleFieldChange(index, 'dateType', e.target.value)
+                        }
+                        className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                      >
+                        <option value="single">Single Date</option>
+                        <option value="range">Date Range</option>
+                      </select>
+                    </div>
+                    {field.dateType === 'single' && (
+                      <div className="flex flex-col gap-2 mt-2">
+                        <label className="block text-xs font-medium text-gray-700">
+                          Select Date
+                        </label>
+                        <input
+                          type="date"
+                          value={field.defaultDate || ''}
+                          onChange={(e) =>
+                            handleFieldChange(index, 'defaultDate', e.target.value)
+                          }
+                          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                        />
+                      </div>
+                    )}
+                    {field.dateType === 'range' && (
+                      <div className="flex flex-col gap-2 mt-2">
+                        <label className="block text-xs font-medium text-gray-700">
+                          Select Start Date
+                        </label>
+                        <input
+                          type="date"
+                          value={field.defaultStartDate || ''}
+                          onChange={(e) =>
+                            handleFieldChange(index, 'defaultStartDate', e.target.value)
+                          }
+                          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                        />
+                        <label className="block text-xs font-medium text-gray-700 mt-2">
+                          Select End Date
+                        </label>
+                        <input
+                          type="date"
+                          value={field.defaultEndDate || ''}
+                          onChange={(e) =>
+                            handleFieldChange(index, 'defaultEndDate', e.target.value)
+                          }
+                          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                        />
+                      </div>
+                    )}
+                  </>
+                )}
               </div>
             ))}
             {(customerData.additionalFields?.length || 0) < 3 && (
@@ -1169,8 +1238,42 @@ function CustomerDetails({ customerData, onFormChange, onAdditionalFieldsChange 
                   {field.label || `Custom Field #${index + 1}`}
                 </label>
                 <div className="border rounded px-3 py-2 text-xs text-gray-900">
-                  {field.type || 'text'} Field
-                  {field.required && ' (Required)'}
+                  {field.type === 'date' ? (
+                    field.dateType === 'single' ? (
+                      <input
+                        type="date"
+                        value={field.defaultDate || ''}
+                        onChange={(e) =>
+                          handleFieldChange(index, 'defaultDate', e.target.value)
+                        }
+                        className="w-full text-xs focus:outline-none"
+                      />
+                    ) : (
+                      <>
+                        <input
+                          type="date"
+                          value={field.defaultStartDate || ''}
+                          onChange={(e) =>
+                            handleFieldChange(index, 'defaultStartDate', e.target.value)
+                          }
+                          className="w-full text-xs focus:outline-none mb-2"
+                        />
+                        <input
+                          type="date"
+                          value={field.defaultEndDate || ''}
+                          onChange={(e) =>
+                            handleFieldChange(index, 'defaultEndDate', e.target.value)
+                          }
+                          className="w-full text-xs focus:outline-none"
+                        />
+                      </>
+                    )
+                  ) : (
+                    <>
+                      {field.type || 'text'} Field
+                      {field.required && ' (Required)'}
+                    </>
+                  )}
                 </div>
               </div>
             ))}
@@ -1184,6 +1287,7 @@ function CustomerDetails({ customerData, onFormChange, onAdditionalFieldsChange 
     </div>
   );
 }
+
 
 function ReviewPage({ formData }) {
   const { buttonDetails, amountDetails, customerDetails } = formData;
