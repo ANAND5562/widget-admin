@@ -25,10 +25,14 @@ function QuickPay() {
       verticalPadding: 5,
       paddingSize: 10
     },
-    // Amount Details without default values
+    // Amount Details with new fields for fixed/dynamic and select plan options
     amountDetails: {
-      label: '',
-      amount: ''
+      amountType: 'fixed',         // 'fixed' or 'selectPlan'
+      fixedAmountType: 'fixed',    // 'fixed' or 'dynamic' (applicable when amountType is 'fixed')
+      fixedAmountLabel: '',        // Label for fixed amount option
+      fixedAmount: '',             // Value for fixed amount option
+      dynamicAmountLabel: '',      // Label for dynamic amount option (no numeric field)
+      products: []                 // Array of products for 'selectPlan', each { productName: '', productPrice: '' }
     },
     // Customer Details
     customerDetails: {
