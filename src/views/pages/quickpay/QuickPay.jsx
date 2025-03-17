@@ -759,20 +759,27 @@ function AmountDetails({ amountData, onFormChange }) {
     onFormChange('amountDetails', 'amountType', e.target.value);
   };
 
+  const handleFixedOptionChange = (e) => {
+    onFormChange('amountDetails', 'fixedAmountType', e.target.value);
+  };
+
+  const handlePlanChange = (e) => {
+    onFormChange('amountDetails', 'selectedPlan', e.target.value);
+  };
+
   return (
     <div>
       <h6 className="text-center md:ml-[-40px] font-semibold">
         Customise Amount
       </h6>
       <p className="text-center text-xs md:ml-[-40px]">
-        Customise your button as per your requirement. You can give it a
-        customer-specific or fixed amount.
+        Customise your button as per your requirement. You can give it a customer-specific or fixed amount.
       </p>
       <div
         className="grid grid-cols-1 gap-5 sm:grid-cols-1 md:grid-cols-10 lg:grid-cols-10 xl:grid-cols-10 2xl:grid-cols-10"
         style={{ marginTop: '23px' }}
       >
-        {/* Left: Radio Options */}
+        {/* Left: Main Radio Options */}
         <div className="md:col-span-6 lg:col-span-6 xl:col-span-6 2xl:col-span-6">
           <div>
             <p className="block text-xs font-medium text-gray-700 mb-1">
@@ -803,6 +810,57 @@ function AmountDetails({ amountData, onFormChange }) {
               </label>
             </div>
           </div>
+          {/* Nested Options */}
+          {amountData.amountType === 'fixed' && (
+            <div className="mt-4">
+              <p className="block text-xs font-medium text-gray-700 mb-1">
+                Fixed Option
+              </p>
+              <div className="flex items-center gap-4">
+                <label className="flex items-center">
+                  <input
+                    type="radio"
+                    name="fixedAmountType"
+                    value="fixed"
+                    checked={amountData.fixedAmountType === 'fixed'}
+                    onChange={handleFixedOptionChange}
+                    className="mr-1"
+                  />
+                  Fixed Amount
+                </label>
+                <label className="flex items-center">
+                  <input
+                    type="radio"
+                    name="fixedAmountType"
+                    value="dynamic"
+                    checked={amountData.fixedAmountType === 'dynamic'}
+                    onChange={handleFixedOptionChange}
+                    className="mr-1"
+                  />
+                  Dynamic Amount
+                </label>
+              </div>
+            </div>
+          )}
+          {amountData.amountType === 'selectPlan' && (
+            <div className="mt-4">
+              <label className="block text-xs font-medium text-gray-700 mb-1">
+                Select Plan
+              </label>
+              <select
+                value={amountData.selectedPlan || ""}
+                onChange={handlePlanChange}
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs"
+              >
+                <option value="">--Select a plan--</option>
+                <option value="Product A - 10000">Product A - 10000</option>
+                <option value="Product B - 20000">Product B - 20000</option>
+                <option value="Product C - 30000">Product C - 30000</option>
+                <option value="Product D - 40000">Product D - 40000</option>
+                <option value="Product E - 50000">Product E - 50000</option>
+              </select>
+            </div>
+          )}
         </div>
         {/* Right: Preview Section */}
         <div
@@ -833,27 +891,31 @@ function AmountDetails({ amountData, onFormChange }) {
               scrollbarColor: 'rgba(0, 0, 0, 0.3) transparent'
             }}
           >
-            {amountData.amountType ? (
-              <div className="px-4 py-2">
+            <div className="px-4 py-2">
+              {amountData.amountType === 'fixed' && amountData.fixedAmountType ? (
                 <p className="w-full px-3 py-2 border rounded text-gray-900 text-xs font-semibold">
-                  {amountData.amountType === 'fixed'
-                    ? 'Fixed/Dynamic Amount'
-                    : 'Select Plan'}
+                  {amountData.fixedAmountType === 'fixed' ? 'Fixed Amount' : 'Dynamic Amount'}
                 </p>
-              </div>
-            ) : (
-              <p className="text-center text-sm text-gray-500">
-                No amount specified
-              </p>
-            )}
+              ) : amountData.amountType === 'selectPlan' && amountData.selectedPlan ? (
+                <p className="w-full px-3 py-2 border rounded text-gray-900 text-xs font-semibold">
+                  {amountData.selectedPlan}
+                </p>
+              ) : (
+                <p className="text-center text-sm text-gray-500">
+                  No amount specified
+                </p>
+              )}
+            </div>
             <div style={{ marginTop: '140px' }}></div>
           </div>
           {/* Footer */}
           <div className="flex justify-between px-4 py-3 bg-white shadow-lg border-t">
             <span className="text-gray-900 font-bold">
-              {amountData.amountType === 'fixed'
-                ? 'Fixed/Dynamic Amount'
-                : 'Select Plan'}
+              {amountData.amountType === 'fixed' && amountData.fixedAmountType
+                ? (amountData.fixedAmountType === 'fixed' ? 'Fixed Amount' : 'Dynamic Amount')
+                : amountData.amountType === 'selectPlan' && amountData.selectedPlan
+                  ? amountData.selectedPlan
+                  : 'No amount specified'}
             </span>
             <button
               className="bg-blue-500 text-white px-12 py-1 rounded"
@@ -869,6 +931,7 @@ function AmountDetails({ amountData, onFormChange }) {
 }
 
 
+
 function CustomerDetails({ customerData, onFormChange, onAdditionalFieldsChange }) {
   const handleAddField = () => {
     const currentFields = customerData.additionalFields || [];
@@ -876,9 +939,9 @@ function CustomerDetails({ customerData, onFormChange, onAdditionalFieldsChange 
       // Initialize new field as a date field by default, including properties for both single and range selections.
       onAdditionalFieldsChange([
         ...currentFields,
-        { 
-          type: 'date', 
-          label: '', 
+        {
+          type: 'date',
+          label: '',
           required: false,
           dateType: 'single',      // "single" or "range"
           defaultDate: '',         // For single date selection
