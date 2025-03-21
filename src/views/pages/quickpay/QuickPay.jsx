@@ -947,7 +947,7 @@ function AmountDetails({ amountData, onFormChange }) {
                     onChange={(e) =>
                       handleProductChange(index, 'productName', e.target.value)
                     }
-                    className="block w-1/2 px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs"
+                    className="block w-1/2 px-3 py-3 border border-gray-300 rounded-md shadow-sm text-xs"
                   />
                   <input
                     type="number"
@@ -956,7 +956,7 @@ function AmountDetails({ amountData, onFormChange }) {
                     onChange={(e) =>
                       handleProductChange(index, 'productPrice', e.target.value)
                     }
-                    className="block w-1/2 px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs"
+                    className="block w-1/2 px-3 py-3 border border-gray-300 rounded-md shadow-sm text-xs"
                   />
                   {actualCount > 1 && (
                     <img
@@ -1143,7 +1143,7 @@ function CustomerDetails({ customerData, onFormChange, onAdditionalFieldsChange 
                     onChange={(e) =>
                       handleCoreFieldUpdate('emailField', { type: e.target.value })
                     }
-                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                    className="mt-1 block w-full px-3 py-3 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                   />
                 </div>
                 <div className="flex-1">
@@ -1157,7 +1157,7 @@ function CustomerDetails({ customerData, onFormChange, onAdditionalFieldsChange 
                     onChange={(e) =>
                       handleCoreFieldUpdate('emailField', { label: e.target.value })
                     }
-                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                    className="mt-1 block w-full px-3 py-3 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                   />
                 </div>
               </div>
@@ -1176,7 +1176,7 @@ function CustomerDetails({ customerData, onFormChange, onAdditionalFieldsChange 
                     onChange={(e) =>
                       handleCoreFieldUpdate('phoneField', { type: e.target.value })
                     }
-                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                    className="mt-1 block w-full px-3 py-3 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                   />
                 </div>
                 <div className="flex-1">
@@ -1190,7 +1190,7 @@ function CustomerDetails({ customerData, onFormChange, onAdditionalFieldsChange 
                     onChange={(e) =>
                       handleCoreFieldUpdate('phoneField', { label: e.target.value })
                     }
-                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                    className="mt-1 block w-full px-3 py-3 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                   />
                 </div>
               </div>
@@ -1209,7 +1209,7 @@ function CustomerDetails({ customerData, onFormChange, onAdditionalFieldsChange 
                     onChange={(e) =>
                       handleCoreFieldUpdate('donorNameField', { type: e.target.value })
                     }
-                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                    className="mt-1 block w-full px-3 py-3 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                   />
                 </div>
                 <div className="flex-1">
@@ -1223,7 +1223,7 @@ function CustomerDetails({ customerData, onFormChange, onAdditionalFieldsChange 
                     onChange={(e) =>
                       handleCoreFieldUpdate('donorNameField', { label: e.target.value })
                     }
-                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                    className="mt-1 block w-full px-3 py-3 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                   />
                 </div>
               </div>
@@ -1244,7 +1244,7 @@ function CustomerDetails({ customerData, onFormChange, onAdditionalFieldsChange 
                         onChange={(e) =>
                           handleFieldChange(index, 'type', e.target.value)
                         }
-                        className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                        className="mt-1 block w-full px-3 py-3 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                       />
                     </div>
                     <div className="flex-1">
@@ -1258,7 +1258,7 @@ function CustomerDetails({ customerData, onFormChange, onAdditionalFieldsChange 
                         onChange={(e) =>
                           handleFieldChange(index, 'label', e.target.value)
                         }
-                        className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                        className="mt-1 block w-full px-3 py-3 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                       />
                     </div>
                     <img
@@ -1318,7 +1318,7 @@ function CustomerDetails({ customerData, onFormChange, onAdditionalFieldsChange 
                         onChange={(e) =>
                           handleFieldChange(index, 'dateType', e.target.value)
                         }
-                        className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                        className="mt-0 block w-full px-3 py-3 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                       >
                         <option value="single">Single Date</option>
                         <option value="range">Date Range</option>
@@ -1335,7 +1335,7 @@ function CustomerDetails({ customerData, onFormChange, onAdditionalFieldsChange 
                           onChange={(e) =>
                             handleFieldChange(index, 'defaultDate', e.target.value)
                           }
-                          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                          className="mt-0 block w-full px-3 py-3 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                         />
                       </div>
                     )}
