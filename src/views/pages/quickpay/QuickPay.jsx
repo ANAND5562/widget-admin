@@ -1128,7 +1128,7 @@ function CustomerDetails({ customerData, onFormChange, onAdditionalFieldsChange 
       >
         {/* Left Section: Configure Fields */}
         <div className="md:col-span-6 lg:col-span-6 xl:col-span-6 2xl:col-span-6">
-          <div className="grid grid-cols-1 gap-5 mt-1">
+          <div className="grid grid-cols-1 gap-4 mt-1">
             {/* Core Fields (Email, Phone, Donor Name) */}
             <div className="flex flex-col gap-2">
               <div className="flex gap-4 items-center">
@@ -1325,7 +1325,7 @@ function CustomerDetails({ customerData, onFormChange, onAdditionalFieldsChange 
                       </select>
                     </div>
                     {field.dateType === 'single' && (
-                      <div className="flex flex-col gap-2 mt-2">
+                      <div className="grid grid-cols-1 gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2 mt-2">
                         <div>
                           <label className="block text-xs font-medium text-gray-700">
                             Select Date
@@ -1339,10 +1339,11 @@ function CustomerDetails({ customerData, onFormChange, onAdditionalFieldsChange 
                             className="mt-0 block w-full px-3 py-3 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                           />
                         </div>
+                        <div></div>
                       </div>
                     )}
                     {field.dateType === 'range' && (
-                      <div className="flex flex-col-1 gap-2 mt-2">
+                      <div className="grid grid-cols-1 gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2 mt-2">
                         <div>
                           <label className="block text-xs font-medium text-gray-700">
                             Select Start Date
@@ -1443,35 +1444,45 @@ function CustomerDetails({ customerData, onFormChange, onAdditionalFieldsChange 
                 <label className="block text-gray-700 text-xs font-medium mb-1">
                   {field.label || `Custom Field #${index + 1}`}
                 </label>
-                <div className="border rounded px-3 py-2 text-xs text-gray-900">
+                <div className="">
                   {field.type === 'date' ? (
                     field.dateType === 'single' ? (
-                      <input
-                        type="date"
-                        value={field.defaultDate || ''}
-                        onChange={(e) =>
-                          handleFieldChange(index, 'defaultDate', e.target.value)
-                        }
-                        className="w-full text-xs focus:outline-none"
-                      />
+                      <>
+                        <div className='border rounded px-3 py-2 text-xs text-gray-900'>
+                          <input
+                            type="date"
+                            value={field.defaultDate || ''}
+                            onChange={(e) =>
+                              handleFieldChange(index, 'defaultDate', e.target.value)
+                            }
+                            className="w-full text-xs focus:outline-none"
+                          />
+                        </div>
+                      </>
                     ) : (
                       <>
-                        <input
-                          type="date"
-                          value={field.defaultStartDate || ''}
-                          onChange={(e) =>
-                            handleFieldChange(index, 'defaultStartDate', e.target.value)
-                          }
-                          className="w-full text-xs focus:outline-none mb-2"
-                        />
-                        <input
-                          type="date"
-                          value={field.defaultEndDate || ''}
-                          onChange={(e) =>
-                            handleFieldChange(index, 'defaultEndDate', e.target.value)
-                          }
-                          className="w-full text-xs focus:outline-none"
-                        />
+                        <div>
+                          <div className='border rounded px-3 py-2 text-xs text-gray-900'>
+                            <input
+                              type="date"
+                              value={field.defaultStartDate || ''}
+                              onChange={(e) =>
+                                handleFieldChange(index, 'defaultStartDate', e.target.value)
+                              }
+                              className="w-full text-xs focus:outline-none"
+                            />
+                          </div>
+                          <div className='border rounded px-3 py-2 text-xs text-gray-900 mt-4'>
+                            <input
+                              type="date"
+                              value={field.defaultEndDate || ''}
+                              onChange={(e) =>
+                                handleFieldChange(index, 'defaultEndDate', e.target.value)
+                              }
+                              className="w-full text-xs focus:outline-none"
+                            />
+                          </div>
+                        </div>
                       </>
                     )
                   ) : (
