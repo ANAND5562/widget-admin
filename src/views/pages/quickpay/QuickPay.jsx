@@ -939,7 +939,7 @@ function AmountDetails({ amountData, onFormChange }) {
                 Add Products (up to 5)
               </label>
               {productsToRender.map((product, index) => (
-                <div key={index} className="flex gap-4 items-center mb-2">
+                <div key={index} className="flex gap-4 items-center mb-4">
                   <input
                     type="text"
                     value={product.productName || ""}
@@ -1326,43 +1326,49 @@ function CustomerDetails({ customerData, onFormChange, onAdditionalFieldsChange 
                     </div>
                     {field.dateType === 'single' && (
                       <div className="flex flex-col gap-2 mt-2">
-                        <label className="block text-xs font-medium text-gray-700">
-                          Select Date
-                        </label>
-                        <input
-                          type="date"
-                          value={field.defaultDate || ''}
-                          onChange={(e) =>
-                            handleFieldChange(index, 'defaultDate', e.target.value)
-                          }
-                          className="mt-0 block w-full px-3 py-3 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                        />
+                        <div>
+                          <label className="block text-xs font-medium text-gray-700">
+                            Select Date
+                          </label>
+                          <input
+                            type="date"
+                            value={field.defaultDate || ''}
+                            onChange={(e) =>
+                              handleFieldChange(index, 'defaultDate', e.target.value)
+                            }
+                            className="mt-0 block w-full px-3 py-3 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                          />
+                        </div>
                       </div>
                     )}
                     {field.dateType === 'range' && (
-                      <div className="flex flex-col gap-2 mt-2">
-                        <label className="block text-xs font-medium text-gray-700">
-                          Select Start Date
-                        </label>
-                        <input
-                          type="date"
-                          value={field.defaultStartDate || ''}
-                          onChange={(e) =>
-                            handleFieldChange(index, 'defaultStartDate', e.target.value)
-                          }
-                          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                        />
-                        <label className="block text-xs font-medium text-gray-700 mt-2">
-                          Select End Date
-                        </label>
-                        <input
-                          type="date"
-                          value={field.defaultEndDate || ''}
-                          onChange={(e) =>
-                            handleFieldChange(index, 'defaultEndDate', e.target.value)
-                          }
-                          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                        />
+                      <div className="flex flex-col-1 gap-2 mt-2">
+                        <div>
+                          <label className="block text-xs font-medium text-gray-700">
+                            Select Start Date
+                          </label>
+                          <input
+                            type="date"
+                            value={field.defaultStartDate || ''}
+                            onChange={(e) =>
+                              handleFieldChange(index, 'defaultStartDate', e.target.value)
+                            }
+                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-xs font-medium text-gray-700">
+                            Select End Date
+                          </label>
+                          <input
+                            type="date"
+                            value={field.defaultEndDate || ''}
+                            onChange={(e) =>
+                              handleFieldChange(index, 'defaultEndDate', e.target.value)
+                            }
+                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                          />
+                        </div>
                       </div>
                     )}
                   </>
