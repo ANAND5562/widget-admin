@@ -955,13 +955,13 @@ function AmountDetails({ amountData, onFormChange }) {
                     className="block w-1/2 px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs"
                   />
                   {actualCount > 1 && (
-                    <button
-                      type="button"
+                    <img
                       onClick={() => handleDeleteProduct(index)}
-                      className="text-red-500 text-xs"
-                    >
-                      Delete
-                    </button>
+                      src={Delete}
+                      alt="Delete"
+                      className="mt-0"
+                      style={{ height: '36px', width: '36px', cursor: 'pointer' }}
+                    />
                   )}
                 </div>
               ))}
