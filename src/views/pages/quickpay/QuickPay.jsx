@@ -852,13 +852,13 @@ function AmountDetails({ amountData, onFormChange }) {
                   onChange={handleAmountTypeChange}
                   className="mr-1"
                 />
-                Select Plan
+                Add Products
               </label>
             </div>
           </div>
           {/* Nested Options for Fixed/Dynamic Amount */}
           {amountData.amountType === 'fixed' && (
-            <div className="mt-4">
+            <div className="mt-5">
               <p className="block text-xs font-medium text-gray-700 mb-1">
                 Fixed Option
               </p>
@@ -898,7 +898,7 @@ function AmountDetails({ amountData, onFormChange }) {
                       value={amountData.fixedAmountLabel || ""}
                       onChange={handleFixedAmountLabelChange}
                       placeholder="Enter label"
-                      className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs"
+                      className="mt-1 block w-full px-3 py-3 border border-gray-300 rounded-md shadow-sm text-xs"
                     />
                   </div>
                   <div className='mt-2'>
@@ -910,7 +910,7 @@ function AmountDetails({ amountData, onFormChange }) {
                       value={amountData.fixedAmount || ""}
                       onChange={handleFixedAmountValueChange}
                       placeholder="Enter fixed amount"
-                      className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs"
+                      className="mt-1 block w-full px-3 py-3 border border-gray-300 rounded-md shadow-sm text-xs"
                     />
                   </div>
                 </div>
@@ -926,7 +926,7 @@ function AmountDetails({ amountData, onFormChange }) {
                     value={amountData.dynamicAmountLabel || ""}
                     onChange={handleDynamicAmountLabelChange}
                     placeholder="Enter label"
-                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs"
+                    className="mt-1 block w-full px-3 py-3 border border-gray-300 rounded-md shadow-sm text-xs"
                   />
                 </div>
               )}
@@ -1072,8 +1072,6 @@ function AmountDetails({ amountData, onFormChange }) {
     </div>
   );
 }
-
-
 
 function CustomerDetails({ customerData, onFormChange, onAdditionalFieldsChange }) {
   const handleAddField = () => {
@@ -1489,7 +1487,6 @@ function CustomerDetails({ customerData, onFormChange, onAdditionalFieldsChange 
     </div>
   );
 }
-
 
 function ReviewPage({ formData }) {
   const { buttonDetails, amountDetails, customerDetails } = formData;
