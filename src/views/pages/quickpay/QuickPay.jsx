@@ -888,27 +888,31 @@ function AmountDetails({ amountData, onFormChange }) {
               </div>
               {/* Input Fields for Fixed Amount Option */}
               {amountData.fixedAmountType === 'fixed' && (
-                <div className="mt-4">
-                  <label className="block text-xs font-medium text-gray-700 mb-1">
-                    Enter Fixed Amount Label
-                  </label>
-                  <input
-                    type="text"
-                    value={amountData.fixedAmountLabel || ""}
-                    onChange={handleFixedAmountLabelChange}
-                    placeholder="Enter label"
-                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs"
-                  />
-                  <label className="block text-xs font-medium text-gray-700 mb-1 mt-2">
-                    Enter Fixed Amount
-                  </label>
-                  <input
-                    type="number"
-                    value={amountData.fixedAmount || ""}
-                    onChange={handleFixedAmountValueChange}
-                    placeholder="Enter fixed amount"
-                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs"
-                  />
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2 mt-4">
+                  <div>
+                    <label className="text-xs font-medium text-gray-700 mb-1">
+                      Enter Fixed Amount Label
+                    </label>
+                    <input
+                      type="text"
+                      value={amountData.fixedAmountLabel || ""}
+                      onChange={handleFixedAmountLabelChange}
+                      placeholder="Enter label"
+                      className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs"
+                    />
+                  </div>
+                  <div className='mt-2'>
+                    <label className="block text-xs font-medium text-gray-700 mb-1">
+                      Enter Fixed Amount
+                    </label>
+                    <input
+                      type="number"
+                      value={amountData.fixedAmount || ""}
+                      onChange={handleFixedAmountValueChange}
+                      placeholder="Enter fixed amount"
+                      className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs"
+                    />
+                  </div>
                 </div>
               )}
               {/* Input Field for Dynamic Amount Option (Only label) */}
@@ -935,7 +939,7 @@ function AmountDetails({ amountData, onFormChange }) {
                 Add Products (up to 5)
               </label>
               {productsToRender.map((product, index) => (
-                <div key={index} className="flex gap-2 items-center mb-2">
+                <div key={index} className="flex gap-4 items-center mb-2">
                   <input
                     type="text"
                     value={product.productName || ""}
