@@ -193,11 +193,33 @@ export default function Sidebar() {
                         : "text-blueGray-300")
                     }
                   ></i>{" "}
-                  Create Widget
+                  Add Widget
                 </Link>
               </li>
 
               <li className="items-center">
+                <Link
+                  className={
+                    "text-xs uppercase py-3 font-bold block " +
+                    (window.location.href.indexOf("/admin/parammapper") !== -1
+                      ? "text-lightBlue-500 hover:text-lightBlue-600"
+                      : "text-blueGray-700 hover:text-blueGray-500")
+                  }
+                  to="/admin/orderlisting"
+                >
+                  <i
+                    className={
+                      "fas fa-table mr-2 text-sm " +
+                      (window.location.href.indexOf("/admin/orderlisting") !== -1
+                        ? "opacity-75"
+                        : "text-blueGray-300")
+                    }
+                  ></i>{" "}
+                  Order Listing
+                </Link>
+              </li>
+
+              {/* <li className="items-center">
                 <Link
                   className={
                     "text-xs uppercase py-3 font-bold block " +
@@ -217,9 +239,9 @@ export default function Sidebar() {
                   ></i>{" "}
                   Param Mapper
                 </Link>
-              </li>
+              </li> */}
 
-              <li className="items-center">
+              {/* <li className="items-center">
                 <Link
                   className={
                     "text-xs uppercase py-3 font-bold block " +
@@ -239,7 +261,7 @@ export default function Sidebar() {
                   ></i>{" "}
                   Create Payment Form
                 </Link>
-              </li>
+              </li> */}
 
               <li className="items-center">
                 <Link

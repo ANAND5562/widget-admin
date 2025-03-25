@@ -20,6 +20,8 @@ import Faq from "views/pages/faq/Faq";
 import CustomForm from "views/pages/customform/CustomForm";
 import Buynowbutton from "views/pages/buynowbutton/Buynowbutton";
 import Parammapper from "views/pages/parammapper/Parammapper";
+import Orderlisting from "views/pages/orderlisting/Orderlisting";
+
 
 export default function Admin() {
   const location = useLocation();
@@ -45,6 +47,7 @@ export default function Admin() {
             <Route path="/admin/parammapper" exact component={Parammapper} />
             <Route path="/admin/payment-form" exact component={PaymentForm} />
             <Route path="/admin/faq" exact component={Faq} />
+            <Route path="/admin/orderlisting" exact component={Orderlisting} />
 
 
             <Redirect from="/admin" to="/admin/dashboard" />
